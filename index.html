@@ -1,191 +1,139 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1769e0">
-<meta name="description" content="লাইভ আন্তর্জাতিক কারেন্সি রেফারেন্স রেট এবং কাতার থেকে বাংলাদেশে রেমিট্যান্স হিসাব।">
-<title>RateBondhu — Live Currency Rates</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1677ff"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="RateBondhu currency rates and personal finance dashboard"><title>RateBondhu — Global Rates & Finance</title>
 <style>
-:root{--blue:#1769e0;--blue2:#eaf2ff;--ink:#14233b;--muted:#63738a;--line:#e1e9f4;--bg:#f5f8fd;--white:#fff;--green:#087f5b;--red:#c0392b;--shadow:0 12px 36px rgba(27,72,130,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Bengali",sans-serif}a{color:var(--blue)}button,input,select{font:inherit}.wrap{max-width:1100px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 22px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;font-size:22px;letter-spacing:-.5px}.logo{display:grid;place-items:center;width:42px;height:42px;background:linear-gradient(135deg,#1769e0,#55a4ff);color:#fff;border-radius:13px;font-size:22px;box-shadow:0 6px 15px #1769e033}.pill{background:#e7f7ef;color:#087f5b;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:750}.hero{background:linear-gradient(120deg,#0f58c7,#2785f4);border-radius:25px;color:white;padding:28px;display:grid;grid-template-columns:1.2fr .8fr;gap:20px;box-shadow:var(--shadow)}.hero h1{font-size:clamp(27px,4vw,42px);line-height:1.16;margin:0 0 12px}.hero p{color:#e1edff;line-height:1.65;margin:0;max-width:570px}.hero-stat{align-self:center;background:#ffffff19;border:1px solid #ffffff35;border-radius:18px;padding:20px}.hero-stat small{color:#dbeaff}.hero-stat strong{display:block;font-size:25px;margin:8px 0}.hero-stat span{font-size:12px;color:#e1edff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-width:0}.card h2{font-size:19px;margin:0 0 6px}.sub{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 18px}.field{display:flex;flex-direction:column;gap:7px;margin:13px 0}.field label{font-size:13px;font-weight:700;color:#42536b}.control{width:100%;padding:12px 13px;border:1px solid #d7e1ef;border-radius:12px;background-color:#fff;color:#14233b !important;-webkit-text-fill-color:#14233b;outline:none;color-scheme:light}select.control{appearance:auto;-webkit-appearance:menulist;color:#14233b !important;background-color:#fff}select.control option{color:#14233b;background-color:#fff}.control:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769e018}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;background:var(--blue);color:#fff;padding:12px 16px;border-radius:12px;font-weight:750;cursor:pointer}.btn:hover{filter:brightness(.96)}.btn.secondary{background:var(--blue2);color:var(--blue)}.result{background:#f0f6ff;border:1px solid #dceaff;border-radius:15px;padding:17px;margin-top:15px}.result small{color:var(--muted)}.result strong{display:block;font-size:27px;line-height:1.4;overflow-wrap:anywhere}.result p{font-size:12px;color:var(--muted);margin:4px 0 0}.rate-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.rate{border:1px solid var(--line);border-radius:13px;padding:13px}.rate .pair{font-size:12px;color:var(--muted)}.rate strong{display:block;font-size:18px;margin:4px 0}.rate small{font-size:11px;color:var(--muted)}.status{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.5}.status.error{color:var(--red)}.ad{border:1px dashed #b9c9df;border-radius:16px;min-height:92px;margin-top:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;color:#718198;background:#fbfdff;font-size:13px}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.links a{font-size:13px;font-weight:650;text-decoration:none;background:var(--blue2);padding:9px 12px;border-radius:10px}.foot{padding:25px 3px 12px;color:var(--muted);font-size:12px;line-height:1.7}.foot strong{color:#42536b}.badge{font-size:11px;background:#eef3fa;color:#4b5d75;border-radius:7px;padding:4px 7px;display:inline-block;margin-bottom:9px}.swap{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:white;color:var(--blue);cursor:pointer;font-size:20px}.convert-row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}.hidden{display:none!important}
-@media(max-width:760px){.wrap{padding:14px}.hero{grid-template-columns:1fr;padding:22px}.hero-stat{padding:15px}.grid{grid-template-columns:1fr}.card{padding:18px}.top{padding-bottom:15px}.brand{font-size:20px}.rate-list{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.two{grid-template-columns:1fr}.convert-row{grid-template-columns:1fr auto 1fr;gap:6px}.control{padding:11px 9px}.rate-list{grid-template-columns:1fr 1fr}.rate strong{font-size:16px}}
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#172b45;background:#f4f8ff;--blue:#1677ff;--muted:#73839a;--line:#e3ebf6}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}.layout{min-height:100vh;display:grid;grid-template-columns:235px 1fr}.side{background:#fff;border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:26px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#e5f2ff;color:var(--blue);font-size:25px}.brand small{display:block;font-size:10px;color:var(--muted);font-weight:500}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#5e7089;text-align:left;padding:12px;border-radius:10px}.nav button.active,.nav button:hover{background:#eaf4ff;color:#1268d8}.sidefoot{margin-top:auto;color:var(--muted);font-size:11px}.main{padding:26px clamp(14px,3vw,38px);min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}.eyebrow{font-size:10px;letter-spacing:1.5px;color:var(--blue);font-weight:800;margin:0}.top h1{margin:4px 0;font-size:27px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.card,.stat{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 20px #17395b05}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:16px}.stat span,.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:24px;margin:11px 0;overflow-wrap:anywhere}.cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.field{display:grid;gap:6px;font-size:12px;color:#536781;font-weight:650;margin-bottom:12px}input,select{width:100%;padding:11px;border:1px solid #dce6f2;border-radius:10px;background:white;color:#172b45}button.primary,.primary{border:0;background:var(--blue);color:white;border-radius:10px;padding:11px 15px;font-weight:700}button.secondary{border:0;background:#edf4fc;color:#34516f;border-radius:10px;padding:10px 13px;font-weight:700}.hidden{display:none!important}.page{display:none}.page.active{display:block}.notice{padding:12px;border-radius:10px;background:#fff7e6;color:#7c5911;margin:12px 0;font-size:13px}.result{font-size:25px;font-weight:800;margin:18px 0 5px;overflow-wrap:anywhere}.tx{border-top:1px solid #edf1f7;padding:12px 0;display:flex;justify-content:space-between;gap:10px}.tx small{display:block;color:var(--muted);margin-top:4px}.plus{color:#159767}.minus{color:#d34d5a}.pill{background:#e8f4ff;color:#1766c4;border-radius:20px;padding:6px 10px;font-size:11px;font-weight:700}.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.price{font-size:27px;font-weight:800}.plan p{color:var(--muted);font-size:13px;line-height:1.6;min-height:65px}.auth{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center;margin-bottom:16px}.auth h2{margin:7px 0}.authform{max-width:390px}.foot{padding:25px 0 5px;color:#8a97a8;font-size:11px}.empty{padding:20px 0;color:var(--muted);font-size:13px}@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.plans{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}@media(max-width:700px){.layout{grid-template-columns:1fr}.side{padding:12px;gap:12px;border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:10px;font-size:12px}.sidefoot{display:none}.main{padding:17px 12px}.auth{grid-template-columns:1fr}.top h1{font-size:23px}}@media(max-width:420px){.plans{grid-template-columns:1fr}.grid{gap:8px}.stat{padding:13px}.stat strong{font-size:20px}}
+
+/* Mobile-first app-like polish */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}body{min-height:100dvh;-webkit-tap-highlight-color:transparent}
+button,input,select{touch-action:manipulation}button{transition:transform .12s ease,background .15s ease}button:active{transform:scale(.98)}
+.card,.stat{overflow-wrap:anywhere}
+@media(max-width:700px){
+ body{background:#f3f7fd}
+ .layout{display:block;min-height:100dvh}
+ .side{position:fixed;z-index:50;left:0;right:0;bottom:0;padding:8px 5px calc(8px + env(safe-area-inset-bottom));gap:0;border:0;border-top:1px solid #e4ebf5;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 -8px 28px #1c37610d}
+ .brand,.sidefoot{display:none}
+ .nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;width:100%;overflow:visible}
+ .nav button{min-width:0;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px 1px;border-radius:12px;white-space:normal;text-align:center;font-size:10px;line-height:1.15;color:#718096}
+ .nav button.active{background:#eaf3ff;color:#1268d8;font-weight:800}
+ .main{padding:calc(15px + env(safe-area-inset-top)) 12px calc(92px + env(safe-area-inset-bottom));}
+ .top{position:sticky;top:0;z-index:20;margin:-5px -12px 16px;padding:12px;background:rgba(243,247,253,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e7edf6}
+ .top h1{font-size:22px;margin:3px 0}
+ #authstate{font-size:10px;max-width:85px;text-align:right}
+ .card,.stat{border-radius:18px;box-shadow:0 5px 18px #17395b08}
+ .card{padding:16px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .stat{padding:14px 12px;min-width:0}
+ .stat strong{font-size:clamp(17px,5vw,22px);margin:8px 0;letter-spacing:-.3px}
+ .stat span,.stat small{font-size:11px;line-height:1.4}
+ .cols,.auth{grid-template-columns:minmax(0,1fr);gap:12px}
+ .plans{grid-template-columns:minmax(0,1fr);gap:10px}
+ .plan p{min-height:0}
+ input,select{min-height:46px;font-size:16px;padding:12px;border-radius:12px}
+ button.primary,button.secondary{min-height:44px;border-radius:12px}
+ .row{flex-wrap:wrap}
+ .row>*{min-width:0}
+ .result{font-size:clamp(21px,6vw,28px)}
+ .tx{align-items:flex-start}
+ h2{font-size:20px}
+}
+@media(max-width:380px){
+ .main{padding-left:9px;padding-right:9px}
+ .top{margin-left:-9px;margin-right:-9px;padding-left:10px;padding-right:10px}
+ .nav button{font-size:9px}
+ .grid{gap:7px}
+ .stat{padding:12px 9px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+/* RateBondhu branded auth + app navigation */
+.logo{width:48px;height:48px;background:transparent;padding:0;border-radius:15px;overflow:hidden;box-shadow:0 7px 18px #1d68d52b}
+.logo svg,.auth-brandmark svg{width:100%;height:100%;display:block}
+.brand small{letter-spacing:1.2px;margin-top:3px}
+.navicon{font-size:21px;line-height:1;font-weight:800}
+.auth-card{overflow:hidden;padding:0;grid-template-columns:1fr 1fr;gap:0;border-radius:24px}
+.auth-hero{padding:32px;background:radial-gradient(circle at 10% 5%,#d6eaff 0,transparent 38%),linear-gradient(145deg,#f4f9ff,#e8f2ff);display:flex;flex-direction:column;justify-content:center;min-height:380px}
+.auth-brandmark{width:64px;height:64px;margin-bottom:22px;filter:drop-shadow(0 9px 14px #1767d52b)}
+.auth-hero h2{font-size:clamp(23px,3vw,32px);line-height:1.25;margin:10px 0}
+.auth-perks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.auth-perks span{font-size:11px;font-weight:700;color:#2762ad;background:#fff;border:1px solid #dbe9fb;border-radius:20px;padding:7px 10px}
+.auth-panel{padding:28px;min-width:0}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;padding:4px;background:#f1f5fb;border-radius:12px;gap:4px;margin-bottom:22px}
+.auth-tab{border:0;border-radius:9px;padding:10px;background:transparent;color:#667991;font-weight:750}
+.auth-tab.active{background:#fff;color:#1768dc;box-shadow:0 2px 8px #1d3b630d}
+.auth-submit{width:100%;min-height:47px;background:linear-gradient(100deg,#2679f6,#1459d9);box-shadow:0 7px 16px #1767df2b}
+.forgot-btn{display:block;margin:10px auto 0;border:0;background:transparent;color:#2670dc;font-size:12px;font-weight:700;padding:7px}
+.auth-divider{display:flex;align-items:center;gap:12px;color:#91a0b4;font-size:11px;margin:12px 0}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e8edf4;flex:1}
+.google-btn{width:100%;display:flex;justify-content:center;align-items:center;gap:10px;border:1px solid #dfe6ef;background:#fff;color:#25364c;border-radius:12px;min-height:47px;font-weight:750;box-shadow:0 2px 5px #17395b07}
+.google-g{font-weight:900;font-size:20px;color:#4285f4}
+.auth-legal{font-size:10px;line-height:1.6;color:#93a0b2;text-align:center;margin:15px 0 0}
+@media(max-width:700px){
+ .auth-card{grid-template-columns:minmax(0,1fr);border-radius:22px}
+ .auth-hero{padding:22px 20px 20px;min-height:0}
+ .auth-brandmark{width:48px;height:48px;margin-bottom:14px}
+ .auth-hero h2{font-size:24px}
+ .auth-perks{margin-top:10px}
+ .auth-panel{padding:20px}
+ .nav{padding:0 3px}
+ .nav button{min-height:58px;gap:5px;font-size:10px}
+ .navicon{font-size:22px}
+}
+@media(max-width:380px){.auth-panel{padding:16px}.auth-hero{padding:19px 16px}.auth-hero h2{font-size:22px}}
+
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo">৳</div><span>RateBondhu</span></div>
-    <span class="pill">● রেট ড্যাশবোর্ড</span>
-  </header>
+<div class="layout">
+<aside class="side"><div class="brand"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="rbGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#43b8ff"/><stop offset="1" stop-color="#2458e6"/></linearGradient></defs><rect x="2" y="2" width="44" height="44" rx="15" fill="url(#rbGrad)"/><path d="M15 13h12a7 7 0 0 1 0 14H15m0-14v22m0-11h13l7 11" fill="none" stroke="white" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>RateBondhu<small>GLOBAL FINANCE</small></span></div>
+<nav class="nav" aria-label="Main navigation">
+<button class="active" data-page="overview"><span class="navicon">⌂</span><span>Home</span></button><button data-page="rates"><span class="navicon">⇄</span><span>Rates</span></button><button data-page="wallet"><span class="navicon">▣</span><span>Wallet</span></button><button data-page="transactions"><span class="navicon">↕</span><span>Activity</span></button><button data-page="membership"><span class="navicon">✦</span><span>Premium</span></button><button data-page="settings"><span class="navicon">⚙</span><span>Settings</span></button></nav>
+<div class="sidefoot">● Your finance workspace</div></aside>
+<main class="main"><header class="top"><div><p class="eyebrow">RATEBONDHU FINANCE</p><h1 id="title">Overview</h1></div><div class="row"><span id="authstate" class="muted">Sign in to RateBondhu</span><button id="logout" class="secondary hidden">Log out</button></div></header>
+<div id="notice" class="notice hidden" role="status"></div>
+<section id="authbox" class="card auth auth-card"><div class="auth-hero"><div class="auth-brandmark"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="15" fill="url(#rbGrad)"/><path d="M15 13h12a7 7 0 0 1 0 14H15m0-14v22m0-11h13l7 11" fill="none" stroke="white" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="eyebrow">WELCOME TO RATEBONDHU</p><h2>আপনার অর্থ, আপনার নিয়ন্ত্রণে</h2><p class="muted">এক জায়গায় আপনার হিসাব ও বিশ্বব্যাপী মুদ্রার রেফারেন্স রেট। নিরাপদে আপনার অ্যাকাউন্টে প্রবেশ করুন।</p><div class="auth-perks"><span>✓ Personal finance</span><span>✓ Global currency rates</span></div></div><div class="auth-panel"><div class="auth-tabs"><button id="signinTab" class="auth-tab active" type="button">লগইন</button><button id="signupTab" class="auth-tab" type="button">নতুন অ্যাকাউন্ট</button></div><form id="authform" class="authform"><label class="field">ইমেইল ঠিকানা<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label class="field">পাসওয়ার্ড<input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="কমপক্ষে ৬ অক্ষর"></label><button class="primary auth-submit" id="emailSubmit" type="submit">লগইন করুন</button><button class="forgot-btn" id="forgotPassword" type="button">পাসওয়ার্ড ভুলে গেছেন?</button></form><div class="auth-divider"><span>অথবা</span></div><button class="google-btn" id="googleSignIn" type="button"><span class="google-g">G</span> Continue with Google</button><p class="auth-legal">চালিয়ে গেলে আপনি RateBondhu-এর ব্যবহারবিধি ও গোপনীয়তা নীতি মেনে নিচ্ছেন।</p></div></section>
+<div id="app" class="hidden">
+<section class="page active" id="page-overview"><div class="row" style="margin-bottom:15px"><div><h2>আপনার ড্যাশবোর্ড</h2><p class="muted">লগইন করা আছে, তবে এই সংস্করণে হিসাবের লেনদেন এই ব্রাউজারেই সংরক্ষিত।</p></div><span class="pill">Browser storage</span></div>
+<div class="grid"><article class="stat"><span>Wallet balance</span><strong id="balance">৳0</strong><small>Income minus expenses</small></article><article class="stat"><span>Total income</span><strong id="income">৳0</strong><small>Saved entries</small></article><article class="stat"><span>Total expenses</span><strong id="expense">৳0</strong><small>Saved entries</small></article><article class="stat"><span>Membership</span><strong>Free</strong><small>Premium requires verified payment</small></article></div>
+<div class="cols"><article class="card"><h3>Quick transaction</h3><form id="txform"><label class="field">Type<select id="type"><option value="income">Income</option><option value="expense">Expense</option></select></label><label class="field">Amount (BDT)<input id="amount" type="number" min=".01" step=".01" required></label><label class="field">Category<input id="category" maxlength="60" required placeholder="Salary, Food…"></label><label class="field">Note<input id="note" maxlength="200" placeholder="Optional note"></label><button class="primary">Save transaction</button></form></article><article class="card"><div class="row"><h3>Recent transactions</h3><button id="export" class="secondary">Export JSON</button></div><div id="recent" class="empty">এখনো transaction নেই।</div></article></div></section>
+<section class="page" id="page-rates"><article class="card"><h2>Global reference rates</h2><p class="muted">Frankfurter API থেকে reference rate; এগুলো guaranteed live bank/cash/remittance rate নয়।</p><div class="cols"><label class="field">Amount<input id="rateamount" type="number" min="0" value="1"></label><label class="field">Base currency<select id="from"><option>EUR</option></select></label><label class="field">Quote currency<select id="to"><option>BDT</option></select></label><button class="primary" id="convert">Convert</button></div><div class="result" id="rateout">Loading currency catalogue…</div><p id="ratemeta" class="muted"></p></article></section>
+<section class="page" id="page-wallet"><article class="card"><h2>My Wallet</h2><p>লেনদেন এই ডিভাইসের browser-এ সংরক্ষিত। Browser data clear করলে ডেটা হারাতে পারে; নিয়মিত JSON backup export করুন। Cloud sync এখনো যুক্ত হয়নি।</p><button class="primary" id="export2">Export backup</button><label class="field" style="margin-top:20px">Restore JSON backup<input type="file" id="restore" accept=".json,application/json"></label></article></section>
+<section class="page" id="page-transactions"><article class="card"><h2>All transactions</h2><div id="alltx" class="empty">এখনো transaction নেই।</div></article></section>
+<section class="page" id="page-membership"><div class="plans"><article class="card plan"><h3>Free</h3><div class="price">৳0</div><p>Reference rates, converter, basic wallet.</p><span class="pill">Default</span></article><article class="card plan"><h3>Monthly</h3><div class="price">৳149</div><p>Premium for 1 month after manual verification.</p></article><article class="card plan"><h3>6 Months</h3><div class="price">৳899</div><p>Premium for 6 months after manual verification.</p></article><article class="card plan"><h3>12 Months</h3><div class="price">৳1299</div><p>Premium for 12 months after manual verification.</p></article></div><div class="notice">bKash/Nagad/Rocket receiving numbers owner verify করে Admin settings-এ যোগ না করা পর্যন্ত unset থাকবে। Payment submit করলেই Premium active হয় না।</div></section>
+<section class="page" id="page-settings"><article class="card"><h2>Settings & support</h2><p class="muted">WhatsApp support: +8801999842041</p><a class="primary" style="display:inline-block;text-decoration:none" href="https://wa.me/8801999842041" target="_blank" rel="noopener">Contact RateBondhu on WhatsApp</a><p class="muted" style="margin-top:18px">Language: বাংলা / English • Base currency: BDT</p><p class="muted">Privacy: Firebase Authentication দিয়ে অ্যাকাউন্ট যাচাই হয়; লেনদেনের ডেটা এই সংস্করণে এখনো এই ব্রাউজারের localStorage-এ থাকে। Cloud sync আলাদা করে যুক্ত করতে হবে। Shared/public device-এ ব্যবহার করবেন না।</p></article></section>
+</div><footer class="foot">RateBondhu • Informational reference rates only. Keep regular backups. Firebase Authentication enabled; transaction cloud sync is not yet connected.</footer>
+</main></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const firebaseConfig={apiKey:"AIzaSyAxmmXGlmCHrSEvNstpgLxguCy8Xq3xMvE",authDomain:"e-wallet-95fb2.firebaseapp.com",databaseURL:"https://e-wallet-95fb2-default-rtdb.firebaseio.com",projectId:"e-wallet-95fb2",storageBucket:"e-wallet-95fb2.firebasestorage.app",messagingSenderId:"274036792120",appId:"1:274036792120:web:881fbe414e64858ee43fcd",measurementId:"G-7ZK36WX89V"};
+let app,auth;try{app=initializeApp(firebaseConfig);auth=getAuth(app)}catch(err){console.error(err)}
+let txs=[];let user=null;
+let authMode='signin';
+function setAuthMode(mode){authMode=mode;const signup=mode==='signup';$('signinTab').classList.toggle('active',!signup);$('signupTab').classList.toggle('active',signup);$('emailSubmit').textContent=signup?'অ্যাকাউন্ট তৈরি করুন':'লগইন করুন';$('password').autocomplete=signup?'new-password':'current-password';$('forgotPassword').classList.toggle('hidden',signup)}
+$('signinTab').onclick=()=>setAuthMode('signin');$('signupTab').onclick=()=>setAuthMode('signup');
+function authError(err){const messages={'auth/invalid-email':'সঠিক ইমেইল ঠিকানা লিখুন।','auth/email-already-in-use':'এই ইমেইলে আগে থেকেই অ্যাকাউন্ট আছে। লগইন করুন।','auth/weak-password':'আরও শক্তিশালী পাসওয়ার্ড দিন (কমপক্ষে ৬ অক্ষর)।','auth/invalid-credential':'ইমেইল বা পাসওয়ার্ড সঠিক নয়।','auth/user-disabled':'এই অ্যাকাউন্টটি বর্তমানে বন্ধ আছে।','auth/operation-not-allowed':'Firebase Console-এ Email/Password sign-in চালু করুন।','auth/popup-blocked':'Google sign-in চালু করা যায়নি। আবার চেষ্টা করুন।','auth/network-request-failed':'ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।','auth/unauthorized-domain':'এই ওয়েবসাইটের domain Firebase Authentication-এর Authorized domains-এ যোগ করুন।','auth/too-many-requests':'অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।'};return messages[err?.code]||('Authentication error: '+(err?.code||err?.message||'অজানা সমস্যা'))}
 
-  <section class="hero">
-    <div>
-      <span class="badge" style="background:#ffffff25;color:white">CURRENCY • CONVERTER</span>
-      <h1>কারেন্সি রেট জানুন,<br>হিসাব করুন সহজে।</h1>
-      <p>আন্তর্জাতিক রেফারেন্স রেট দেখুন এবং কাতার থেকে বাংলাদেশে টাকা পাঠালে সম্ভাব্য কত টাকা পাবেন তা হিসাব করুন।</p>
-    </div>
-    <div class="hero-stat">
-      <small>আপনার জন্য গুরুত্বপূর্ণ</small>
-      <strong>QAR → BDT</strong>
-      <span>কাতারি রিয়াল থেকে বাংলাদেশি টাকা</span>
-    </div>
-  </section>
-
-  <div class="grid">
-    <section class="card">
-      <h2>কারেন্সি কনভার্টার</h2>
-      <p class="sub">আন্তর্জাতিক রেফারেন্স ডেটা থেকে হিসাব। এটি কোনো এক্সচেঞ্জ হাউসের নিশ্চিত রেমিট্যান্স রেট নয়।</p>
-      <div class="field"><label for="amount">পরিমাণ</label><input id="amount" class="control" type="number" min="0" step="any" value="100" inputmode="decimal"></div>
-      <div class="convert-row">
-        <div class="field"><label for="from">যে মুদ্রা থেকে</label><select id="from" class="control" aria-label="যে মুদ্রা থেকে"></select><small id="from-selected" class="status">QAR — কাতারি রিয়াল</small></div>
-        <button class="swap" id="swap" aria-label="মুদ্রা অদলবদল" title="মুদ্রা অদলবদল">⇄</button>
-        <div class="field"><label for="to">যে মুদ্রায়</label><select id="to" class="control" aria-label="যে মুদ্রায়"></select><small id="to-selected" class="status">BDT — বাংলাদেশি টাকা</small></div>
-      </div>
-      <button class="btn" id="convert">রেট হিসাব করুন</button>
-      <div class="result" aria-live="polite"><small id="result-label">ফলাফল</small><strong id="result">রেট লোড হচ্ছে…</strong><p id="result-note">সর্বশেষ উপলভ্য রেফারেন্স রেট</p></div>
-      <div id="api-status" class="status">রেট ডেটা লোড হচ্ছে…</div>
-    </section>
-
-    <section class="card">
-      <h2>কাতার → বাংলাদেশ রেমিট্যান্স</h2>
-      <p class="sub">এক্সচেঞ্জ হাউসের রেট ও ফি ভিন্ন হতে পারে। যে রেটটি আপনাকে দেওয়া হয়েছে, সেটি লিখে সম্ভাব্য প্রাপ্য হিসাব করুন।</p>
-      <div class="field"><label for="qar">পাঠাবেন (QAR)</label><input id="qar" class="control" type="number" min="0" step="any" value="1000" inputmode="decimal"></div>
-      <div class="field"><label for="remit-rate">আপনার এক্সচেঞ্জের রেট (১ QAR = কত BDT)</label><input id="remit-rate" class="control" type="number" min="0" step="any" placeholder="যেমন: 33.50" inputmode="decimal"></div>
-      <div class="field"><label for="fee">ফি (QAR)</label><input id="fee" class="control" type="number" min="0" step="any" value="0" inputmode="decimal"></div>
-      <button class="btn" id="remit-calc">প্রাপ্য টাকা হিসাব করুন</button>
-      <div class="result" aria-live="polite"><small>আনুমানিক প্রাপ্য</small><strong id="remit-result">রেট লিখুন</strong><p id="remit-note">রেট ও ফি নিশ্চিত না হলে ফলাফল চূড়ান্ত নয়।</p></div>
-      <div class="links">
-        <a href="https://www.qiib.com.qa/Tools/Exchange" target="_blank" rel="noopener">QIIB রেট দেখুন ↗</a>
-        <a href="https://masarif.qa/" target="_blank" rel="noopener">কাতার এক্সচেঞ্জ রেট তুলনা ↗</a>
-      </div>
-    </section>
-  </div>
-
-  <section class="card" style="margin-top:20px">
-    <h2>জনপ্রিয় আন্তর্জাতিক রেট</h2>
-    <p class="sub">নিচের মানগুলো API থেকে পাওয়া গেলে দেখাবে। ডেটা সাধারণত দৈনিক রেফারেন্স রেট; প্রতি সেকেন্ডের ট্রেডিং রেট নয়।</p>
-    <div id="popular" class="rate-list"><div class="rate">রেট লোড হচ্ছে…</div></div>
-    <div id="popular-status" class="status"></div>
-  </section>
-
-  <div class="ad"><div><strong>বিজ্ঞাপনের জায়গা</strong><br>Ad network অনুমোদন পাওয়ার পর এখানে তাদের অনুমোদিত বিজ্ঞাপন কোড বসান।</div></div>
-
-  <footer class="foot">
-    <strong>গুরুত্বপূর্ণ তথ্য:</strong> আন্তর্জাতিক রেফারেন্স রেট ও এক্সচেঞ্জ হাউসের প্রকৃত রেমিট্যান্স রেট এক নয়। এক্সচেঞ্জের ফি, পেমেন্ট পদ্ধতি, প্রচারমূলক অফার ও প্রাপকের ব্যাংক অনুযায়ী প্রাপ্ত টাকা বদলাতে পারে। এই সাইট কোনো টাকা পাঠায় না এবং দেখানো হিসাব আর্থিক নিশ্চয়তা নয়।<br>
-    আন্তর্জাতিক রেটের উৎস: <a href="https://frankfurter.dev/" target="_blank" rel="noopener">Frankfurter API</a>। রেট প্রকাশের সময় উৎসের আপডেট সময়ের ওপর নির্ভর করে।
-  </footer>
-</div>
-<script>
-const API = "https://api.frankfurter.dev/v2";
-const currencies = [
- ["QAR","কাতারি রিয়াল"],["BDT","বাংলাদেশি টাকা"],["USD","মার্কিন ডলার"],["EUR","ইউরো"],
- ["GBP","ব্রিটিশ পাউন্ড"],["SAR","সৌদি রিয়াল"],["AED","UAE দিরহাম"],["INR","ভারতীয় রুপি"],
- ["PKR","পাকিস্তানি রুপি"],["NPR","নেপালি রুপি"],["LKR","শ্রীলঙ্কান রুপি"],["MYR","মালয়েশিয়ান রিঙ্গিত"],
- ["SGD","সিঙ্গাপুর ডলার"],["JPY","জাপানি ইয়েন"],["CNY","চীনা ইউয়ান"],["CAD","কানাডিয়ান ডলার"],
- ["AUD","অস্ট্রেলিয়ান ডলার"],["CHF","সুইস ফ্রাঁ"],["KWD","কুয়েতি দিনার"],["BHD","বাহরাইনি দিনার"],
- ["OMR","ওমানি রিয়াল"],["TRY","তুর্কি লিরা"],["THB","থাই বাত"],["HKD","হংকং ডলার"],
- ["IDR","ইন্দোনেশীয় রুপিয়া"],["PHP","ফিলিপাইন পেসো"],["KRW","দক্ষিণ কোরীয় ওন"],["ZAR","দক্ষিণ আফ্রিকান র‍্যান্ড"],
- ["SEK","সুইডিশ ক্রোনা"],["NOK","নরওয়েজিয়ান ক্রোন"],["DKK","ড্যানিশ ক্রোন"],["NZD","নিউজিল্যান্ড ডলার"]
-];
-const $ = id => document.getElementById(id);
-const names = Object.fromEntries(currencies);
-let latest = new Map();
-let lastUpdated = "";
-function fmt(n, max=4) { return Number(n).toLocaleString("en-US",{maximumFractionDigits:max}); }
-function currencyOptions() {
-  for (const id of ["from","to"]) {
-    const select = $(id);
-    select.replaceChildren();
-    currencies.forEach(([code, name]) => {
-      const option = document.createElement("option");
-      option.value = code;
-      option.textContent = `${code} — ${name}`;
-      select.appendChild(option);
-    });
-    select.style.color = "#14233b";
-    select.style.backgroundColor = "#ffffff";
-  }
-  $("from").value = "QAR";
-  $("to").value = "BDT";
-}
-async function getRate(from,to) {
-  if (from===to) return {rate:1,date:lastUpdated || "—"};
-  const key=`${from}/${to}`;
-  if (latest.has(key)) return latest.get(key);
-  const response = await fetch(`${API}/rate/${encodeURIComponent(from)}/${encodeURIComponent(to)}`);
-  if (!response.ok) throw new Error(`API response ${response.status}`);
-  const data = await response.json();
-  if (typeof data.rate !== "number") throw new Error("রেট পাওয়া যায়নি");
-  const item={rate:data.rate,date:data.date || "—"};
-  latest.set(key,item);
-  return item;
-}
-async function convert() {
-  const amount=Number($("amount").value), from=$("from").value, to=$("to").value;
-  if (!Number.isFinite(amount) || amount<0) { $("result").textContent="সঠিক পরিমাণ লিখুন"; return; }
-  $("result").textContent="হিসাব হচ্ছে…"; $("api-status").classList.remove("error");
-  try {
-    const d=await getRate(from,to);
-    $("result").textContent=`${fmt(amount*d.rate,2)} ${to}`;
-    $("result-label").textContent=`${fmt(amount,2)} ${from} =`;
-    $("result-note").textContent=`১ ${from} = ${fmt(d.rate,6)} ${to} · রেটের তারিখ: ${d.date}`;
-    $("api-status").textContent=`রেট সফলভাবে লোড হয়েছে · তারিখ: ${d.date} · উৎস: Frankfurter API`;
-  } catch(e) {
-    $("result").textContent="এই মুহূর্তে রেট পাওয়া যায়নি";
-    $("result-note").textContent="ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
-    $("api-status").textContent="API থেকে রেট আনা যায়নি। কিছু মুদ্রার রেট উৎসে নাও থাকতে পারে।";
-    $("api-status").classList.add("error");
-  }
-}
-async function loadPopular() {
-  const pairs=[["QAR","BDT"],["USD","BDT"],["SAR","BDT"],["AED","BDT"],["QAR","USD"],["EUR","BDT"]];
-  $("popular").innerHTML="";
-  let ok=0;
-  for (const [from,to] of pairs) {
-    const box=document.createElement("div"); box.className="rate";
-    box.innerHTML=`<div class="pair">${from} → ${to}</div><strong>লোড হচ্ছে…</strong><small>আন্তর্জাতিক রেফারেন্স</small>`;
-    $("popular").appendChild(box);
-    try {
-      const d=await getRate(from,to);
-      box.querySelector("strong").textContent=`${fmt(d.rate,5)} ${to}`;
-      box.querySelector("small").textContent=`১ ${from} · তারিখ ${d.date}`;
-      ok++;
-    } catch(e) {
-      box.querySelector("strong").textContent="রেট পাওয়া যায়নি";
-      box.querySelector("small").textContent="এই মুদ্রাজোড়া উৎসে অনুপলভ্য হতে পারে";
-    }
-  }
-  $("popular-status").textContent=ok ? "রেটগুলো সর্বশেষ উপলভ্য প্রকাশিত রেফারেন্স ডেটা থেকে নেওয়া হয়েছে।" : "রেট লোড হয়নি। পরে আবার চেষ্টা করুন।";
-}
-function remitCalc() {
-  const amount=Number($("qar").value), rate=Number($("remit-rate").value), fee=Number($("fee").value || 0);
-  if (!Number.isFinite(amount)||amount<0||!Number.isFinite(rate)||rate<=0||!Number.isFinite(fee)||fee<0||fee>amount) {
-    $("remit-result").textContent="সঠিক তথ্য লিখুন";
-    $("remit-note").textContent="পরিমাণ, রেট ও ফি যাচাই করুন। ফি পাঠানোর পরিমাণের বেশি হতে পারবে না।"; return;
-  }
-  const receive=(amount-fee)*rate;
-  $("remit-result").textContent=`৳ ${fmt(receive,2)}`;
-  $("remit-note").textContent=`হিসাব: (${fmt(amount,2)} − ${fmt(fee,2)} QAR ফি) × ${fmt(rate,5)} BDT। এক্সচেঞ্জের শর্ত অনুযায়ী চূড়ান্ত অঙ্ক আলাদা হতে পারে।`;
-}
-$("convert").addEventListener("click",convert);
-$("swap").addEventListener("click",()=>{const a=$("from").value;$("from").value=$("to").value;$("to").value=a;updateSelectedLabels();convert();});
-function updateSelectedLabels() {
-  const from = $("from").value, to = $("to").value;
-  $("from-selected").textContent = `${from} — ${names[from] || from}`;
-  $("to-selected").textContent = `${to} — ${names[to] || to}`;
-}
-$("from").addEventListener("change",()=>{updateSelectedLabels();convert();});
-$("to").addEventListener("change",()=>{updateSelectedLabels();convert();});
-$("amount").addEventListener("input",()=>{if($("amount").value!=="")convert();});
-$("remit-calc").addEventListener("click",remitCalc);
-$("qar").addEventListener("input",()=>{if($("remit-rate").value)remitCalc();});
-$("remit-rate").addEventListener("input",remitCalc); $("fee").addEventListener("input",()=>{if($("remit-rate").value)remitCalc();});
-currencyOptions();
-updateSelectedLabels();
-convert();
-loadPopular();
+function note(s,bad=false){$('notice').textContent=s;$('notice').classList.remove('hidden');$('notice').style.background=bad?'#fff0f0':'#fff7e6';$('notice').style.color=bad?'#9c2933':'#7c5911'}
+function money(n){return '৳'+Number(n||0).toLocaleString('en-US',{maximumFractionDigits:2})}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){let inc=txs.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0),exp=txs.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);$('balance').textContent=money(inc-exp);$('income').textContent=money(inc);$('expense').textContent=money(exp);let html=txs.slice().reverse().map(t=>`<div class="tx"><div><b>${esc(t.category)}</b><small>${esc(t.note||t.type)} • ${esc(t.date)}</small></div><b class="${t.type==='income'?'plus':'minus'}">${t.type==='income'?'+':'−'}${money(t.amount)}</b></div>`).join('');$('recent').innerHTML=html||'<div class="empty">এখনো transaction নেই।</div>';$('alltx').innerHTML=html||'<div class="empty">এখনো transaction নেই।</div>';if(user)localStorage.setItem('rb_transactions_'+user.uid,JSON.stringify(txs))}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$('page-'+b.dataset.page).classList.add('active');document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x===b));$('title').textContent=b.textContent.replace(/^[^A-Za-z\u0980-\u09FF]+/,'')});
+$('authform').onsubmit=async e=>{e.preventDefault();if(!auth)return note('Firebase initialize হয়নি। Firebase config-এর API key যাচাই করুন।',true);const email=$('email').value.trim(),password=$('password').value;const btn=$('emailSubmit');btn.disabled=true;btn.textContent='অপেক্ষা করুন…';try{if(authMode==='signup'){const cred=await createUserWithEmailAndPassword(auth,email,password);try{await updateProfile(cred.user,{displayName:email.split('@')[0]})}catch{}}else{await signInWithEmailAndPassword(auth,email,password)}}catch(err){note(authError(err),true)}finally{btn.disabled=false;btn.textContent=authMode==='signup'?'অ্যাকাউন্ট তৈরি করুন':'লগইন করুন'}};
+$('googleSignIn').onclick=async()=>{if(!auth)return note('Firebase initialize হয়নি। Firebase config যাচাই করুন।',true);try{await signInWithRedirect(auth,new GoogleAuthProvider())}catch(err){note(authError(err),true)}};
+$('forgotPassword').onclick=async()=>{if(!auth)return note('Firebase initialize হয়নি।',true);const email=$('email').value.trim();if(!email)return note('আগে ইমেইল ঠিকানা লিখুন।',true);try{await sendPasswordResetEmail(auth,email);note('পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে।')}catch(err){note(authError(err),true)}};
+$('logout').onclick=async()=>{if(auth)try{await signOut(auth)}catch(err){note(authError(err),true)}};
+onAuthStateChanged(auth,async currentUser=>{user=currentUser;$('authbox').classList.toggle('hidden',!!currentUser);$('app').classList.toggle('hidden',!currentUser);$('authstate').textContent=currentUser?(currentUser.displayName||currentUser.email||'Signed in'):'Sign in to RateBondhu';$('logout').classList.toggle('hidden',!currentUser);if(currentUser){try{txs=JSON.parse(localStorage.getItem('rb_transactions_'+currentUser.uid)||'[]');if(!Array.isArray(txs))txs=[]}catch{txs=[]}$('authstate').title=currentUser.email||'';render();note('Firebase account দিয়ে সফলভাবে প্রবেশ করেছেন। লেনদেন এখনো এই ডিভাইসেই সংরক্ষিত।')}else{txs=[];render()}});
+getRedirectResult(auth).catch(err=>note(authError(err),true));
+$('txform').onsubmit=e=>{e.preventDefault();let amount=Number($('amount').value),category=$('category').value.trim();if(!Number.isFinite(amount)||amount<=0||!category)return note('সঠিক amount ও category দিন।',true);txs.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),type:$('type').value,amount,category,note:$('note').value.trim(),date:new Date().toISOString(),currency:'BDT',schemaVersion:1});render();e.target.reset();note('Transaction local demo wallet-এ সংরক্ষিত হয়েছে।')};
+function exportData(){let blob=new Blob([JSON.stringify({schemaVersion:1,exportedAt:new Date().toISOString(),transactions:txs},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ratebondhu-backup.json';a.click();URL.revokeObjectURL(a.href)}$('export').onclick=exportData;$('export2').onclick=exportData;
+$('restore').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{if(f.size>5*1024*1024)throw Error('Backup must be under 5 MB');let obj=JSON.parse(await f.text());if(obj.schemaVersion!==1||!Array.isArray(obj.transactions)||obj.transactions.some(t=>!['income','expense'].includes(t.type)||!Number.isFinite(t.amount)||t.amount<=0||typeof t.category!=='string'))throw Error('Backup schema or transaction data is invalid');if(confirm('বর্তমান demo transaction-গুলো replace করে backup restore করবেন?')){txs=obj.transactions;render();note('Backup restore হয়েছে।')}}catch(err){note('Restore failed: '+err.message,true)}e.target.value=''};
+let codes={};async function loadCurrencies(){try{let r=await fetch('https://api.frankfurter.dev/v2/currencies');if(!r.ok)throw Error();codes=await r.json();for(let id of ['from','to']){let s=$(id);s.innerHTML='';Object.entries(codes).sort(([a],[b])=>a.localeCompare(b)).forEach(([code,v])=>{let o=document.createElement('option');o.value=code;o.textContent=code+' — '+(v.name||code);s.append(o)})}$('from').value=codes.EUR?'EUR':Object.keys(codes)[0];$('to').value=codes.BDT?'BDT':(codes.USD?'USD':Object.keys(codes)[1]);$('rateout').textContent='Currency catalogue loaded.';$('ratemeta').textContent=Object.keys(codes).length+' API-listed currencies; pair support may vary.'}catch{$('rateout').textContent='Currency catalogue unavailable';$('ratemeta').textContent='API error. Retry later; no rate has been invented.'}}
+$('convert').onclick=async()=>{let amount=Number($('rateamount').value),from=$('from').value,to=$('to').value;if(!Number.isFinite(amount)||amount<0)return note('সঠিক amount দিন।',true);if(from===to){$('rateout').textContent=`${amount} ${to}`;$('ratemeta').textContent='Same-currency conversion.';return}$('rateout').textContent='Loading…';try{let r=await fetch(`https://api.frankfurter.dev/v2/rates?base=${encodeURIComponent(from)}&quotes=${encodeURIComponent(to)}`);if(!r.ok)throw Error();let d=await r.json(),row=Array.isArray(d)?d.find(x=>x.quote===to):null;if(!row||!Number.isFinite(Number(row.rate)))throw Error();$('rateout').textContent=(amount*Number(row.rate)).toLocaleString(undefined,{maximumFractionDigits:6})+' '+to;$('ratemeta').textContent=`Reference: 1 ${from} = ${row.rate} ${to}. Date: ${row.date||'not supplied'}. Not guaranteed remittance rate.`}catch{$('rateout').textContent='Rate unavailable for this pair';$('ratemeta').textContent='Unsupported pair or API error.'}};
+render();loadCurrencies();setAuthMode('signin');
+})();
 </script>
-</body>
-</html>
+</body></html>
