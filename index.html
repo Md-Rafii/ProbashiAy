@@ -41,7 +41,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/fireba
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import {onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import {doc,onSnapshot,updateDoc} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import {doc,onSnapshot,updateDoc,runTransaction} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 // TODO: Firebase Console → Project settings → Your apps থেকে সঠিক appId বসান।
 const firebaseConfig = {
@@ -67,9 +67,19 @@ $("go").onclick=async()=>{const e=$("em").value.trim(),p=$("pw").value;if(!e||p.
 $("fg").onclick=async()=>{const e=$("em").value.trim();if(!e)return say($("m1"),"আগে ইমেইল লিখুন।");
  try{await sendPasswordResetEmail(auth,e)}catch{}say($("m1"),"ইমেইলটি নিবন্ধিত হলে রিসেট লিংক পাঠানো হয়েছে।",1)};
 $("out").onclick=()=>signOut(auth);
-$("sv").onclick=async()=>{try{await updateDoc(doc(db,"users",auth.currentUser.uid),{displayName:$("dn").value.trim().slice(0,60)});say($("m2"),"সেভ হয়েছে।",1)}catch{say($("m2"),"সেভ করা যায়নি।")}};
+$("sv").onclick=async()=>{try{await updateDoc(doc(db,"users",auth.currentUser.uid),{displayName:$("dn").value.trim().slice(0,60)});say($("m2"),"সেভ হয়েছে।",1)}catch(x){say($("m2"),"সেভ করা যায়নি: "+(x.code||x.message))}};
+let busy=false;
+async function ensureRb(u){if(busy)return;busy=true;
+ try{await runTransaction(db,async tx=>{
+  const cr=doc(db,"counters","rb"),ur=doc(db,"users",u.uid);
+  const c=await tx.get(cr),us=await tx.get(ur);
+  if(us.exists()&&us.data().rbId)return;
+  const n=(c.exists()?c.data().n:100000)+1,id="RB-"+n;
+  tx.set(cr,{n});tx.set(doc(db,"rbIds",id),{uid:u.uid});
+  if(us.exists())tx.update(ur,{rbId:id});else tx.set(ur,{rbId:id,email:u.email||null,displayName:"",lang:"bn"});
+ })}catch(x){say($("m2"),"আইডি তৈরি ব্যর্থ: "+(x.code||x.message))}busy=false}
 onAuthStateChanged(auth,u=>{unsub&&unsub();$("guest").hidden=!!u;$("dash").hidden=!u;$("out").hidden=!u;if(!u)return;
- unsub=onSnapshot(doc(db,"users",u.uid),s=>{const d=s.data();if(!d)return;$("rb").textContent=d.rbId||"তৈরি হচ্ছে…";
+ unsub=onSnapshot(doc(db,"users",u.uid),s=>{const d=s.data();if(!d||!d.rbId){ensureRb(u);if(!d)return}$("rb").textContent=d.rbId||"তৈরি হচ্ছে…";
   $("plan").textContent=d.subscription?.plan==="free"||!d.subscription?"Free":"Premium";
   const x=d.subscription?.expiresAt;$("exp").textContent=x?x.toDate().toLocaleDateString("bn-BD"):"—";
   if(document.activeElement!==$("dn"))$("dn").value=d.displayName||""})});
