@@ -16,33 +16,61 @@ button.ghost{background:transparent;color:var(--pri);border:1px solid var(--line
 .badge{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--pri);color:#fff;font-size:13px}
 .big{font-size:28px;font-weight:700;letter-spacing:.5px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 [hidden]{display:none!important}
-</style></head><body>
+select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--bg);border-top:1px solid var(--line)}
+nav button{flex:1;background:transparent;color:var(--mute);border-radius:0;padding:12px 4px;font-size:14px}
+nav button.on{color:var(--pri);box-shadow:inset 0 3px 0 var(--pri)}main{padding-bottom:84px}
+.tx{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.in{color:var(--ok)}.out{color:var(--err)}.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);word-break:break-all}
+.kv span:first-child{color:var(--mute);white-space:nowrap}small,.mute{color:var(--mute)}</style></head><body>
 <header><b>রেটবন্ধু</b><button id="out" class="ghost" hidden>লগআউট</button></header>
 <main>
-<section id="guest">
- <div class="card"><h2 id="t">লগইন</h2>
-  <label for="em">ইমেইল</label><input id="em" type="email" autocomplete="email">
-  <label for="pw">পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর)</label><input id="pw" type="password" autocomplete="current-password">
-  <div class="row"><button id="go">লগইন করুন</button><button id="sw" class="ghost">নতুন অ্যাকাউন্ট খুলুন</button><button id="fg" class="ghost">পাসওয়ার্ড ভুলে গেছেন?</button></div>
-  <div id="m1" class="msg" role="status"></div></div>
-</section>
+<div id="boot" class="card">লোড হচ্ছে…</div>
+<section id="guest" hidden><div class="card"><h2 id="t">লগইন</h2>
+ <div id="nameWrap" hidden><label for="nm">আপনার নাম</label><input id="nm" maxlength="60" autocomplete="name"></div>
+ <label for="em">ইমেইল</label><input id="em" type="email" autocomplete="email">
+ <label for="pw">পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর)</label><input id="pw" type="password" autocomplete="current-password">
+ <div class="row"><button id="go">লগইন করুন</button><button id="sw" class="ghost">নতুন অ্যাকাউন্ট খুলুন</button><button id="fg" class="ghost">পাসওয়ার্ড ভুলে গেছেন?</button></div>
+ <div id="m1" class="msg" role="status"></div></div></section>
+
 <section id="dash" hidden>
- <div class="card"><div>আপনার রেটবন্ধু আইডি</div><div class="big" id="rb">তৈরি হচ্ছে…</div>
-  <small>এই আইডি স্থায়ী, বদলানো যায় না।</small></div>
- <div class="grid">
-  <div class="card"><div>প্ল্যান</div><span class="badge" id="plan">Free</span></div>
-  <div class="card"><div>মেয়াদ</div><b id="exp">—</b></div></div>
- <div class="card"><label for="dn">আপনার নাম</label><input id="dn" maxlength="60">
-  <div class="row"><button id="sv">সেভ করুন</button></div><div id="m2" class="msg" role="status"></div></div>
- <div class="card">কারেন্সি রেট, ওয়ালেট ও পেমেন্ট পরের ধাপে যোগ হবে।</div>
+ <div id="p-home">
+  <div class="card"><h2 id="hi">স্বাগতম</h2><span class="mute">আইডি: </span><b id="hid">…</b> <span class="badge" id="hplan">Free</span></div>
+  <div class="grid"><div class="card"><div>মোট ব্যালেন্স</div><div class="big" id="bal">৳0</div></div>
+  <div class="card"><div>এই মাসে আয়</div><b class="in" id="mi">৳0</b><div>এই মাসে ব্যয়</div><b class="out" id="mo">৳0</b></div></div>
+  <div class="card"><b>সাম্প্রতিক লেনদেন</b><div id="recent"></div></div></div>
+
+ <div id="p-conv" hidden>
+  <div class="card"><h3>কারেন্সি কনভার্টার</h3>
+   <label for="amt">পরিমাণ</label><input id="amt" type="number" value="100" min="0" step="any" inputmode="decimal">
+   <label for="cf">থেকে</label><select id="cf"></select><label for="ct">এতে</label><select id="ct"></select>
+   <div class="row"><button id="cv">কনভার্ট</button></div><div id="cr" class="msg big" role="status"></div>
+   <small id="cs">উৎস: Frankfurter (ECB রেফারেন্স রেট)। এটা ব্যাংক বা এক্সচেঞ্জ হাউসের আসল রেট নয়। BDT ও QAR এই উৎসে নেই।</small></div>
+  <div class="card"><h3>QAR → BDT রেমিট্যান্স ক্যালকুলেটর</h3>
+   <label for="qa">পাঠাবেন (QAR)</label><input id="qa" type="number" min="0" step="any" inputmode="decimal">
+   <label for="qr">এক্সচেঞ্জ হাউসের রেট (১ QAR = ? BDT)</label><input id="qr" type="number" min="0" step="any" inputmode="decimal">
+   <label for="qf">ট্রান্সফার ফি (QAR)</label><input id="qf" type="number" min="0" step="any" value="0" inputmode="decimal">
+   <div class="row"><button id="qc">হিসাব করুন</button></div><div id="qo" class="msg" role="status"></div></div></div>
+
+ <div id="p-wal" hidden>
+  <div class="card"><h3>নতুন লেনদেন</h3>
+   <label for="ty">ধরন</label><select id="ty"><option value="income">আয়</option><option value="expense">ব্যয়</option></select>
+   <label for="am">পরিমাণ (৳)</label><input id="am" type="number" min="0" step="any" inputmode="decimal">
+   <label for="ca">ক্যাটাগরি</label><input id="ca" maxlength="40" placeholder="যেমন: খাবার, বেতন">
+   <label for="dt">তারিখ</label><input id="dt" type="date">
+   <div class="row"><button id="ad">যোগ করুন</button></div><div id="m3" class="msg" role="status"></div></div>
+  <div class="card"><b>সব লেনদেন</b><div id="list"></div></div></div>
+
+ <div id="p-prof" hidden>
+  <div class="card"><h3>আমার প্রোফাইল</h3><div id="kv"></div></div>
+  <div class="card"><label for="dn">নাম পরিবর্তন</label><input id="dn" maxlength="60">
+   <div class="row"><button id="sv">সেভ করুন</button></div><div id="m2" class="msg" role="status"></div></div></div>
+ <nav id="nav"><button data-p="home" class="on">হোম</button><button data-p="conv">কনভার্টার</button><button data-p="wal">ওয়ালেট</button><button data-p="prof">প্রোফাইল</button></nav>
 </section></main>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import {onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import {doc,onSnapshot,updateDoc,runTransaction} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
+import { getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore,doc,onSnapshot,updateDoc,runTransaction,collection,query,orderBy,addDoc,deleteDoc,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 // TODO: Firebase Console → Project settings → Your apps থেকে সঠিক appId বসান।
 const firebaseConfig = {
   apiKey: "AIzaSyAxmmXGlmCHrSEvNstpgLxguCy8Xq3xMvE",
@@ -58,17 +86,26 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const $=i=>document.getElementById(i);let reg=false,unsub=null;
+
+const $=i=>document.getElementById(i);let reg=false,unsub=null,unsubT=null,busy=false,pendingName="",txs=[],prof={};
 const say=(el,t,ok)=>{el.textContent=t;el.className="msg "+(ok?"ok":"err")};
+const tk=n=>"৳"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const E={"auth/invalid-credential":"ইমেইল বা পাসওয়ার্ড ভুল।","auth/email-already-in-use":"এই ইমেইল দিয়ে অ্যাকাউন্ট আছে।","auth/weak-password":"পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের দিন।","auth/invalid-email":"ইমেইল সঠিক নয়।","auth/too-many-requests":"অনেকবার চেষ্টা হয়েছে, একটু পরে আবার দিন।"};
-$("sw").onclick=()=>{reg=!reg;$("t").textContent=reg?"নতুন অ্যাকাউন্ট":"লগইন";$("go").textContent=reg?"অ্যাকাউন্ট খুলুন":"লগইন করুন";$("sw").textContent=reg?"আগে থেকেই অ্যাকাউন্ট আছে":"নতুন অ্যাকাউন্ট খুলুন"};
-$("go").onclick=async()=>{const e=$("em").value.trim(),p=$("pw").value;if(!e||p.length<8)return say($("m1"),"ইমেইল ও কমপক্ষে ৮ অক্ষরের পাসওয়ার্ড দিন।");
+$("sw").onclick=()=>{reg=!reg;$("nameWrap").hidden=!reg;$("t").textContent=reg?"নতুন অ্যাকাউন্ট":"লগইন";$("go").textContent=reg?"অ্যাকাউন্ট খুলুন":"লগইন করুন";$("sw").textContent=reg?"আগে থেকেই অ্যাকাউন্ট আছে":"নতুন অ্যাকাউন্ট খুলুন"};
+$("go").onclick=async()=>{const e=$("em").value.trim(),p=$("pw").value,n=$("nm").value.trim();
+ if(reg&&n.length<2)return say($("m1"),"আপনার নাম লিখুন।");
+ if(!e||p.length<8)return say($("m1"),"ইমেইল ও কমপক্ষে ৮ অক্ষরের পাসওয়ার্ড দিন।");
+ pendingName=reg?n:"";
  try{await(reg?createUserWithEmailAndPassword:signInWithEmailAndPassword)(auth,e,p)}catch(x){say($("m1"),E[x.code]||"সমস্যা হয়েছে, আবার চেষ্টা করুন।")}};
 $("fg").onclick=async()=>{const e=$("em").value.trim();if(!e)return say($("m1"),"আগে ইমেইল লিখুন।");
  try{await sendPasswordResetEmail(auth,e)}catch{}say($("m1"),"ইমেইলটি নিবন্ধিত হলে রিসেট লিংক পাঠানো হয়েছে।",1)};
 $("out").onclick=()=>signOut(auth);
-$("sv").onclick=async()=>{try{await updateDoc(doc(db,"users",auth.currentUser.uid),{displayName:$("dn").value.trim().slice(0,60)});say($("m2"),"সেভ হয়েছে।",1)}catch(x){say($("m2"),"সেভ করা যায়নি: "+(x.code||x.message))}};
-let busy=false;
+$("nav").onclick=e=>{const p=e.target.dataset.p;if(!p)return;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b===e.target));
+ ["home","conv","wal","prof"].forEach(k=>$("p-"+k).hidden=k!==p)};
+$("sv").onclick=async()=>{const n=$("dn").value.trim();if(n.length<2)return say($("m2"),"নাম লিখুন।");
+ try{await updateDoc(doc(db,"users",auth.currentUser.uid),{displayName:n.slice(0,60)});say($("m2"),"সেভ হয়েছে।",1)}catch(x){say($("m2"),"সেভ করা যায়নি: "+(x.code||x.message))}};
+
 async function ensureRb(u){if(busy)return;busy=true;
  try{await runTransaction(db,async tx=>{
   const cr=doc(db,"counters","rb"),ur=doc(db,"users",u.uid);
@@ -76,11 +113,53 @@ async function ensureRb(u){if(busy)return;busy=true;
   if(us.exists()&&us.data().rbId)return;
   const n=(c.exists()?c.data().n:100000)+1,id="RB-"+n;
   tx.set(cr,{n});tx.set(doc(db,"rbIds",id),{uid:u.uid});
-  if(us.exists())tx.update(ur,{rbId:id});else tx.set(ur,{rbId:id,email:u.email||null,displayName:"",lang:"bn"});
+  if(us.exists())tx.update(ur,{rbId:id});else tx.set(ur,{rbId:id,email:u.email||null,displayName:pendingName.slice(0,60),lang:"bn"});
  })}catch(x){say($("m2"),"আইডি তৈরি ব্যর্থ: "+(x.code||x.message))}busy=false}
-onAuthStateChanged(auth,u=>{unsub&&unsub();$("guest").hidden=!!u;$("dash").hidden=!u;$("out").hidden=!u;if(!u)return;
- unsub=onSnapshot(doc(db,"users",u.uid),s=>{const d=s.data();if(!d||!d.rbId){ensureRb(u);if(!d)return}$("rb").textContent=d.rbId||"তৈরি হচ্ছে…";
-  $("plan").textContent=d.subscription?.plan==="free"||!d.subscription?"Free":"Premium";
-  const x=d.subscription?.expiresAt;$("exp").textContent=x?x.toDate().toLocaleDateString("bn-BD"):"—";
-  if(document.activeElement!==$("dn"))$("dn").value=d.displayName||""})});
+
+function render(){
+ const d=prof,u=auth.currentUser;if(!u)return;
+ const name=d.displayName||"বন্ধু",prem=d.subscription&&d.subscription.plan&&d.subscription.plan!=="free";
+ $("hi").textContent="স্বাগতম, "+name;$("hid").textContent=d.rbId||"তৈরি হচ্ছে…";$("hplan").textContent=prem?"Premium":"Free";
+ if(document.activeElement!==$("dn"))$("dn").value=d.displayName||"";
+ const x=d.subscription&&d.subscription.expiresAt;
+ const rows=[["নাম",name],["রেটবন্ধু আইডি",d.rbId||"তৈরি হচ্ছে…"],["ইমেইল",u.email||"—"],["প্ল্যান",prem?"Premium":"Free"],["মেয়াদ",x?x.toDate().toLocaleDateString("bn-BD"):"—"],["অ্যাকাউন্ট খোলা",u.metadata.creationTime?new Date(u.metadata.creationTime).toLocaleDateString("bn-BD"):"—"],["ইউজার UID",u.uid]];
+ $("kv").innerHTML=rows.map(r=>`<div class="kv"><span>${r[0]}</span><span>${esc(r[1])}</span></div>`).join("");
+}
+function renderTx(){
+ let inc=0,exp=0,mi=0,mo=0;const ym=new Date().toISOString().slice(0,7);
+ txs.forEach(t=>{const a=t.amount||0,m=(t.date||"").startsWith(ym);if(t.type==="income"){inc+=a;if(m)mi+=a}else{exp+=a;if(m)mo+=a}});
+ $("bal").textContent=tk(inc-exp);$("mi").textContent=tk(mi);$("mo").textContent=tk(mo);
+ const row=(t,del)=>`<div class="tx"><span>${esc(t.category||"—")}<br><small>${esc(t.date||"")}</small></span><span class="${t.type==="income"?"in":"out"}">${t.type==="income"?"+":"−"}${tk(t.amount)}${del?` <button class="ghost" data-del="${t.id}" aria-label="মুছুন">✕</button>`:""}</span></div>`;
+ $("recent").innerHTML=txs.slice(0,5).map(t=>row(t)).join("")||'<p class="mute">এখনো কোনো লেনদেন নেই।</p>';
+ $("list").innerHTML=txs.map(t=>row(t,1)).join("")||'<p class="mute">এখনো কোনো লেনদেন নেই।</p>';
+}
+$("dt").value=new Date().toISOString().slice(0,10);
+$("ad").onclick=async()=>{const a=parseFloat($("am").value),c=$("ca").value.trim(),d=$("dt").value;
+ if(!(a>0&&a<=1e9)||!c||!d)return say($("m3"),"পরিমাণ, ক্যাটাগরি ও তারিখ ঠিকভাবে দিন।");
+ try{await addDoc(collection(db,"users",auth.currentUser.uid,"transactions"),{type:$("ty").value,amount:a,category:c,date:d,createdAt:serverTimestamp()});
+  $("am").value="";$("ca").value="";say($("m3"),"যোগ হয়েছে।",1)}catch(x){say($("m3"),"যোগ করা যায়নি: "+(x.code||x.message))}};
+$("list").onclick=async e=>{const id=e.target.dataset.del;if(!id||!confirm("এই লেনদেন মুছে ফেলবেন?"))return;
+ try{await deleteDoc(doc(db,"users",auth.currentUser.uid,"transactions",id))}catch(x){say($("m3"),"মোছা যায়নি: "+(x.code||x.message))}};
+
+// কনভার্টার
+let cl=false;
+async function loadCur(){if(cl)return;
+ try{const r=await fetch("https://api.frankfurter.dev/v1/currencies");if(!r.ok)throw 0;const j=await r.json();
+  const o=Object.entries(j).map(([k,v])=>`<option value="${k}">${k} — ${esc(v)}</option>`).join("");
+  $("cf").innerHTML=o;$("ct").innerHTML=o;$("cf").value="USD";$("ct").value="EUR";cl=true}catch{$("cr").textContent="কারেন্সি তালিকা লোড হয়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন.";$("cr").className="msg err"}}
+$("cv").onclick=async()=>{await loadCur();if(!cl)return;const a=parseFloat($("amt").value),f=$("cf").value,t=$("ct").value;
+ if(!(a>=0))return say($("cr"),"সঠিক পরিমাণ দিন।");if(f===t){$("cr").className="msg big";$("cr").textContent=a+" "+t;return}
+ try{const r=await fetch(`https://api.frankfurter.dev/v1/latest?base=${f}&symbols=${t}`);if(!r.ok)throw 0;const j=await r.json();
+  $("cr").className="msg big";$("cr").textContent=(a*j.rates[t]).toLocaleString("en-US",{maximumFractionDigits:4})+" "+t;
+  $("cs").textContent=`১ ${f} = ${j.rates[t]} ${t} · রেটের তারিখ: ${j.date} · উৎস: Frankfurter (ECB রেফারেন্স রেট, আসল ব্যাংক রেট নয়)`}
+ catch{say($("cr"),"রেট আনা যায়নি। পরে আবার চেষ্টা করুন।")}};
+$("qc").onclick=()=>{const a=parseFloat($("qa").value),r=parseFloat($("qr").value),f=parseFloat($("qf").value)||0;
+ if(!(a>0&&r>0&&f>=0))return say($("qo"),"পরিমাণ ও রেট দিন।");
+ $("qo").className="msg";$("qo").innerHTML=`প্রাপক পাবে: <b>${(a*r).toLocaleString("en-IN",{maximumFractionDigits:2})} BDT</b><br>আপনার মোট খরচ: <b>${(a+f).toFixed(2)} QAR</b><br><small>রেট ও ফি আপনার দেওয়া, অফিশিয়াল নয়।</small>`};
+loadCur();
+
+onAuthStateChanged(auth,u=>{unsub&&unsub();unsubT&&unsubT();$("boot").hidden=true;
+ $("guest").hidden=!!u;$("dash").hidden=!u;$("out").hidden=!u;if(!u){prof={};txs=[];return}
+ unsub=onSnapshot(doc(db,"users",u.uid),s=>{prof=s.data()||{};if(!prof.rbId)ensureRb(u);render()});
+ unsubT=onSnapshot(query(collection(db,"users",u.uid,"transactions"),orderBy("createdAt","desc")),s=>{txs=s.docs.map(d=>({id:d.id,...d.data()}));renderTx()},()=>{})});
 </script></body></html>
