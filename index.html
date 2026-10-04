@@ -90,6 +90,28 @@ h2{font-size:20px;margin:22px 0 10px;font-weight:700}
 .ring{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center}
 .ring i{width:40px;height:40px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700}
 
+.dayh{display:flex;justify-content:space-between;align-items:baseline;margin:20px 4px 8px}
+.dayh b{font-size:14px}.dayh span{font-size:13px;font-weight:700}
+.tx{align-items:flex-start}.tx .av{border-radius:15px}
+.wchip{font-style:normal;background:var(--bg);border-radius:8px;padding:1px 7px;margin-right:6px;font-size:11.5px;color:var(--mu);font-weight:600}
+.rt{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.acts{display:flex;gap:6px}
+.ib2{width:30px;height:28px;border:0;border-radius:9px;background:var(--bg);font-size:13px;padding:0}
+.dc{background:var(--sf);border-radius:22px;padding:14px;margin-bottom:12px}
+.dc .hd{display:flex;gap:12px;align-items:center}
+.pill{font-size:11px;font-weight:700;border-radius:8px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.dc.get .pill{background:rgba(18,144,106,.14);color:var(--in)}.dc.owe .pill{background:rgba(229,72,77,.12);color:var(--ex)}
+.pbar{height:10px;border-radius:9px;background:var(--ln);overflow:hidden;margin:12px 0 6px}
+.pbar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--g1),var(--g2))}
+.dc.owe .pbar i{background:linear-gradient(90deg,#E5484D,#F2994A)}
+.pl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mu)}
+.dact{display:flex;gap:8px;margin-top:12px}
+.dact .cta{height:42px;font-size:14px;margin:0;flex:1}
+.dact .ib2{width:42px;height:42px;border-radius:13px;font-size:16px}
+details{margin-top:10px;font-size:13px}summary{color:var(--mu);cursor:pointer;font-weight:600}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed var(--ln)}
+.ph:last-child{border:0}
+.done{color:var(--in);font-weight:700;font-size:13px}
 /* nav */
 nav{position:fixed;left:0;right:0;bottom:0;background:var(--sf);display:flex;justify-content:center;padding:6px 8px calc(8px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;box-shadow:0 -6px 24px rgba(8,30,24,.10);z-index:20}
 nav .in-nav{display:grid;grid-template-columns:1fr 1fr 74px 1fr 1fr;width:100%;max-width:520px;align-items:end}
@@ -164,6 +186,7 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 <h2>হিসাব</h2>
 <div class="rows" style="display:flex;text-align:center;padding:14px">
 <div style="flex:1"><div class="sub">এই মাসে সঞ্চয়</div><div class="amt" id="sBal" style="text-align:center;font-size:22px">০</div></div></div>
+<div class="seg" data-g="tf" style="margin-top:14px"><button class="on" data-seg="tf:a">সব</button><button data-seg="tf:in">আয়</button><button data-seg="tf:ex">ব্যয়</button><button data-seg="tf:tr">ট্রান্সফার</button></div>
 <div id="txList"></div>
 </div>
 
@@ -189,7 +212,7 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 <div id="mo-d">
 <div class="mini" style="margin:0 0 12px"><div style="background:var(--sf)">আমি পাব<b class="in" id="dGet">০</b></div><div style="background:var(--sf)">আমি দেব<b class="ex" id="dOwe">০</b></div></div>
 <button class="cta" data-open="debt">+ নতুন দেনা-পাওনা</button>
-<div class="rows" id="dList" style="margin-top:12px"></div></div>
+<div id="dList" style="margin-top:12px"></div></div>
 <div id="mo-g" class="hide">
 <button class="cta" data-open="goal">+ নতুন লক্ষ্য</button>
 <div class="rows" id="gList" style="margin-top:12px"></div></div>
@@ -209,7 +232,8 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 <div class="grab"></div>
 
 <div id="sh_tx" class="f">
-<div class="seg in-sheet" id="tseg"><button data-m="ex">ব্যয়</button><button data-m="in">আয়</button><button data-m="tr">ট্রান্সফার</button></div>
+<h3 id="tTitle" class="hide">লেনদেন সম্পাদনা</h3>
+<div class="seg in-sheet" id="tseg"><button data-m="ex">ব্যয়</button><button data-m="in">আয়</button><button data-m="tr" id="mTr">ট্রান্সফার</button></div>
 <input id="tAmt" type="number" class="big" placeholder="০" inputmode="decimal">
 <div class="sub" style="margin:0 4px 4px" id="lblW">ওয়ালেট</div>
 <select id="tW"></select>
@@ -226,7 +250,7 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 <div class="two"><select id="wCur"></select><input id="wBal" type="number" placeholder="প্রারম্ভিক ব্যালেন্স" inputmode="decimal"></div>
 <button class="cta" id="wAdd">ওয়ালেট যোগ করুন</button></div>
 
-<div id="sh_debt" class="f hide"><h3>নতুন দেনা-পাওনা</h3>
+<div id="sh_debt" class="f hide"><h3 id="dTitle">নতুন দেনা-পাওনা</h3>
 <select id="dKind"><option value="get">পাওনা – আমি পাব</option><option value="owe">দেনা – আমি দেব</option></select>
 <input id="dWho" placeholder="কার সাথে">
 <div class="two"><input id="dAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"><select id="dCur"></select></div>
@@ -237,6 +261,13 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 <input id="gName" placeholder="লক্ষ্যের নাম (বাইক, হজ্ব, ফোন…)">
 <div class="two"><input id="gTar" type="number" placeholder="টার্গেট" inputmode="decimal"><select id="gCur"></select></div>
 <button class="cta" id="gAdd">লক্ষ্য যোগ করুন</button></div>
+
+<div id="sh_pay" class="f hide"><h3 id="pTitle">পরিশোধ</h3>
+<div class="sub" id="pInfo" style="margin:0 4px"></div>
+<input id="pAmt" type="number" class="big" placeholder="০" inputmode="decimal">
+<button class="cta alt" data-full="1" style="margin:0 0 10px;height:40px;font-size:14px">পুরো বাকি টাকা</button>
+<div class="two"><input id="pDate" type="date"><input id="pNote" placeholder="নোট (ঐচ্ছিক)"></div>
+<button class="cta" id="pAdd">যোগ করুন</button></div>
 </div>
 
 <div id="toast"></div>
@@ -267,7 +298,7 @@ const tint=s=>`hsl(${hue(s)} 52% 42%)`;
 const today=()=>new Date().toISOString().slice(0,10);
 const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
 
-let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[],tmode='ex';
+let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[],tmode='ex',txf='a',editTx=null,editDebt=null,payId=null;
 let S={wallets:[],txs:[],debts:[],goals:[]};
 const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','শিক্ষা','অন্যান্য']};
 const emo={'খাবার':'🍚','বাসা ভাড়া':'🏠','যাতায়াত':'🚌','বিল':'💡','কেনাকাটা':'🛍️','চিকিৎসা':'💊','শিক্ষা':'📚','বেতন':'💼','ব্যবসা':'🏪','রেমিটেন্স':'🌍','উপহার':'🎁'};
@@ -277,6 +308,8 @@ const provs=[['বিকাশ','#E2136E','ব'],['নগদ','#F6921E','ন'],[
 const brand=Object.fromEntries(provs.map(p=>[p[0],p[1]]));
 const fixed=['বিকাশ','নগদ','রকেট','উপায়','ক্যাশ'];
 const has=n=>S.wallets.some(w=>w.name.trim().toLowerCase()===n.trim().toLowerCase());
+const paidSum=d=>(d.pays&&d.pays.length)?d.pays.reduce((s,x)=>s+x.a,0):(d.paid?d.a:0);
+const rem=d=>Math.max(0,d.a-paidSum(d));
 let wpick='';
 function drawChips(){
   if(!wpick||(fixed.includes(wpick)&&has(wpick)))wpick=(provs.find(p=>!fixed.includes(p[0])||!has(p[0])))[0];
@@ -337,7 +370,9 @@ function conv(){
 }
 
 /* ---------- draw ---------- */
-const txRow=t=>`<div class="r" data-dt="${t.id}"><div class="av e" style="background:var(--bg)">${ico(t.cat)}</div><div class="rm"><b>${esc(t.cat)}</b><span>${esc(t.wn)}${t.n?' • '+esc(t.n):''}</span></div><div class="amt ${t.k==='in'||t.k==='tin'?'in':'ex'}">${t.k==='in'||t.k==='tin'?'+':'−'}${fmt(t.a)} ${t.cur}</div></div>`;
+const txRow=(t,acts)=>{const isIn=t.k==='in'||t.k==='tin',isTr=t.k[0]==='t';
+  const bg=isTr?'rgba(59,91,219,.14)':isIn?'rgba(18,144,106,.14)':'rgba(229,72,77,.12)';
+  return `<div class="r tx"><div class="av e" style="background:${bg}">${ico(t.cat)}</div><div class="rm"><b>${esc(t.cat)}</b><span><em class="wchip">${esc(t.wn)}</em>${esc(t.n)}</span></div><div class="rt"><div class="amt ${isIn?'in':'ex'}">${isIn?'+':'−'}${fmt(t.a)} ${t.cur}</div>${acts?`<div class="acts">${isTr?'':`<button class="ib2" data-et="${t.id}" aria-label="সম্পাদনা">✎</button>`}<button class="ib2" data-dt="${t.id}" aria-label="মুছুন">🗑</button></div>`:''}</div></div>`};
 function draw(){
   if(!U)return;
   $('net').textContent=fmt(S.wallets.reduce((s,w)=>s+w.bal*rt(w.cur,home),0),0);
@@ -350,13 +385,23 @@ function draw(){
   $('sBal').className='amt '+(i-e<0?'ex':'in');
   const wn=id=>S.wallets.find(w=>w.id===id)?.name||'মুছে ফেলা ওয়ালেট';
   const T=S.txs.map(t=>({...t,wn:wn(t.w)}));
-  $('recent').innerHTML=T.slice(0,5).map(txRow).join('')||'<div class="empty">এখনো কোনো লেনদেন নেই। নিচের ＋ চেপে প্রথম লেনদেন যোগ করুন।</div>';
-  let h='',last='';
-  T.slice(0,150).forEach(t=>{if(t.d!==last){last=t.d;h+=`</div><div class="day">${t.d===today()?'আজ':new Date(t.d+'T00:00').toLocaleDateString('bn-BD',{weekday:'short',day:'numeric',month:'long'})}</div><div class="rows">`}h+=txRow(t)});
-  $('txList').innerHTML=h?h.slice(6)+'</div>':'<div class="rows"><div class="empty">কোনো হিসাব নেই</div></div>';
-  let g=0,o=0;S.debts.filter(d=>!d.paid).forEach(d=>{const v=d.a*rt(d.cur,home);d.k==='get'?g+=v:o+=v});
+  $('recent').innerHTML=T.slice(0,5).map(t=>txRow(t)).join('')||'<div class="empty">এখনো কোনো লেনদেন নেই। নিচের ＋ চেপে প্রথম লেনদেন যোগ করুন।</div>';
+  const F=T.filter(t=>txf==='a'||(txf==='tr'?t.k[0]==='t':t.k===txf));
+  const groups={};F.slice(0,200).forEach(t=>(groups[t.d]=groups[t.d]||[]).push(t));
+  $('txList').innerHTML=Object.keys(groups).sort().reverse().map(dy=>{
+    const net=groups[dy].reduce((a,t)=>{const v=t.a*rt(t.cur,home);return t.k==='in'?a+v:t.k==='ex'?a-v:a},0);
+    const lab=dy===today()?'আজ':new Date(dy+'T00:00').toLocaleDateString('bn-BD',{weekday:'long',day:'numeric',month:'long'});
+    return `<div class="dayh"><b>${lab}</b><span class="${net<0?'ex':'in'}">${net?((net>0?'+':'−')+fmt(Math.abs(net),0)+' '+home):''}</span></div><div class="rows">${groups[dy].map(t=>txRow(t,1)).join('')}</div>`}).join('')||'<div class="rows"><div class="empty">কোনো হিসাব নেই</div></div>';
+  let g=0,o=0;S.debts.forEach(d=>{const v=rem(d)*rt(d.cur,home);d.k==='get'?g+=v:o+=v});
   $('dGet').textContent=fmt(g,0)+' '+home;$('dOwe').textContent=fmt(o,0)+' '+home;
-  $('dList').innerHTML=S.debts.slice().sort((a,b)=>a.paid-b.paid).map(d=>`<div class="r" style="${d.paid?'opacity:.5':''}"><div class="av" style="background:${tint(d.who)}">${esc([...d.who][0])}</div><div class="rm"><b>${esc(d.who)}</b><span>${d.k==='get'?'আমি পাব':'আমি দেব'}${d.paid?' • মিটেছে':''}${d.n?' • '+esc(d.n):''}</span></div><div class="amt ${d.k==='get'?'in':'ex'}">${fmt(d.a)} ${d.cur}</div>${d.paid?'':`<button class="sm" data-dp="${d.id}">মিটেছে</button>`}<button class="sm" data-dd="${d.id}">🗑</button></div>`).join('')||'<div class="empty">কারও কাছে পাওনা বা দেনা থাকলে এখানে যোগ করুন।</div>';
+  $('dList').innerHTML=S.debts.slice().sort((a,b)=>(rem(a)===0)-(rem(b)===0)).map(d=>{
+    const ps=paidSum(d),r=rem(d),p=Math.min(100,ps/d.a*100||0),get=d.k==='get',done=r<=0;
+    const pays=(d.pays||[]).slice().sort((a,b)=>b.d.localeCompare(a.d));
+    return `<div class="dc ${get?'get':'owe'}" style="${done?'opacity:.78':''}"><div class="hd"><div class="av" style="background:${tint(d.who)}">${esc([...d.who][0])}</div><div class="rm"><b>${esc(d.who)}<span class="pill">${get?'পাব':'দেব'}</span></b><span>${esc(d.n)}</span></div><div style="text-align:right"><div class="amt ${get?'in':'ex'}">${fmt(r)} ${d.cur}</div><div class="sub">${done?'কিছু বাকি নেই':'বাকি'}</div></div></div>
+<div class="pbar"><i style="width:${p}%"></i></div>
+<div class="pl"><span>${get?'পেয়েছি':'পরিশোধ'} ${fmt(ps)} / ${fmt(d.a)} ${d.cur}</span><span>${fmt(p,0)}%</span></div>
+<div class="dact">${done?'<div class="done" style="flex:1;align-self:center">✓ সম্পূর্ণ মিটেছে</div>':`<button class="cta" data-pay="${d.id}">＋ ${get?'টাকা পেয়েছি':'পরিশোধ করেছি'}</button>`}<button class="ib2" data-ed="${d.id}" aria-label="সম্পাদনা">✎</button><button class="ib2" data-dd="${d.id}" aria-label="মুছুন">🗑</button></div>
+${pays.length?`<details><summary>${get?'প্রাপ্তির':'পরিশোধের'} ইতিহাস (${fmt(pays.length,0)}টি)</summary>${pays.map(x=>`<div class="ph"><span>${new Date(x.d+'T00:00').toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})}${x.n?' • '+esc(x.n):''}</span><span><b class="${get?'in':'ex'}">${fmt(x.a)} ${d.cur}</b> <button class="ib2" data-dpx="${d.id}:${x.id}" style="width:26px;height:24px" aria-label="মুছুন">✕</button></span></div>`).join('')}</details>`:''}</div>`}).join('')||'<div class="empty">কারও কাছে পাওনা বা দেনা থাকলে এখানে যোগ করুন।</div>';
   $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div class="r"><div class="ring" style="background:conic-gradient(var(--g2) ${p*3.6}deg,var(--ln) 0)"><i>${fmt(p,0)}%</i></div><div class="rm"><b>${esc(x.name)}</b><span>${fmt(x.saved)} / ${fmt(x.t)} ${x.cur}</span></div><button class="sm" data-ga="${x.id}">+ জমা</button><button class="sm" data-dg="${x.id}">🗑</button></div>`}).join('')||'<div class="empty">বড় কিছুর জন্য সঞ্চয় করতে একটি লক্ষ্য ঠিক করুন।</div>';
 }
 
@@ -369,14 +414,20 @@ function setMode(m){
   if(m!=='tr')$('tCat').innerHTML=cats[m].map(c=>`<option>${c}</option>`).join('');
 }
 function openSheet(k,m){
-  ['tx','wallet','debt','goal'].forEach(s=>$('sh_'+s).classList.toggle('hide',s!==k));
+  ['tx','wallet','debt','goal','pay'].forEach(s=>$('sh_'+s).classList.toggle('hide',s!==k));
+  $('tTitle').classList.toggle('hide',!editTx);$('mTr').classList.toggle('hide',!!editTx);$('tAdd').textContent=editTx?'আপডেট করুন':'সংরক্ষণ করুন';
+  $('dTitle').textContent=editDebt?'দেনা-পাওনা সম্পাদনা':'নতুন দেনা-পাওনা';$('dAdd').textContent=editDebt?'আপডেট করুন':'যোগ করুন';
   if(k==='tx'){
     if(!S.wallets.length){toast('আগে একটি ওয়ালেট যোগ করুন');k='wallet';$('sh_tx').classList.add('hide');$('sh_wallet').classList.remove('hide')}
     else{setMode(m||'ex');$('tDate').value=today()}
   }
   $('ov').classList.add('on');$('sheet').classList.add('on');
 }
-const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove('on')};
+const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove('on');editTx=editDebt=payId=null;['tAmt','tNote','dWho','dAmt','dNote','pAmt','pNote'].forEach(i=>$(i).value='')};
+function openEditTx(id){const t=S.txs.find(x=>x.id===id);if(!t)return;editTx=t;openSheet('tx',t.k);$('tAmt').value=t.a;$('tW').value=t.w;$('tCat').value=t.cat;$('tDate').value=t.d;$('tNote').value=t.n||''}
+function openPay(id){const d=S.debts.find(x=>x.id===id);if(!d)return;payId=id;
+  $('pTitle').textContent=d.k==='get'?d.who+' এর কাছ থেকে কত পেলেন?':d.who+' কে কত দিলেন?';
+  $('pInfo').textContent='বাকি আছে '+fmt(rem(d))+' '+d.cur;$('pDate').value=today();openSheet('pay')}
 
 /* ---------- actions ---------- */
 const num=id=>parseFloat($(id).value);
@@ -389,22 +440,34 @@ $('wAdd').onclick=async()=>{
 $('tAdd').onclick=async()=>{
   const a=num('tAmt'),f=S.wallets.find(x=>x.id===$('tW').value);
   if(!f)return toast('ওয়ালেট বাছুন');if(!(a>0))return toast('সঠিক পরিমাণ দিন');
-  const d=$('tDate').value||today(),b=writeBatch(db);
+  const d=$('tDate').value||today(),n=$('tNote').value,b=writeBatch(db);
   if(tmode==='tr'){
     const t=S.wallets.find(x=>x.id===$('tTo').value);if(!t||t.id===f.id)return toast('দুটি আলাদা ওয়ালেট বাছুন');
-    const ta=a*rt(f.cur,t.cur);
-    b.set(doc(col('txs')),{k:'tout',w:f.id,a,cur:f.cur,cat:'ট্রান্সফার → '+t.name,d,n:$('tNote').value});
-    b.set(doc(col('txs')),{k:'tin',w:t.id,a:ta,cur:t.cur,cat:'ট্রান্সফার ← '+f.name,d,n:$('tNote').value});
+    const ta=a*rt(f.cur,t.cur),tr=Date.now().toString(36);
+    b.set(doc(col('txs')),{k:'tout',w:f.id,a,cur:f.cur,cat:'ট্রান্সফার → '+t.name,d,n,tr});
+    b.set(doc(col('txs')),{k:'tin',w:t.id,a:ta,cur:t.cur,cat:'ট্রান্সফার ← '+f.name,d,n,tr});
     b.update(dref('wallets',f.id),{bal:increment(-a)});b.update(dref('wallets',t.id),{bal:increment(ta)});
+  }else if(editTx){
+    const o=editTx,dl={},add=(w,v)=>dl[w]=(dl[w]||0)+v;
+    if(S.wallets.some(w=>w.id===o.w))add(o.w,o.k==='in'?-o.a:o.a);
+    add(f.id,tmode==='in'?a:-a);
+    b.update(dref('txs',o.id),{k:tmode,w:f.id,a,cur:f.cur,cat:$('tCat').value,d,n});
+    Object.entries(dl).forEach(([w,v])=>b.update(dref('wallets',w),{bal:increment(v)}));
   }else{
-    b.set(doc(col('txs')),{k:tmode,w:f.id,a,cur:f.cur,cat:$('tCat').value,d,n:$('tNote').value});
+    b.set(doc(col('txs')),{k:tmode,w:f.id,a,cur:f.cur,cat:$('tCat').value,d,n});
     b.update(dref('wallets',f.id),{bal:increment(tmode==='in'?a:-a)});
   }
-  await b.commit();$('tAmt').value='';$('tNote').value='';closeSheet();toast('সংরক্ষণ হয়েছে');
+  const ed=!!editTx;await b.commit();closeSheet();toast(ed?'আপডেট হয়েছে':'সংরক্ষণ হয়েছে');
 };
 $('dAdd').onclick=async()=>{const w=$('dWho').value.trim(),a=num('dAmt');if(!w||!(a>0))return toast('নাম ও পরিমাণ দিন');
-  await addDoc(col('debts'),{k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value,paid:false});
-  $('dWho').value='';$('dAmt').value='';$('dNote').value='';closeSheet();toast('যোগ হয়েছে')};
+  const f={k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value};
+  if(editDebt){const o=editDebt;await updateDoc(dref('debts',o.id),{...f,paid:paidSum(o)>=a-1e-9});toast('আপডেট হয়েছে')}
+  else{await addDoc(col('debts'),{...f,pays:[],paid:false});toast('যোগ হয়েছে')}
+  closeSheet()};
+$('pAdd').onclick=async()=>{const d=S.debts.find(x=>x.id===payId);if(!d)return;const a=num('pAmt');
+  if(!(a>0))return toast('সঠিক পরিমাণ দিন');if(a>rem(d)+1e-9)return toast('বাকির চেয়ে বেশি দেওয়া যাবে না');
+  const pays=[...(d.pays||[]),{id:Date.now().toString(36),a,d:$('pDate').value||today(),n:$('pNote').value}];
+  await updateDoc(dref('debts',d.id),{pays,paid:pays.reduce((t,x)=>t+x.a,0)>=d.a-1e-9});closeSheet();toast('পরিশোধ যোগ হয়েছে')};
 $('gAdd').onclick=async()=>{const n=$('gName').value.trim(),t=num('gTar');if(!n||!(t>0))return toast('নাম ও টার্গেট দিন');
   await addDoc(col('goals'),{name:n,t,saved:0,cur:$('gCur').value});$('gName').value='';$('gTar').value='';closeSheet();toast('লক্ষ্য যোগ হয়েছে')};
 
@@ -413,7 +476,7 @@ const showPage=p=>{
   ['home','tx','rt','mo'].forEach(s=>$('p-'+s).classList.toggle('hide',s!==p));scrollTo(0,0);
 };
 document.addEventListener('click',async e=>{
-  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-dp],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp]');
+  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-pay],[data-et],[data-ed],[data-dpx],[data-full],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp]');
   if(!el)return;const d=el.dataset;
   if(d.close)closeSheet();
   if(d.wp){wpick=d.wp;drawChips()}
@@ -422,16 +485,24 @@ document.addEventListener('click',async e=>{
   if(d.p)showPage(d.p);
   if(d.seg){const [g,v]=d.seg.split(':');
     el.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===el));
+    if(g==='tf'){txf=v;draw()}
     if(g==='rt'){$('rt-r').classList.toggle('hide',v!=='r');$('rt-c').classList.toggle('hide',v!=='c')}
     if(g==='mo'){$('mo-d').classList.toggle('hide',v!=='d');$('mo-g').classList.toggle('hide',v!=='g')}}
   if(d.fav){fav=fav.includes(d.fav)?fav.filter(x=>x!==d.fav):[...fav,d.fav];ls.set('rb_fav',fav);drawRates()}
   if(d.dw&&confirm('এই ওয়ালেট মুছবেন? এর লেনদেনের তালিকা থেকে যাবে।'))deleteDoc(dref('wallets',d.dw));
   if(d.dt&&confirm('এই লেনদেন মুছবেন? ওয়ালেটের ব্যালেন্স ঠিক করে দেওয়া হবে।')){
-    const t=S.txs.find(x=>x.id===d.dt),b=writeBatch(db);b.delete(dref('txs',d.dt));
-    if(S.wallets.some(w=>w.id===t.w))b.update(dref('wallets',t.w),{bal:increment(t.k==='in'||t.k==='tin'?-t.a:t.a)});
+    const t=S.txs.find(x=>x.id===d.dt);if(!t)return;
+    const legs=t.tr?S.txs.filter(x=>x.tr===t.tr):[t],b=writeBatch(db),dl={};
+    legs.forEach(x=>{b.delete(dref('txs',x.id));if(S.wallets.some(w=>w.id===x.w))dl[x.w]=(dl[x.w]||0)+(x.k==='in'||x.k==='tin'?-x.a:x.a)});
+    Object.entries(dl).forEach(([w,v])=>b.update(dref('wallets',w),{bal:increment(v)}));
     await b.commit();toast('মুছে ফেলা হয়েছে');
   }
-  if(d.dp)updateDoc(dref('debts',d.dp),{paid:true});
+  if(d.et)openEditTx(d.et);
+  if(d.pay)openPay(d.pay);
+  if(d.full){const x=S.debts.find(y=>y.id===payId);if(x)$('pAmt').value=rem(x)}
+  if(d.ed){const x=S.debts.find(y=>y.id===d.ed);if(x){editDebt=x;openSheet('debt');$('dKind').value=x.k;$('dWho').value=x.who;$('dAmt').value=x.a;$('dCur').value=x.cur;$('dNote').value=x.n||''}}
+  if(d.dpx&&confirm('এই পরিশোধ মুছবেন?')){const [di,pi]=d.dpx.split(':'),x=S.debts.find(y=>y.id===di);
+    if(x){const pays=(x.pays||[]).filter(q=>q.id!==pi);updateDoc(dref('debts',di),{pays,paid:pays.reduce((t,q)=>t+q.a,0)>=x.a-1e-9})}}
   if(d.dd&&confirm('মুছবেন?'))deleteDoc(dref('debts',d.dd));
   if(d.dg&&confirm('এই লক্ষ্য মুছবেন?'))deleteDoc(dref('goals',d.dg));
   if(d.ga){const v=parseFloat(prompt('কত জমা করলেন?'));if(v>0){updateDoc(dref('goals',d.ga),{saved:increment(v)});toast('জমা হয়েছে')}}
