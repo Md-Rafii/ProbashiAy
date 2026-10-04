@@ -81,6 +81,11 @@ h2{font-size:20px;margin:22px 0 10px;font-weight:700}
 .cv{background:var(--sf);border-radius:24px;padding:16px;margin-top:12px}
 .cvo{font-size:30px;font-weight:700;margin-top:6px}
 
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.chips button{border:2px solid transparent;background:var(--bg);border-radius:16px;padding:12px 4px;font-weight:600;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.chips button i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-style:normal;color:#fff;font-size:13px}
+.chips button.on{border-color:var(--g2);background:var(--sf)}
+.chips button:disabled{opacity:.4;cursor:not-allowed}
 /* goal ring */
 .ring{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center}
 .ring i{width:40px;height:40px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700}
@@ -215,7 +220,9 @@ nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(13
 </div>
 
 <div id="sh_wallet" class="f hide"><h3>নতুন ওয়ালেট</h3>
-<input id="wName" placeholder="নাম (ক্যাশ, বিকাশ, ব্যাংক…)">
+<div class="sub" style="margin:0 4px 6px">ওয়ালেট বাছুন</div>
+<div class="chips" id="wChips"></div>
+<input id="wName" class="hide" placeholder="নাম লিখুন">
 <div class="two"><select id="wCur"></select><input id="wBal" type="number" placeholder="প্রারম্ভিক ব্যালেন্স" inputmode="decimal"></div>
 <button class="cta" id="wAdd">ওয়ালেট যোগ করুন</button></div>
 
@@ -266,6 +273,18 @@ const cats={in:['বেতন','ব্যবসা','রেমিটেন্স
 const emo={'খাবার':'🍚','বাসা ভাড়া':'🏠','যাতায়াত':'🚌','বিল':'💡','কেনাকাটা':'🛍️','চিকিৎসা':'💊','শিক্ষা':'📚','বেতন':'💼','ব্যবসা':'🏪','রেমিটেন্স':'🌍','উপহার':'🎁'};
 const ico=c=>c.startsWith('ট্রান্সফার')?'🔁':(emo[c]||'💠');
 const grads=['#0B5D4B,#1FA37C','#2D2A6E,#5B54D6','#7A2E4D,#E0566F','#7A4E00,#E8A33A','#0F4C81,#2BA3D9'];
+const provs=[['বিকাশ','#E2136E','ব'],['নগদ','#F6921E','ন'],['রকেট','#8C3494','র'],['উপায়','#0A5FB4','উ'],['ক্যাশ','#1FA37C','৳'],['ব্যাংক','#3B5BDB','🏦'],['অন্যান্য','#6B7280','＋']];
+const brand=Object.fromEntries(provs.map(p=>[p[0],p[1]]));
+const fixed=['বিকাশ','নগদ','রকেট','উপায়','ক্যাশ'];
+const has=n=>S.wallets.some(w=>w.name.trim().toLowerCase()===n.trim().toLowerCase());
+let wpick='';
+function drawChips(){
+  if(!wpick||(fixed.includes(wpick)&&has(wpick)))wpick=(provs.find(p=>!fixed.includes(p[0])||!has(p[0])))[0];
+  $('wChips').innerHTML=provs.map(([n,c,s])=>`<button data-wp="${n}" class="${n===wpick?'on':''}" ${fixed.includes(n)&&has(n)?'disabled':''}><i style="background:${c}">${s}</i>${n}</button>`).join('');
+  const custom=wpick==='ব্যাংক'||wpick==='অন্যান্য';
+  $('wName').classList.toggle('hide',!custom);
+  $('wName').placeholder=wpick==='ব্যাংক'?'ব্যাংকের নাম (যেমন: ডাচ-বাংলা)':'ওয়ালেটের নাম';
+}
 const curs=()=>R?Object.keys(R.rates).sort():['BDT','USD'];
 const rt=(f,t)=>f===t?1:(R&&R.rates[f]&&R.rates[t]?R.rates[t]/R.rates[f]:1);
 const col=n=>collection(db,'users',U.uid,n),dref=(n,id)=>doc(db,'users',U.uid,n,id);
@@ -322,7 +341,8 @@ const txRow=t=>`<div class="r" data-dt="${t.id}"><div class="av e" style="backgr
 function draw(){
   if(!U)return;
   $('net').textContent=fmt(S.wallets.reduce((s,w)=>s+w.bal*rt(w.cur,home),0),0);
-  $('cards').innerHTML=S.wallets.map((w,i)=>`<div class="wc" style="background:linear-gradient(135deg,${grads[i%grads.length]})"><button class="wx" data-dw="${w.id}">✕</button><div class="wn">${esc(w.name)}</div><div><div class="wb">${fmt(w.bal)}</div><div class="wcu">${w.cur} • ${nm(w.cur)}</div></div></div>`).join('')+'<button class="wadd" data-open="wallet">+ নতুন ওয়ালেট</button>';
+  $('cards').innerHTML=S.wallets.map((w,i)=>`<div class="wc" style="background:linear-gradient(135deg,${brand[w.name]?brand[w.name]+','+brand[w.name]+'bb':grads[i%grads.length]})"><button class="wx" data-dw="${w.id}">✕</button><div class="wn">${esc(w.name)}</div><div><div class="wb">${fmt(w.bal)}</div><div class="wcu">${w.cur} • ${nm(w.cur)}</div></div></div>`).join('')+'<button class="wadd" data-open="wallet">+ নতুন ওয়ালেট</button>';
+  drawChips();
   const wo=walOpts();sel($('tW'),wo);sel($('tTo'),wo,S.wallets[1]?.id);
   const m=new Date().toISOString().slice(0,7);let i=0,e=0;
   S.txs.filter(t=>t.d.startsWith(m)).forEach(t=>{const v=t.a*rt(t.cur,home);if(t.k==='in')i+=v;if(t.k==='ex')e+=v});
@@ -360,7 +380,11 @@ const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove
 
 /* ---------- actions ---------- */
 const num=id=>parseFloat($(id).value);
-$('wAdd').onclick=async()=>{const n=$('wName').value.trim();if(!n)return toast('ওয়ালেটের নাম দিন');
+$('wAdd').onclick=async()=>{
+  const custom=wpick==='ব্যাংক'||wpick==='অন্যান্য';
+  const n=custom?($('wName').value.trim()||(wpick==='ব্যাংক'?'ব্যাংক':'')):wpick;
+  if(!n)return toast('ওয়ালেটের নাম দিন');
+  if(has(n))return toast(`"${n}" নামে ওয়ালেট আগে থেকেই আছে`);
   await addDoc(col('wallets'),{name:n,cur:$('wCur').value,bal:num('wBal')||0});$('wName').value='';$('wBal').value='';closeSheet();toast('ওয়ালেট যোগ হয়েছে')};
 $('tAdd').onclick=async()=>{
   const a=num('tAmt'),f=S.wallets.find(x=>x.id===$('tW').value);
@@ -389,9 +413,10 @@ const showPage=p=>{
   ['home','tx','rt','mo'].forEach(s=>$('p-'+s).classList.toggle('hide',s!==p));scrollTo(0,0);
 };
 document.addEventListener('click',async e=>{
-  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-dp],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close]');
+  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-dp],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp]');
   if(!el)return;const d=el.dataset;
   if(d.close)closeSheet();
+  if(d.wp){wpick=d.wp;drawChips()}
   if(d.open){const [k,m]=d.open.split(':');openSheet(k,m)}
   if(d.m)setMode(d.m);
   if(d.p)showPage(d.p);
