@@ -2,113 +2,238 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>মাই ওয়ালেট – কারেন্সি ও হিসাব</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B5D4B">
+<title>মাই ওয়ালেট</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--tx:#1b2333;--mu:#6b7690;--pr:#0f9d6e;--rd:#e0483e;--bd:#e3e8f2}
-@media(prefers-color-scheme:dark){:root{--bg:#0f1420;--card:#192032;--tx:#e8ecf5;--mu:#8e9ab5;--bd:#27314a}}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--tx)}
-header{background:var(--pr);color:#fff;padding:12px 14px;font-weight:700;font-size:18px;display:flex;justify-content:space-between;align-items:center}
-header small{font-weight:400;font-size:11px;display:block}
-header button{background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer}
-nav{display:flex;overflow-x:auto;position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);z-index:5}
-nav button{flex:1 0 auto;padding:12px 14px;border:0;background:none;color:var(--mu);font:600 14px inherit;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
-nav button.on{color:var(--pr);border-color:var(--pr)}
-main{max-width:760px;margin:auto;padding:12px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
-input,select,.b{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;margin-bottom:8px}
-.b{background:var(--pr);color:#fff;border:0;font-weight:700;cursor:pointer}
-.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
-.list>div{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd);gap:8px}
-.list>div:last-child{border:0}.mu{color:var(--mu);font-size:12px}
-.in{color:var(--pr)}.ex{color:var(--rd)}.big{font-size:22px;font-weight:700}
-.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+:root{--bg:#EDF3F0;--sf:#fff;--tx:#0F2420;--mu:#68807A;--ln:#DCE7E2;--g1:#0B5D4B;--g2:#1FA37C;--in:#12906A;--ex:#E5484D;--gold:#F5B83D}
+@media(prefers-color-scheme:dark){:root{--bg:#0A1512;--sf:#13231F;--tx:#E8F2EE;--mu:#8BA39B;--ln:#213731;--in:#3DD6A3;--ex:#FF7A7F}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 .hide{display:none!important}
-.sm{background:none;border:0;cursor:pointer;font-size:17px;padding:2px 5px}
-.star{color:#f0b429}.bar{height:8px;background:var(--bd);border-radius:5px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--pr)}
-#err{color:var(--rd);font-size:13px;min-height:18px}
+.page{padding-bottom:110px;max-width:560px;margin:auto}
+.pad{padding:0 18px}
+h2{font-size:20px;margin:22px 0 10px;font-weight:700}
+.sub{color:var(--mu);font-size:13px}
+
+/* hero */
+.hero{background:linear-gradient(160deg,#0B5D4B 0%,#128466 70%,#1FA37C 100%);color:#fff;padding:max(16px,env(safe-area-inset-top)) 18px 26px;border-radius:0 0 34px 34px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:34px solid rgba(255,255,255,.07)}
+.top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.top b{font-size:17px}.top small{display:block;font-size:11px;opacity:.75}
+.ib{width:38px;height:38px;border-radius:12px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:17px}
+.lab{margin-top:22px;opacity:.8;font-size:14px;position:relative;z-index:1}
+.net{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.net span{font-size:42px;font-weight:700;letter-spacing:-.5px;line-height:1.25}
+.chip{width:auto;max-width:110px;border:0;border-radius:99px;background:rgba(255,255,255,.18);color:#fff;padding:6px 10px;font-size:13px;font-weight:600;appearance:none;-webkit-appearance:none}
+.chip option{color:#000}
+.mini{display:flex;gap:10px;margin-top:14px;position:relative;z-index:1}
+.mini div{flex:1;background:rgba(255,255,255,.14);border-radius:16px;padding:9px 12px;font-size:13px}
+.mini b{display:block;font-size:17px}
+
+/* wallet cards */
+.cards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 18px 8px;scrollbar-width:none}
+.cards::-webkit-scrollbar{display:none}
+.wc{flex:0 0 78%;max-width:280px;scroll-snap-align:start;border-radius:24px;padding:16px;color:#fff;position:relative;min-height:138px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.wc:after{content:"";position:absolute;right:-30px;bottom:-40px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.12)}
+.wn{font-weight:600;font-size:15px}.wb{font-size:26px;font-weight:700;letter-spacing:-.3px}.wcu{font-size:12px;opacity:.85}
+.wx{position:absolute;right:10px;top:10px;border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:10px;width:28px;height:28px;z-index:1}
+.wadd{flex:0 0 42%;scroll-snap-align:start;border:2px dashed var(--ln);border-radius:24px;background:none;color:var(--mu);font-weight:600;min-height:138px}
+
+/* quick */
+.qk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.qk button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:500}
+.qk i{width:54px;height:54px;border-radius:19px;background:var(--sf);display:grid;place-items:center;font-size:23px;font-style:normal;box-shadow:0 1px 0 var(--ln)}
+
+/* rows */
+.rows{background:var(--sf);border-radius:22px;padding:4px 14px}
+.r{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--ln)}
+.r:last-child{border:0}
+.av{flex:0 0 42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:19px;background:var(--bg);font-weight:700;font-size:13px;color:#fff}
+.av.e{font-size:20px}
+.rm{flex:1;min-width:0}.rm b{display:block;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm span{font-size:12px;color:var(--mu)}
+.amt{font-weight:700;text-align:right;white-space:nowrap}
+.in{color:var(--in)}.ex{color:var(--ex)}
+.day{font-size:13px;color:var(--mu);font-weight:600;margin:16px 4px 6px}
+.empty{padding:26px 10px;text-align:center;color:var(--mu);font-size:14px}
+.star{border:0;background:none;font-size:20px;color:var(--gold);padding:0 0 0 8px}
+.sm{border:0;background:var(--bg);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;margin-left:6px}
+
+/* segmented + search */
+.seg{display:flex;background:var(--sf);border-radius:16px;padding:4px;margin:18px 0 6px}
+.seg button{flex:1;border:0;background:none;padding:9px 6px;border-radius:12px;font-weight:600;color:var(--mu);font-size:14px}
+.seg button.on{background:var(--g1);color:#fff}
+.sbar{display:flex;gap:8px;margin:10px 0}
+.sbar>*{flex:1;min-width:0}
+
+/* inputs */
+.f input,.f select,.sbar input,.sbar select,.cv input,.cv select{width:100%;height:48px;border:1.5px solid transparent;background:var(--bg);border-radius:15px;padding:0 14px;margin-bottom:10px;outline:0}
+.sbar input,.sbar select{background:var(--sf);margin:0}
+.f input:focus,.f select:focus,.sbar input:focus,.cv input:focus{border-color:var(--g2)}
+.f .two{display:flex;gap:8px}.f .two>*{flex:1;min-width:0}
+.big{font-size:36px!important;font-weight:700;text-align:center;height:70px!important;background:transparent!important;letter-spacing:-.5px}
+.cta{width:100%;height:52px;border:0;border-radius:17px;background:var(--g1);color:#fff;font-weight:700;font-size:16px;margin-top:4px}
+.cta.alt{background:var(--bg);color:var(--tx);margin-top:8px}
+.cv{background:var(--sf);border-radius:24px;padding:16px;margin-top:12px}
+.cvo{font-size:30px;font-weight:700;margin-top:6px}
+
+/* goal ring */
+.ring{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center}
+.ring i{width:40px;height:40px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700}
+
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--sf);display:flex;justify-content:center;padding:6px 8px calc(8px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;box-shadow:0 -6px 24px rgba(8,30,24,.10);z-index:20}
+nav .in-nav{display:grid;grid-template-columns:1fr 1fr 74px 1fr 1fr;width:100%;max-width:520px;align-items:end}
+nav button{border:0;background:none;color:var(--mu);font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0}
+nav button i{font-style:normal;font-size:21px;filter:grayscale(1);opacity:.7}
+nav button.on{color:var(--g1)}nav button.on i{filter:none;opacity:1}
+@media(prefers-color-scheme:dark){nav button.on{color:var(--in)}}
+nav .fab{width:60px;height:60px;border-radius:21px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;font-size:30px;justify-self:center;margin-top:-26px;padding:0;box-shadow:0 8px 18px rgba(18,132,102,.45);align-items:center;justify-content:center}
+
+/* sheet */
+.ov{position:fixed;inset:0;background:rgba(6,18,14,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--sf);border-radius:28px 28px 0 0;max-height:90vh;overflow:auto;padding:10px 18px calc(22px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .25s;z-index:31;max-width:560px;margin:auto}
+.sheet.on{transform:none}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--ln);margin:0 auto 12px}
+.sheet h3{margin:4px 0 12px;font-size:18px}
+.seg.in-sheet{background:var(--bg);margin:0 0 10px}
+.seg.in-sheet button.on.ex-m{background:var(--ex)}.seg.in-sheet button.on.in-m{background:var(--in)}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:100px;transform:translate(-50%,20px);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;transition:.2s;z-index:50;pointer-events:none}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* auth */
+#auth{min-height:100vh;background:linear-gradient(170deg,#0B5D4B,#1FA37C);display:flex;flex-direction:column;justify-content:flex-end}
+#auth .lg{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:30px}
+#auth .lg i{font-style:normal;font-size:54px;background:rgba(255,255,255,.16);width:96px;height:96px;border-radius:32px;display:grid;place-items:center;margin-bottom:16px}
+#auth .lg b{font-size:26px}#auth .lg span{opacity:.85;margin-top:6px}
+#auth .bx{background:var(--sf);border-radius:30px 30px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));max-width:560px;width:100%;margin:auto}
+#err{color:var(--ex);font-size:13px;min-height:18px;margin-bottom:6px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<div id="auth" class="hide" style="max-width:380px;margin:60px auto;padding:12px">
-<div class="card">
-<div class="big" style="text-align:center;margin-bottom:12px">💰 মাই ওয়ালেট</div>
+<div id="auth" class="hide">
+<div class="lg"><i>💰</i><b>মাই ওয়ালেট</b><span>আপনার সব টাকার হিসাব, এক জায়গায়</span></div>
+<div class="bx f">
 <input id="em" type="email" placeholder="ইমেইল" autocomplete="email">
 <input id="pw" type="password" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="current-password">
 <div id="err"></div>
-<button class="b" id="login">লগইন</button>
-<button class="b" id="signup" style="background:#3b5bdb">নতুন অ্যাকাউন্ট</button>
+<button class="cta" id="login">লগইন করুন</button>
+<button class="cta alt" id="signup">নতুন অ্যাকাউন্ট খুলুন</button>
 </div></div>
 
 <div id="app" class="hide">
-<header><div>💰 মাই ওয়ালেট<small id="upd"></small></div><button id="out">লগআউট</button></header>
-<nav id="nav">
-<button class="on" data-t="wal">ওয়ালেট</button><button data-t="tx">হিসাব</button><button data-t="debt">দেনা-পাওনা</button><button data-t="goal">লক্ষ্য</button><button data-t="rates">রেট</button><button data-t="conv">কনভার্টার</button>
-</nav>
-<main>
 
-<section id="wal">
-<div class="card"><div class="mu">মোট সম্পদ (<span class="hc"></span>)</div><div class="big" id="net">0</div>
-<select id="home" style="margin-top:8px"></select></div>
-<div class="card list" id="walList"></div>
-<div class="card"><b>নতুন ওয়ালেট</b>
+<!-- হোম -->
+<div class="page" id="p-home">
+<div class="hero">
+<div class="top"><div><b>মাই ওয়ালেট</b><small id="upd"></small></div><button class="ib" id="out" title="লগআউট">⎋</button></div>
+<div class="lab">মোট সম্পদ</div>
+<div class="net"><span id="net">০</span><select id="home" class="chip"></select></div>
+<div class="mini"><div>এই মাসের আয়<b id="sIn">০</b></div><div>এই মাসের ব্যয়<b id="sEx">০</b></div></div>
+</div>
+<h2 class="pad" style="margin-top:20px">আমার ওয়ালেট</h2>
+<div class="cards" id="cards"></div>
+<div class="pad">
+<h2>দ্রুত কাজ</h2>
+<div class="qk">
+<button data-open="tx:in"><i>📥</i>আয়</button>
+<button data-open="tx:ex"><i>📤</i>ব্যয়</button>
+<button data-open="tx:tr"><i>🔁</i>ট্রান্সফার</button>
+<button data-open="debt"><i>🤝</i>ধার</button>
+</div>
+<h2>সাম্প্রতিক লেনদেন</h2>
+<div class="rows" id="recent"></div>
+</div></div>
+
+<!-- হিসাব -->
+<div class="page pad" id="p-tx">
+<h2>হিসাব</h2>
+<div class="rows" style="display:flex;text-align:center;padding:14px">
+<div style="flex:1"><div class="sub">এই মাসে সঞ্চয়</div><div class="amt" id="sBal" style="text-align:center;font-size:22px">০</div></div></div>
+<div id="txList"></div>
+</div>
+
+<!-- রেট -->
+<div class="page pad" id="p-rt">
+<h2>কারেন্সি</h2>
+<div class="seg" data-g="rt"><button class="on" data-seg="rt:r">লাইভ রেট</button><button data-seg="rt:c">কনভার্টার</button></div>
+<div id="rt-r">
+<div class="sbar"><select id="base"></select><input id="q" placeholder="খুঁজুন: USD, ডলার…"></div>
+<div class="sub" id="baseNote" style="margin:0 4px 8px"></div>
+<div class="rows" id="rateList"></div></div>
+<div id="rt-c" class="hide"><div class="cv">
+<input id="cAmt" type="number" value="1" inputmode="decimal" class="big">
+<div class="two" style="display:flex;gap:8px"><select id="cFrom"></select><select id="cTo"></select></div>
+<button class="cta alt" id="swap" style="margin-top:0">⇄ অদলবদল</button>
+<div class="cvo" id="cOut">—</div><div class="sub" id="cRate"></div></div></div>
+</div>
+
+<!-- আরও -->
+<div class="page pad" id="p-mo">
+<h2>দেনা-পাওনা ও লক্ষ্য</h2>
+<div class="seg" data-g="mo"><button class="on" data-seg="mo:d">দেনা-পাওনা</button><button data-seg="mo:g">লক্ষ্য</button></div>
+<div id="mo-d">
+<div class="mini" style="margin:0 0 12px"><div style="background:var(--sf)">আমি পাব<b class="in" id="dGet">০</b></div><div style="background:var(--sf)">আমি দেব<b class="ex" id="dOwe">০</b></div></div>
+<button class="cta" data-open="debt">+ নতুন দেনা-পাওনা</button>
+<div class="rows" id="dList" style="margin-top:12px"></div></div>
+<div id="mo-g" class="hide">
+<button class="cta" data-open="goal">+ নতুন লক্ষ্য</button>
+<div class="rows" id="gList" style="margin-top:12px"></div></div>
+<button class="cta alt" style="margin-top:22px" id="out2">লগআউট</button>
+</div>
+
+<nav><div class="in-nav">
+<button data-p="home" class="on"><i>🏠</i>হোম</button>
+<button data-p="tx"><i>🧾</i>হিসাব</button>
+<button class="fab" data-open="tx:ex" aria-label="নতুন লেনদেন">＋</button>
+<button data-p="rt"><i>💱</i>কারেন্সি</button>
+<button data-p="mo"><i>🧭</i>আরও</button>
+</div></nav>
+
+<div class="ov" id="ov" data-close="1"></div>
+<div class="sheet" id="sheet">
+<div class="grab"></div>
+
+<div id="sh_tx" class="f">
+<div class="seg in-sheet" id="tseg"><button data-m="ex">ব্যয়</button><button data-m="in">আয়</button><button data-m="tr">ট্রান্সফার</button></div>
+<input id="tAmt" type="number" class="big" placeholder="০" inputmode="decimal">
+<div class="sub" style="margin:0 4px 4px" id="lblW">ওয়ালেট</div>
+<select id="tW"></select>
+<div id="trWrap" class="hide"><div class="sub" style="margin:0 4px 4px">যে ওয়ালেটে যাবে</div><select id="tTo"></select></div>
+<select id="tCat"></select>
+<div class="two"><input id="tDate" type="date"><input id="tNote" placeholder="নোট (ঐচ্ছিক)"></div>
+<button class="cta" id="tAdd">সংরক্ষণ করুন</button>
+</div>
+
+<div id="sh_wallet" class="f hide"><h3>নতুন ওয়ালেট</h3>
 <input id="wName" placeholder="নাম (ক্যাশ, বিকাশ, ব্যাংক…)">
-<div class="row"><select id="wCur"></select><input id="wBal" type="number" placeholder="প্রারম্ভিক ব্যালেন্স" inputmode="decimal"></div>
-<button class="b" id="wAdd">+ ওয়ালেট যোগ</button></div>
-<div class="card"><b>ট্রান্সফার</b>
-<div class="row"><select id="trF"></select><select id="trT"></select></div>
-<input id="trA" type="number" placeholder="পরিমাণ (প্রেরক ওয়ালেটের মুদ্রায়)" inputmode="decimal">
-<button class="b" id="trGo" style="background:#3b5bdb">ট্রান্সফার করুন</button></div>
-</section>
+<div class="two"><select id="wCur"></select><input id="wBal" type="number" placeholder="প্রারম্ভিক ব্যালেন্স" inputmode="decimal"></div>
+<button class="cta" id="wAdd">ওয়ালেট যোগ করুন</button></div>
 
-<section id="tx" class="hide">
-<div class="card"><div class="mu">এই মাস (<span class="hc"></span>)</div><div class="sum">
-<div><div class="mu">আয়</div><div class="in big" id="sIn">0</div></div>
-<div><div class="mu">ব্যয়</div><div class="ex big" id="sEx">0</div></div>
-<div><div class="mu">সঞ্চয়</div><div class="big" id="sBal">0</div></div></div></div>
-<div class="card">
-<div class="row"><select id="tW"></select><select id="tType"><option value="in">আয়</option><option value="ex">ব্যয়</option></select></div>
-<div class="row"><select id="tCat"></select><input id="tAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"></div>
-<div class="row"><input id="tDate" type="date"><input id="tNote" placeholder="নোট"></div>
-<button class="b" id="tAdd">+ যোগ করুন</button></div>
-<div class="card list" id="txList"></div>
-</section>
+<div id="sh_debt" class="f hide"><h3>নতুন দেনা-পাওনা</h3>
+<select id="dKind"><option value="get">পাওনা – আমি পাব</option><option value="owe">দেনা – আমি দেব</option></select>
+<input id="dWho" placeholder="কার সাথে">
+<div class="two"><input id="dAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"><select id="dCur"></select></div>
+<input id="dNote" placeholder="নোট বা ফেরতের তারিখ">
+<button class="cta" id="dAdd">যোগ করুন</button></div>
 
-<section id="debt" class="hide">
-<div class="card"><div class="sum" style="grid-template-columns:1fr 1fr">
-<div><div class="mu">আমি পাব</div><div class="in big" id="dGet">0</div></div>
-<div><div class="mu">আমি দেব</div><div class="ex big" id="dOwe">0</div></div></div></div>
-<div class="card">
-<div class="row"><select id="dKind"><option value="get">পাওনা (আমি পাব)</option><option value="owe">দেনা (আমি দেব)</option></select><input id="dWho" placeholder="কার সাথে"></div>
-<div class="row"><input id="dAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"><select id="dCur"></select></div>
-<input id="dNote" placeholder="নোট / ফেরতের তারিখ">
-<button class="b" id="dAdd">+ যোগ করুন</button></div>
-<div class="card list" id="dList"></div>
-</section>
+<div id="sh_goal" class="f hide"><h3>নতুন লক্ষ্য</h3>
+<input id="gName" placeholder="লক্ষ্যের নাম (বাইক, হজ্ব, ফোন…)">
+<div class="two"><input id="gTar" type="number" placeholder="টার্গেট" inputmode="decimal"><select id="gCur"></select></div>
+<button class="cta" id="gAdd">লক্ষ্য যোগ করুন</button></div>
+</div>
 
-<section id="goal" class="hide">
-<div class="card">
-<input id="gName" placeholder="লক্ষ্যের নাম (যেমন: বাইক, হজ্ব)">
-<div class="row"><input id="gTar" type="number" placeholder="টার্গেট" inputmode="decimal"><select id="gCur"></select></div>
-<button class="b" id="gAdd">+ লক্ষ্য যোগ</button></div>
-<div class="card list" id="gList"></div>
-</section>
-
-<section id="rates" class="hide">
-<div class="card"><div class="row"><select id="base"></select><input id="q" placeholder="🔍 খুঁজুন (USD, ডলার…)"></div></div>
-<div class="card list" id="rateList"></div>
-</section>
-
-<section id="conv" class="hide">
-<div class="card">
-<input id="cAmt" type="number" value="1" inputmode="decimal">
-<div class="row"><select id="cFrom"></select><select id="cTo"></select></div>
-<button class="b" id="swap">⇄ অদলবদল</button>
-<div class="big" id="cOut">—</div><div class="mu" id="cRate"></div></div>
-</section>
-
-</main></div>
+<div id="toast"></div>
+</div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
@@ -130,23 +255,30 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const fmt=(n,d=2)=>Number(n||0).toLocaleString('bn-BD',{maximumFractionDigits:Math.abs(n)<1&&n!==0?6:d});
 const dn=new Intl.DisplayNames(['bn'],{type:'currency'}),dne=new Intl.DisplayNames(['en'],{type:'currency'});
 const nm=c=>{try{return dn.of(c)}catch(e){return c}},nme=c=>{try{return dne.of(c)}catch(e){return ''}};
+const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;return h};
+const tint=s=>`hsl(${hue(s)} 52% 42%)`;
+const today=()=>new Date().toISOString().slice(0,10);
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
 
-let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[];
+let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[],tmode='ex';
 let S={wallets:[],txs:[],debts:[],goals:[]};
 const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','শিক্ষা','অন্যান্য']};
+const emo={'খাবার':'🍚','বাসা ভাড়া':'🏠','যাতায়াত':'🚌','বিল':'💡','কেনাকাটা':'🛍️','চিকিৎসা':'💊','শিক্ষা':'📚','বেতন':'💼','ব্যবসা':'🏪','রেমিটেন্স':'🌍','উপহার':'🎁'};
+const ico=c=>c.startsWith('ট্রান্সফার')?'🔁':(emo[c]||'💠');
+const grads=['#0B5D4B,#1FA37C','#2D2A6E,#5B54D6','#7A2E4D,#E0566F','#7A4E00,#E8A33A','#0F4C81,#2BA3D9'];
 const curs=()=>R?Object.keys(R.rates).sort():['BDT','USD'];
 const rt=(f,t)=>f===t?1:(R&&R.rates[f]&&R.rates[t]?R.rates[t]/R.rates[f]:1);
 const col=n=>collection(db,'users',U.uid,n),dref=(n,id)=>doc(db,'users',U.uid,n,id);
 const sel=(el,html,def)=>{const v=el.value;el.innerHTML=html;el.value=v&&[...el.options].some(o=>o.value===v)?v:(def??el.options[0]?.value??'')};
 const curOpts=()=>curs().map(c=>`<option value="${c}">${c} – ${nm(c)}</option>`).join('');
-const walOpts=()=>S.wallets.map(w=>`<option value="${w.id}">${esc(w.name)} (${fmt(w.bal)} ${w.cur})</option>`).join('');
+const walOpts=()=>S.wallets.map(w=>`<option value="${w.id}">${esc(w.name)} – ${fmt(w.bal)} ${w.cur}</option>`).join('');
 
 /* ---------- auth ---------- */
-const errMsg=e=>({'auth/invalid-credential':'ইমেইল বা পাসওয়ার্ড ভুল','auth/email-already-in-use':'এই ইমেইলে অ্যাকাউন্ট আছে','auth/weak-password':'পাসওয়ার্ড কমপক্ষে ৬ অক্ষর','auth/invalid-email':'ইমেইল সঠিক নয়'}[e.code]||e.message);
+const errMsg=e=>({'auth/invalid-credential':'ইমেইল বা পাসওয়ার্ড ভুল','auth/email-already-in-use':'এই ইমেইলে আগে থেকেই অ্যাকাউন্ট আছে','auth/weak-password':'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের দিন','auth/invalid-email':'ইমেইল সঠিক নয়'}[e.code]||e.message);
 const go=async fn=>{$('err').textContent='';try{await fn(auth,$('em').value.trim(),$('pw').value)}catch(e){$('err').textContent=errMsg(e)}};
 $('login').onclick=()=>go(signInWithEmailAndPassword);
 $('signup').onclick=()=>go(createUserWithEmailAndPassword);
-$('out').onclick=()=>signOut(auth);
+$('out').onclick=$('out2').onclick=()=>signOut(auth);
 onAuthStateChanged(auth,u=>{
   unsubs.forEach(f=>f());unsubs=[];U=u;
   $('auth').classList.toggle('hide',!!u);$('app').classList.toggle('hide',!u);
@@ -154,7 +286,7 @@ onAuthStateChanged(auth,u=>{
   if(!u)return;
   ['wallets','txs','debts','goals'].forEach(n=>{
     const q=n==='txs'?query(col(n),orderBy('d','desc')):col(n);
-    unsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>alert('ডাটা লোড হয়নি: '+e.message)));
+    unsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>toast('ডাটা লোড হয়নি: '+e.code)));
   });
   draw();
 });
@@ -163,8 +295,7 @@ onAuthStateChanged(auth,u=>{
 async function loadRates(){
   try{const j=await (await fetch('https://open.er-api.com/v6/latest/USD')).json();
     if(j.result==='success'){R={rates:j.rates,time:j.time_last_update_utc};ls.set('rb_rates',R)}}catch(e){}
-  if(R)$('upd').textContent='রেট আপডেট: '+new Date(R.time).toLocaleString('bn-BD');
-  else $('upd').textContent='রেট পাওয়া যায়নি';
+  $('upd').textContent=R?'রেট: '+new Date(R.time).toLocaleDateString('bn-BD',{day:'numeric',month:'short'})+' এর আপডেট':'রেট পাওয়া যায়নি';
   initSel();drawRates();conv();draw();
 }
 function initSel(){
@@ -172,13 +303,14 @@ function initSel(){
   ['home','wCur','dCur','gCur','cFrom','cTo','base'].forEach(i=>$(i).innerHTML=o);
   $('home').value=home;$('wCur').value=home;$('dCur').value=home;$('gCur').value=home;
   $('cFrom').value='USD';$('cTo').value=home;$('base').value=ls.get('rb_base','USD');
-  $('tDate').valueAsDate=new Date();setCats();
 }
 function drawRates(){
-  if(!R)return;const b=$('base').value,q=$('q').value.trim().toLowerCase();ls.set('rb_base',b);
+  if(!R)return $('rateList').innerHTML='<div class="empty">রেট লোড হয়নি। ইন্টারনেট চেক করুন।</div>';
+  const b=$('base').value,q=$('q').value.trim().toLowerCase();ls.set('rb_base',b);
+  $('baseNote').textContent=`১ ${b} (${nm(b)}) এর বিপরীতে`;
   const l=curs().filter(c=>c!==b&&(!q||c.toLowerCase().includes(q)||nm(c).toLowerCase().includes(q)||nme(c).toLowerCase().includes(q)))
     .sort((a,c)=>(fav.includes(c)-fav.includes(a))||a.localeCompare(c));
-  $('rateList').innerHTML=`<div class="mu">১ ${b} (${nm(b)}) =</div>`+l.map(c=>`<div><div><b>${c}</b> <span class="mu">${nm(c)}</span></div><div><b>${fmt(rt(b,c),4)}</b><button class="sm star" data-fav="${c}">${fav.includes(c)?'★':'☆'}</button></div></div>`).join('');
+  $('rateList').innerHTML=l.map(c=>`<div class="r"><div class="av" style="background:${tint(c)}">${c}</div><div class="rm"><b>${nm(c)}</b><span>${c}</span></div><div class="amt">${fmt(rt(b,c),4)}</div><button class="star" data-fav="${c}">${fav.includes(c)?'★':'☆'}</button></div>`).join('')||'<div class="empty">কিছু পাওয়া যায়নি। অন্য নাম বা কোড লিখুন।</div>';
 }
 function conv(){
   if(!R)return;const a=parseFloat($('cAmt').value)||0,f=$('cFrom').value,t=$('cTo').value;
@@ -186,73 +318,99 @@ function conv(){
 }
 
 /* ---------- draw ---------- */
-function setCats(){$('tCat').innerHTML=cats[$('tType').value].map(c=>`<option>${c}</option>`).join('')}
+const txRow=t=>`<div class="r" data-dt="${t.id}"><div class="av e" style="background:var(--bg)">${ico(t.cat)}</div><div class="rm"><b>${esc(t.cat)}</b><span>${esc(t.wn)}${t.n?' • '+esc(t.n):''}</span></div><div class="amt ${t.k==='in'||t.k==='tin'?'in':'ex'}">${t.k==='in'||t.k==='tin'?'+':'−'}${fmt(t.a)} ${t.cur}</div></div>`;
 function draw(){
   if(!U)return;
-  document.querySelectorAll('.hc').forEach(e=>e.textContent=home);
-  // wallets
   $('net').textContent=fmt(S.wallets.reduce((s,w)=>s+w.bal*rt(w.cur,home),0),0);
-  $('walList').innerHTML=S.wallets.map(w=>`<div><div><b>${esc(w.name)}</b><div class="mu">${w.cur}</div></div><div><b class="${w.bal<0?'ex':''}">${fmt(w.bal)} ${w.cur}</b><button class="sm" data-dw="${w.id}">🗑</button></div></div>`).join('')||'<div class="mu">প্রথমে একটি ওয়ালেট যোগ করুন</div>';
-  const wo=walOpts();['tW','trF','trT'].forEach(i=>sel($(i),wo));
-  // transactions
+  $('cards').innerHTML=S.wallets.map((w,i)=>`<div class="wc" style="background:linear-gradient(135deg,${grads[i%grads.length]})"><button class="wx" data-dw="${w.id}">✕</button><div class="wn">${esc(w.name)}</div><div><div class="wb">${fmt(w.bal)}</div><div class="wcu">${w.cur} • ${nm(w.cur)}</div></div></div>`).join('')+'<button class="wadd" data-open="wallet">+ নতুন ওয়ালেট</button>';
+  const wo=walOpts();sel($('tW'),wo);sel($('tTo'),wo,S.wallets[1]?.id);
   const m=new Date().toISOString().slice(0,7);let i=0,e=0;
   S.txs.filter(t=>t.d.startsWith(m)).forEach(t=>{const v=t.a*rt(t.cur,home);if(t.k==='in')i+=v;if(t.k==='ex')e+=v});
-  $('sIn').textContent=fmt(i,0);$('sEx').textContent=fmt(e,0);$('sBal').textContent=fmt(i-e,0);
-  const wn=id=>esc(S.wallets.find(w=>w.id===id)?.name||'—');
-  const kl={in:'+',tin:'+',ex:'−',tout:'−'};
-  $('txList').innerHTML=S.txs.slice(0,100).map(t=>`<div><div><b>${esc(t.cat)}</b><div class="mu">${t.d} · ${wn(t.w)}${t.n?' · '+esc(t.n):''}</div></div><div><b class="${t.k==='in'||t.k==='tin'?'in':'ex'}">${kl[t.k]}${fmt(t.a)} ${t.cur}</b><button class="sm" data-dt="${t.id}">✕</button></div></div>`).join('')||'<div class="mu">এখনো কোনো হিসাব নেই</div>';
-  // debts
+  $('sIn').textContent=fmt(i,0)+' '+home;$('sEx').textContent=fmt(e,0)+' '+home;$('sBal').textContent=fmt(i-e,0)+' '+home;
+  $('sBal').className='amt '+(i-e<0?'ex':'in');
+  const wn=id=>S.wallets.find(w=>w.id===id)?.name||'মুছে ফেলা ওয়ালেট';
+  const T=S.txs.map(t=>({...t,wn:wn(t.w)}));
+  $('recent').innerHTML=T.slice(0,5).map(txRow).join('')||'<div class="empty">এখনো কোনো লেনদেন নেই। নিচের ＋ চেপে প্রথম লেনদেন যোগ করুন।</div>';
+  let h='',last='';
+  T.slice(0,150).forEach(t=>{if(t.d!==last){last=t.d;h+=`</div><div class="day">${t.d===today()?'আজ':new Date(t.d+'T00:00').toLocaleDateString('bn-BD',{weekday:'short',day:'numeric',month:'long'})}</div><div class="rows">`}h+=txRow(t)});
+  $('txList').innerHTML=h?h.slice(6)+'</div>':'<div class="rows"><div class="empty">কোনো হিসাব নেই</div></div>';
   let g=0,o=0;S.debts.filter(d=>!d.paid).forEach(d=>{const v=d.a*rt(d.cur,home);d.k==='get'?g+=v:o+=v});
-  $('dGet').textContent=fmt(g,0);$('dOwe').textContent=fmt(o,0);
-  $('dList').innerHTML=S.debts.slice().sort((a,b)=>a.paid-b.paid).map(d=>`<div style="${d.paid?'opacity:.5':''}"><div><b>${esc(d.who)}</b> <span class="mu">${d.k==='get'?'পাব':'দেব'}${d.paid?' · মিটেছে':''}</span><div class="mu">${esc(d.n)}</div></div><div><b class="${d.k==='get'?'in':'ex'}">${fmt(d.a)} ${d.cur}</b>${d.paid?'':`<button class="sm" data-dp="${d.id}">✓</button>`}<button class="sm" data-dd="${d.id}">🗑</button></div></div>`).join('')||'<div class="mu">কোনো দেনা-পাওনা নেই</div>';
-  // goals
-  $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div style="display:block"><div style="display:flex;justify-content:space-between"><b>${esc(x.name)}</b><span><button class="sm" data-ga="${x.id}">＋জমা</button><button class="sm" data-dg="${x.id}">🗑</button></span></div><div class="mu">${fmt(x.saved)} / ${fmt(x.t)} ${x.cur} (${fmt(p,0)}%)</div><div class="bar"><i style="width:${p}%"></i></div></div>`}).join('')||'<div class="mu">কোনো লক্ষ্য নেই</div>';
+  $('dGet').textContent=fmt(g,0)+' '+home;$('dOwe').textContent=fmt(o,0)+' '+home;
+  $('dList').innerHTML=S.debts.slice().sort((a,b)=>a.paid-b.paid).map(d=>`<div class="r" style="${d.paid?'opacity:.5':''}"><div class="av" style="background:${tint(d.who)}">${esc([...d.who][0])}</div><div class="rm"><b>${esc(d.who)}</b><span>${d.k==='get'?'আমি পাব':'আমি দেব'}${d.paid?' • মিটেছে':''}${d.n?' • '+esc(d.n):''}</span></div><div class="amt ${d.k==='get'?'in':'ex'}">${fmt(d.a)} ${d.cur}</div>${d.paid?'':`<button class="sm" data-dp="${d.id}">মিটেছে</button>`}<button class="sm" data-dd="${d.id}">🗑</button></div>`).join('')||'<div class="empty">কারও কাছে পাওনা বা দেনা থাকলে এখানে যোগ করুন।</div>';
+  $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div class="r"><div class="ring" style="background:conic-gradient(var(--g2) ${p*3.6}deg,var(--ln) 0)"><i>${fmt(p,0)}%</i></div><div class="rm"><b>${esc(x.name)}</b><span>${fmt(x.saved)} / ${fmt(x.t)} ${x.cur}</span></div><button class="sm" data-ga="${x.id}">+ জমা</button><button class="sm" data-dg="${x.id}">🗑</button></div>`}).join('')||'<div class="empty">বড় কিছুর জন্য সঞ্চয় করতে একটি লক্ষ্য ঠিক করুন।</div>';
 }
+
+/* ---------- sheet ---------- */
+function setMode(m){
+  tmode=m;
+  document.querySelectorAll('#tseg button').forEach(b=>{const on=b.dataset.m===m;b.className=on?'on '+(m==='in'?'in-m':m==='ex'?'ex-m':''):''});
+  $('trWrap').classList.toggle('hide',m!=='tr');$('tCat').classList.toggle('hide',m==='tr');
+  $('lblW').textContent=m==='tr'?'যে ওয়ালেট থেকে':'ওয়ালেট';
+  if(m!=='tr')$('tCat').innerHTML=cats[m].map(c=>`<option>${c}</option>`).join('');
+}
+function openSheet(k,m){
+  ['tx','wallet','debt','goal'].forEach(s=>$('sh_'+s).classList.toggle('hide',s!==k));
+  if(k==='tx'){
+    if(!S.wallets.length){toast('আগে একটি ওয়ালেট যোগ করুন');k='wallet';$('sh_tx').classList.add('hide');$('sh_wallet').classList.remove('hide')}
+    else{setMode(m||'ex');$('tDate').value=today()}
+  }
+  $('ov').classList.add('on');$('sheet').classList.add('on');
+}
+const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove('on')};
 
 /* ---------- actions ---------- */
 const num=id=>parseFloat($(id).value);
-$('wAdd').onclick=async()=>{const n=$('wName').value.trim();if(!n)return alert('নাম দিন');
-  await addDoc(col('wallets'),{name:n,cur:$('wCur').value,bal:num('wBal')||0});$('wName').value='';$('wBal').value=''};
-$('tType').onchange=setCats;
+$('wAdd').onclick=async()=>{const n=$('wName').value.trim();if(!n)return toast('ওয়ালেটের নাম দিন');
+  await addDoc(col('wallets'),{name:n,cur:$('wCur').value,bal:num('wBal')||0});$('wName').value='';$('wBal').value='';closeSheet();toast('ওয়ালেট যোগ হয়েছে')};
 $('tAdd').onclick=async()=>{
-  const a=num('tAmt'),wid=$('tW').value,w=S.wallets.find(x=>x.id===wid);
-  if(!w)return alert('ওয়ালেট বাছুন');if(!(a>0))return alert('সঠিক পরিমাণ দিন');
-  const k=$('tType').value,b=writeBatch(db);
-  b.set(doc(col('txs')),{k,w:wid,a,cur:w.cur,cat:$('tCat').value,d:$('tDate').value||new Date().toISOString().slice(0,10),n:$('tNote').value});
-  b.update(dref('wallets',wid),{bal:increment(k==='in'?a:-a)});
-  await b.commit();$('tAmt').value='';$('tNote').value='';
+  const a=num('tAmt'),f=S.wallets.find(x=>x.id===$('tW').value);
+  if(!f)return toast('ওয়ালেট বাছুন');if(!(a>0))return toast('সঠিক পরিমাণ দিন');
+  const d=$('tDate').value||today(),b=writeBatch(db);
+  if(tmode==='tr'){
+    const t=S.wallets.find(x=>x.id===$('tTo').value);if(!t||t.id===f.id)return toast('দুটি আলাদা ওয়ালেট বাছুন');
+    const ta=a*rt(f.cur,t.cur);
+    b.set(doc(col('txs')),{k:'tout',w:f.id,a,cur:f.cur,cat:'ট্রান্সফার → '+t.name,d,n:$('tNote').value});
+    b.set(doc(col('txs')),{k:'tin',w:t.id,a:ta,cur:t.cur,cat:'ট্রান্সফার ← '+f.name,d,n:$('tNote').value});
+    b.update(dref('wallets',f.id),{bal:increment(-a)});b.update(dref('wallets',t.id),{bal:increment(ta)});
+  }else{
+    b.set(doc(col('txs')),{k:tmode,w:f.id,a,cur:f.cur,cat:$('tCat').value,d,n:$('tNote').value});
+    b.update(dref('wallets',f.id),{bal:increment(tmode==='in'?a:-a)});
+  }
+  await b.commit();$('tAmt').value='';$('tNote').value='';closeSheet();toast('সংরক্ষণ হয়েছে');
 };
-$('trGo').onclick=async()=>{
-  const f=S.wallets.find(x=>x.id===$('trF').value),t=S.wallets.find(x=>x.id===$('trT').value),a=num('trA');
-  if(!f||!t||f.id===t.id)return alert('দুটি আলাদা ওয়ালেট বাছুন');if(!(a>0))return alert('সঠিক পরিমাণ দিন');
-  const ta=a*rt(f.cur,t.cur),d=new Date().toISOString().slice(0,10),b=writeBatch(db);
-  b.set(doc(col('txs')),{k:'tout',w:f.id,a,cur:f.cur,cat:'ট্রান্সফার → '+t.name,d,n:''});
-  b.set(doc(col('txs')),{k:'tin',w:t.id,a:ta,cur:t.cur,cat:'ট্রান্সফার ← '+f.name,d,n:''});
-  b.update(dref('wallets',f.id),{bal:increment(-a)});b.update(dref('wallets',t.id),{bal:increment(ta)});
-  await b.commit();$('trA').value='';
-};
-$('dAdd').onclick=async()=>{const w=$('dWho').value.trim(),a=num('dAmt');if(!w||!(a>0))return alert('নাম ও পরিমাণ দিন');
-  await addDoc(col('debts'),{k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value,paid:false});$('dWho').value='';$('dAmt').value='';$('dNote').value=''};
-$('gAdd').onclick=async()=>{const n=$('gName').value.trim(),t=num('gTar');if(!n||!(t>0))return alert('নাম ও টার্গেট দিন');
-  await addDoc(col('goals'),{name:n,t,saved:0,cur:$('gCur').value});$('gName').value='';$('gTar').value=''};
+$('dAdd').onclick=async()=>{const w=$('dWho').value.trim(),a=num('dAmt');if(!w||!(a>0))return toast('নাম ও পরিমাণ দিন');
+  await addDoc(col('debts'),{k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value,paid:false});
+  $('dWho').value='';$('dAmt').value='';$('dNote').value='';closeSheet();toast('যোগ হয়েছে')};
+$('gAdd').onclick=async()=>{const n=$('gName').value.trim(),t=num('gTar');if(!n||!(t>0))return toast('নাম ও টার্গেট দিন');
+  await addDoc(col('goals'),{name:n,t,saved:0,cur:$('gCur').value});$('gName').value='';$('gTar').value='';closeSheet();toast('লক্ষ্য যোগ হয়েছে')};
 
+const showPage=p=>{
+  document.querySelectorAll('nav [data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  ['home','tx','rt','mo'].forEach(s=>$('p-'+s).classList.toggle('hide',s!==p));scrollTo(0,0);
+};
 document.addEventListener('click',async e=>{
-  const d=e.target.dataset;if(!d)return;
+  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-dp],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close]');
+  if(!el)return;const d=el.dataset;
+  if(d.close)closeSheet();
+  if(d.open){const [k,m]=d.open.split(':');openSheet(k,m)}
+  if(d.m)setMode(d.m);
+  if(d.p)showPage(d.p);
+  if(d.seg){const [g,v]=d.seg.split(':');
+    el.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===el));
+    if(g==='rt'){$('rt-r').classList.toggle('hide',v!=='r');$('rt-c').classList.toggle('hide',v!=='c')}
+    if(g==='mo'){$('mo-d').classList.toggle('hide',v!=='d');$('mo-g').classList.toggle('hide',v!=='g')}}
   if(d.fav){fav=fav.includes(d.fav)?fav.filter(x=>x!==d.fav):[...fav,d.fav];ls.set('rb_fav',fav);drawRates()}
-  if(d.dw&&confirm('ওয়ালেট মুছবেন? (এর লেনদেন থেকে যাবে)'))deleteDoc(dref('wallets',d.dw));
-  if(d.dt&&confirm('লেনদেন মুছবেন? ব্যালেন্স ঠিক করা হবে।')){
+  if(d.dw&&confirm('এই ওয়ালেট মুছবেন? এর লেনদেনের তালিকা থেকে যাবে।'))deleteDoc(dref('wallets',d.dw));
+  if(d.dt&&confirm('এই লেনদেন মুছবেন? ওয়ালেটের ব্যালেন্স ঠিক করে দেওয়া হবে।')){
     const t=S.txs.find(x=>x.id===d.dt),b=writeBatch(db);b.delete(dref('txs',d.dt));
     if(S.wallets.some(w=>w.id===t.w))b.update(dref('wallets',t.w),{bal:increment(t.k==='in'||t.k==='tin'?-t.a:t.a)});
-    await b.commit();
+    await b.commit();toast('মুছে ফেলা হয়েছে');
   }
   if(d.dp)updateDoc(dref('debts',d.dp),{paid:true});
   if(d.dd&&confirm('মুছবেন?'))deleteDoc(dref('debts',d.dd));
-  if(d.dg&&confirm('মুছবেন?'))deleteDoc(dref('goals',d.dg));
-  if(d.ga){const v=parseFloat(prompt('কত জমা করলেন?'));if(v>0)updateDoc(dref('goals',d.ga),{saved:increment(v)})}
+  if(d.dg&&confirm('এই লক্ষ্য মুছবেন?'))deleteDoc(dref('goals',d.dg));
+  if(d.ga){const v=parseFloat(prompt('কত জমা করলেন?'));if(v>0){updateDoc(dref('goals',d.ga),{saved:increment(v)});toast('জমা হয়েছে')}}
 });
-$('nav').onclick=e=>{const t=e.target.dataset.t;if(!t)return;
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===e.target));
-  ['wal','tx','debt','goal','rates','conv'].forEach(s=>$(s).classList.toggle('hide',s!==t))};
 $('home').onchange=()=>{home=$('home').value;ls.set('rb_home',home);draw()};
 $('base').onchange=$('q').oninput=drawRates;
 ['cAmt','cFrom','cTo'].forEach(i=>$(i).oninput=conv);
