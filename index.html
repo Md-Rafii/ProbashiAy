@@ -3,40 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>রেটবন্ধু – কারেন্সি রেট ও হিসাব</title>
+<title>মাই ওয়ালেট – কারেন্সি ও হিসাব</title>
 <style>
 :root{--bg:#f4f6fb;--card:#fff;--tx:#1b2333;--mu:#6b7690;--pr:#0f9d6e;--rd:#e0483e;--bd:#e3e8f2}
 @media(prefers-color-scheme:dark){:root{--bg:#0f1420;--card:#192032;--tx:#e8ecf5;--mu:#8e9ab5;--bd:#27314a}}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--tx)}
-header{background:var(--pr);color:#fff;padding:14px 16px;font-weight:700;font-size:20px;display:flex;justify-content:space-between;align-items:center}
-header small{font-weight:400;font-size:12px;opacity:.9}
-nav{display:flex;position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);z-index:5}
-nav button{flex:1;padding:12px 4px;border:0;background:none;color:var(--mu);font:600 14px inherit;cursor:pointer;border-bottom:3px solid transparent}
+header{background:var(--pr);color:#fff;padding:12px 14px;font-weight:700;font-size:18px;display:flex;justify-content:space-between;align-items:center}
+header small{font-weight:400;font-size:11px;display:block}
+header button{background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer}
+nav{display:flex;overflow-x:auto;position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);z-index:5}
+nav button{flex:1 0 auto;padding:12px 14px;border:0;background:none;color:var(--mu);font:600 14px inherit;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
 nav button.on{color:var(--pr);border-color:var(--pr)}
 main{max-width:760px;margin:auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
-input,select,button.b{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;margin-bottom:8px}
-button.b{background:var(--pr);color:#fff;border:0;font-weight:700;cursor:pointer}
+input,select,.b{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;margin-bottom:8px}
+.b{background:var(--pr);color:#fff;border:0;font-weight:700;cursor:pointer}
 .row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
 .list>div{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd);gap:8px}
 .list>div:last-child{border:0}.mu{color:var(--mu);font-size:12px}
-.in{color:var(--pr)}.ex{color:var(--rd)}.big{font-size:24px;font-weight:700}
-.star{cursor:pointer;font-size:20px;background:none;border:0;color:#f0b429}
+.in{color:var(--pr)}.ex{color:var(--rd)}.big{font-size:22px;font-weight:700}
 .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
-.hide{display:none}.x{background:none;border:0;color:var(--rd);font-size:18px;cursor:pointer}
+.hide{display:none!important}
+.sm{background:none;border:0;cursor:pointer;font-size:17px;padding:2px 5px}
+.star{color:#f0b429}.bar{height:8px;background:var(--bd);border-radius:5px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--pr)}
+#err{color:var(--rd);font-size:13px;min-height:18px}
 </style>
 </head>
 <body>
-<header><span>🌍 রেটবন্ধু</span><small id="upd">লোড হচ্ছে…</small></header>
+
+<div id="auth" class="hide" style="max-width:380px;margin:60px auto;padding:12px">
+<div class="card">
+<div class="big" style="text-align:center;margin-bottom:12px">💰 মাই ওয়ালেট</div>
+<input id="em" type="email" placeholder="ইমেইল" autocomplete="email">
+<input id="pw" type="password" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" autocomplete="current-password">
+<div id="err"></div>
+<button class="b" id="login">লগইন</button>
+<button class="b" id="signup" style="background:#3b5bdb">নতুন অ্যাকাউন্ট</button>
+</div></div>
+
+<div id="app" class="hide">
+<header><div>💰 মাই ওয়ালেট<small id="upd"></small></div><button id="out">লগআউট</button></header>
 <nav id="nav">
-<button class="on" data-t="rates">রেট</button><button data-t="conv">কনভার্টার</button><button data-t="tx">হিসাব</button>
+<button class="on" data-t="wal">ওয়ালেট</button><button data-t="tx">হিসাব</button><button data-t="debt">দেনা-পাওনা</button><button data-t="goal">লক্ষ্য</button><button data-t="rates">রেট</button><button data-t="conv">কনভার্টার</button>
 </nav>
 <main>
-<section id="rates">
+
+<section id="wal">
+<div class="card"><div class="mu">মোট সম্পদ (<span class="hc"></span>)</div><div class="big" id="net">0</div>
+<select id="home" style="margin-top:8px"></select></div>
+<div class="card list" id="walList"></div>
+<div class="card"><b>নতুন ওয়ালেট</b>
+<input id="wName" placeholder="নাম (ক্যাশ, বিকাশ, ব্যাংক…)">
+<div class="row"><select id="wCur"></select><input id="wBal" type="number" placeholder="প্রারম্ভিক ব্যালেন্স" inputmode="decimal"></div>
+<button class="b" id="wAdd">+ ওয়ালেট যোগ</button></div>
+<div class="card"><b>ট্রান্সফার</b>
+<div class="row"><select id="trF"></select><select id="trT"></select></div>
+<input id="trA" type="number" placeholder="পরিমাণ (প্রেরক ওয়ালেটের মুদ্রায়)" inputmode="decimal">
+<button class="b" id="trGo" style="background:#3b5bdb">ট্রান্সফার করুন</button></div>
+</section>
+
+<section id="tx" class="hide">
+<div class="card"><div class="mu">এই মাস (<span class="hc"></span>)</div><div class="sum">
+<div><div class="mu">আয়</div><div class="in big" id="sIn">0</div></div>
+<div><div class="mu">ব্যয়</div><div class="ex big" id="sEx">0</div></div>
+<div><div class="mu">সঞ্চয়</div><div class="big" id="sBal">0</div></div></div></div>
 <div class="card">
-<div class="row"><select id="base"></select><input id="q" placeholder="🔍 খুঁজুন (USD, ডলার…)"></div>
-<div class="mu" id="baseNote"></div>
-</div>
+<div class="row"><select id="tW"></select><select id="tType"><option value="in">আয়</option><option value="ex">ব্যয়</option></select></div>
+<div class="row"><select id="tCat"></select><input id="tAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"></div>
+<div class="row"><input id="tDate" type="date"><input id="tNote" placeholder="নোট"></div>
+<button class="b" id="tAdd">+ যোগ করুন</button></div>
+<div class="card list" id="txList"></div>
+</section>
+
+<section id="debt" class="hide">
+<div class="card"><div class="sum" style="grid-template-columns:1fr 1fr">
+<div><div class="mu">আমি পাব</div><div class="in big" id="dGet">0</div></div>
+<div><div class="mu">আমি দেব</div><div class="ex big" id="dOwe">0</div></div></div></div>
+<div class="card">
+<div class="row"><select id="dKind"><option value="get">পাওনা (আমি পাব)</option><option value="owe">দেনা (আমি দেব)</option></select><input id="dWho" placeholder="কার সাথে"></div>
+<div class="row"><input id="dAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"><select id="dCur"></select></div>
+<input id="dNote" placeholder="নোট / ফেরতের তারিখ">
+<button class="b" id="dAdd">+ যোগ করুন</button></div>
+<div class="card list" id="dList"></div>
+</section>
+
+<section id="goal" class="hide">
+<div class="card">
+<input id="gName" placeholder="লক্ষ্যের নাম (যেমন: বাইক, হজ্ব)">
+<div class="row"><input id="gTar" type="number" placeholder="টার্গেট" inputmode="decimal"><select id="gCur"></select></div>
+<button class="b" id="gAdd">+ লক্ষ্য যোগ</button></div>
+<div class="card list" id="gList"></div>
+</section>
+
+<section id="rates" class="hide">
+<div class="card"><div class="row"><select id="base"></select><input id="q" placeholder="🔍 খুঁজুন (USD, ডলার…)"></div></div>
 <div class="card list" id="rateList"></div>
 </section>
 
@@ -45,97 +105,160 @@ button.b{background:var(--pr);color:#fff;border:0;font-weight:700;cursor:pointer
 <input id="cAmt" type="number" value="1" inputmode="decimal">
 <div class="row"><select id="cFrom"></select><select id="cTo"></select></div>
 <button class="b" id="swap">⇄ অদলবদল</button>
-<div class="big" id="cOut">—</div><div class="mu" id="cRate"></div>
-</div>
+<div class="big" id="cOut">—</div><div class="mu" id="cRate"></div></div>
 </section>
 
-<section id="tx" class="hide">
-<div class="card"><div class="sum">
-<div><div class="mu">আয়</div><div class="in big" id="sIn">0</div></div>
-<div><div class="mu">ব্যয়</div><div class="ex big" id="sEx">0</div></div>
-<div><div class="mu">ব্যালেন্স</div><div class="big" id="sBal">0</div></div>
-</div><div class="mu" style="text-align:center;margin-top:6px">সব হিসাব <b id="hc"></b> এ দেখানো হচ্ছে</div></div>
-<div class="card">
-<div class="row"><select id="tType"><option value="in">আয়</option><option value="ex">ব্যয়</option></select>
-<select id="tCat"></select></div>
-<div class="row"><input id="tAmt" type="number" placeholder="পরিমাণ" inputmode="decimal"><select id="tCur"></select></div>
-<div class="row"><input id="tDate" type="date"><input id="tNote" placeholder="নোট"></div>
-<button class="b" id="tAdd">+ যোগ করুন</button>
-</div>
-<div class="card"><div class="row"><select id="fMonth"></select><select id="fHome"></select></div>
-<button class="b" id="csv" style="background:#3b5bdb">CSV ডাউনলোড</button></div>
-<div class="card list" id="txList"></div>
-</section>
-</main>
-<script>
+</main></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import {getFirestore,collection,doc,addDoc,deleteDoc,updateDoc,onSnapshot,query,orderBy,writeBatch,increment} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const app=initializeApp({
+  apiKey:"AIzaSyB64OUEB7sQlIfFPt1jQuSPKw9H1az-7XU",
+  authDomain:"my-wallet-fc574.firebaseapp.com",
+  projectId:"my-wallet-fc574",
+  storageBucket:"my-wallet-fc574.firebasestorage.app",
+  messagingSenderId:"901912926518",
+  appId:"1:901912926518:web:6388a890716238aae13b97"
+});
+const auth=getAuth(app),db=getFirestore(app);
 const $=id=>document.getElementById(id);
-const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let rates=store.get('rb_rates',null),fav=store.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),txs=store.get('rb_tx',[]),home=store.get('rb_home','BDT');
-const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','অন্যান্য']};
-const dn=new Intl.DisplayNames(['bn'],{type:'currency'}),dnEn=new Intl.DisplayNames(['en'],{type:'currency'});
-const nm=c=>{try{return dn.of(c)}catch(e){return c}},nmE=c=>{try{return dnEn.of(c)}catch(e){return ''}};
-const fmt=(n,d=2)=>Number(n).toLocaleString('bn-BD',{maximumFractionDigits:n<1?6:d});
-const list=()=>rates?Object.keys(rates.rates).sort():[];
-const rate=(from,to)=>rates.rates[to]/rates.rates[from];
+const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=(n,d=2)=>Number(n||0).toLocaleString('bn-BD',{maximumFractionDigits:Math.abs(n)<1&&n!==0?6:d});
+const dn=new Intl.DisplayNames(['bn'],{type:'currency'}),dne=new Intl.DisplayNames(['en'],{type:'currency'});
+const nm=c=>{try{return dn.of(c)}catch(e){return c}},nme=c=>{try{return dne.of(c)}catch(e){return ''}};
 
-async function load(){
-  try{
-    const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();
-    if(j.result==='success'){rates={rates:j.rates,time:j.time_last_update_utc};store.set('rb_rates',rates);}
-  }catch(e){}
-  if(!rates){$('upd').textContent='ডাটা পাওয়া যায়নি';return}
-  $('upd').textContent='আপডেট: '+new Date(rates.time).toLocaleString('bn-BD');
-  init();
+let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[];
+let S={wallets:[],txs:[],debts:[],goals:[]};
+const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','শিক্ষা','অন্যান্য']};
+const curs=()=>R?Object.keys(R.rates).sort():['BDT','USD'];
+const rt=(f,t)=>f===t?1:(R&&R.rates[f]&&R.rates[t]?R.rates[t]/R.rates[f]:1);
+const col=n=>collection(db,'users',U.uid,n),dref=(n,id)=>doc(db,'users',U.uid,n,id);
+const sel=(el,html,def)=>{const v=el.value;el.innerHTML=html;el.value=v&&[...el.options].some(o=>o.value===v)?v:(def??el.options[0]?.value??'')};
+const curOpts=()=>curs().map(c=>`<option value="${c}">${c} – ${nm(c)}</option>`).join('');
+const walOpts=()=>S.wallets.map(w=>`<option value="${w.id}">${esc(w.name)} (${fmt(w.bal)} ${w.cur})</option>`).join('');
+
+/* ---------- auth ---------- */
+const errMsg=e=>({'auth/invalid-credential':'ইমেইল বা পাসওয়ার্ড ভুল','auth/email-already-in-use':'এই ইমেইলে অ্যাকাউন্ট আছে','auth/weak-password':'পাসওয়ার্ড কমপক্ষে ৬ অক্ষর','auth/invalid-email':'ইমেইল সঠিক নয়'}[e.code]||e.message);
+const go=async fn=>{$('err').textContent='';try{await fn(auth,$('em').value.trim(),$('pw').value)}catch(e){$('err').textContent=errMsg(e)}};
+$('login').onclick=()=>go(signInWithEmailAndPassword);
+$('signup').onclick=()=>go(createUserWithEmailAndPassword);
+$('out').onclick=()=>signOut(auth);
+onAuthStateChanged(auth,u=>{
+  unsubs.forEach(f=>f());unsubs=[];U=u;
+  $('auth').classList.toggle('hide',!!u);$('app').classList.toggle('hide',!u);
+  S={wallets:[],txs:[],debts:[],goals:[]};
+  if(!u)return;
+  ['wallets','txs','debts','goals'].forEach(n=>{
+    const q=n==='txs'?query(col(n),orderBy('d','desc')):col(n);
+    unsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>alert('ডাটা লোড হয়নি: '+e.message)));
+  });
+  draw();
+});
+
+/* ---------- rates ---------- */
+async function loadRates(){
+  try{const j=await (await fetch('https://open.er-api.com/v6/latest/USD')).json();
+    if(j.result==='success'){R={rates:j.rates,time:j.time_last_update_utc};ls.set('rb_rates',R)}}catch(e){}
+  if(R)$('upd').textContent='রেট আপডেট: '+new Date(R.time).toLocaleString('bn-BD');
+  else $('upd').textContent='রেট পাওয়া যায়নি';
+  initSel();drawRates();conv();draw();
 }
-function opts(sel,val){const l=list();sel.innerHTML=l.map(c=>`<option value="${c}">${c} – ${nm(c)}</option>`).join('');sel.value=val}
-function init(){
-  opts($('base'),store.get('rb_base','USD'));opts($('cFrom'),'USD');opts($('cTo'),'BDT');opts($('tCur'),home);opts($('fHome'),home);
-  setCats();$('tDate').valueAsDate=new Date();
-  drawRates();conv();drawTx();
+function initSel(){
+  const o=curOpts();
+  ['home','wCur','dCur','gCur','cFrom','cTo','base'].forEach(i=>$(i).innerHTML=o);
+  $('home').value=home;$('wCur').value=home;$('dCur').value=home;$('gCur').value=home;
+  $('cFrom').value='USD';$('cTo').value=home;$('base').value=ls.get('rb_base','USD');
+  $('tDate').valueAsDate=new Date();setCats();
 }
 function drawRates(){
-  const b=$('base').value,q=$('q').value.trim().toLowerCase();store.set('rb_base',b);
-  $('baseNote').textContent=`১ ${b} (${nm(b)}) = বাকি মুদ্রার সমান`;
-  let l=list().filter(c=>c!==b&&(!q||c.toLowerCase().includes(q)||nm(c).toLowerCase().includes(q)||nmE(c).toLowerCase().includes(q)));
-  l.sort((a,c)=>(fav.includes(c)-fav.includes(a))||a.localeCompare(c));
-  $('rateList').innerHTML=l.map(c=>`<div><div><b>${c}</b> <span class="mu">${nm(c)}</span></div><div style="display:flex;align-items:center;gap:8px"><b>${fmt(rate(b,c),4)}</b><button class="star" data-c="${c}">${fav.includes(c)?'★':'☆'}</button></div></div>`).join('')||'<div class="mu">কিছু পাওয়া যায়নি</div>';
+  if(!R)return;const b=$('base').value,q=$('q').value.trim().toLowerCase();ls.set('rb_base',b);
+  const l=curs().filter(c=>c!==b&&(!q||c.toLowerCase().includes(q)||nm(c).toLowerCase().includes(q)||nme(c).toLowerCase().includes(q)))
+    .sort((a,c)=>(fav.includes(c)-fav.includes(a))||a.localeCompare(c));
+  $('rateList').innerHTML=`<div class="mu">১ ${b} (${nm(b)}) =</div>`+l.map(c=>`<div><div><b>${c}</b> <span class="mu">${nm(c)}</span></div><div><b>${fmt(rt(b,c),4)}</b><button class="sm star" data-fav="${c}">${fav.includes(c)?'★':'☆'}</button></div></div>`).join('');
 }
 function conv(){
-  const a=parseFloat($('cAmt').value)||0,f=$('cFrom').value,t=$('cTo').value;
-  $('cOut').textContent=`${fmt(a*rate(f,t))} ${t}`;$('cRate').textContent=`১ ${f} = ${fmt(rate(f,t),4)} ${t}`;
+  if(!R)return;const a=parseFloat($('cAmt').value)||0,f=$('cFrom').value,t=$('cTo').value;
+  $('cOut').textContent=`${fmt(a*rt(f,t))} ${t}`;$('cRate').textContent=`১ ${f} = ${fmt(rt(f,t),4)} ${t}`;
 }
+
+/* ---------- draw ---------- */
 function setCats(){$('tCat').innerHTML=cats[$('tType').value].map(c=>`<option>${c}</option>`).join('')}
-function drawTx(){
-  const months=[...new Set(txs.map(t=>t.d.slice(0,7)))].sort().reverse();const cur=$('fMonth').value||'all';
-  $('fMonth').innerHTML='<option value="all">সব সময়</option>'+months.map(m=>`<option>${m}</option>`).join('');$('fMonth').value=months.includes(cur)?cur:'all';
-  $('hc').textContent=home;
-  const l=txs.filter(t=>$('fMonth').value==='all'||t.d.startsWith($('fMonth').value)).sort((a,b)=>b.d.localeCompare(a.d));
-  let i=0,e=0;
-  l.forEach(t=>{const v=t.a*rate(t.c,home);t.k==='in'?i+=v:e+=v});
+function draw(){
+  if(!U)return;
+  document.querySelectorAll('.hc').forEach(e=>e.textContent=home);
+  // wallets
+  $('net').textContent=fmt(S.wallets.reduce((s,w)=>s+w.bal*rt(w.cur,home),0),0);
+  $('walList').innerHTML=S.wallets.map(w=>`<div><div><b>${esc(w.name)}</b><div class="mu">${w.cur}</div></div><div><b class="${w.bal<0?'ex':''}">${fmt(w.bal)} ${w.cur}</b><button class="sm" data-dw="${w.id}">🗑</button></div></div>`).join('')||'<div class="mu">প্রথমে একটি ওয়ালেট যোগ করুন</div>';
+  const wo=walOpts();['tW','trF','trT'].forEach(i=>sel($(i),wo));
+  // transactions
+  const m=new Date().toISOString().slice(0,7);let i=0,e=0;
+  S.txs.filter(t=>t.d.startsWith(m)).forEach(t=>{const v=t.a*rt(t.cur,home);if(t.k==='in')i+=v;if(t.k==='ex')e+=v});
   $('sIn').textContent=fmt(i,0);$('sEx').textContent=fmt(e,0);$('sBal').textContent=fmt(i-e,0);
-  $('txList').innerHTML=l.map(t=>`<div><div><b>${t.cat}</b><div class="mu">${t.d} ${t.n?'· '+t.n.replace(/</g,'&lt;'):''}</div></div><div style="display:flex;gap:6px;align-items:center"><b class="${t.k}">${t.k==='in'?'+':'−'}${fmt(t.a)} ${t.c}</b><button class="x" data-id="${t.id}">✕</button></div></div>`).join('')||'<div class="mu">এখনো কোনো হিসাব নেই</div>';
+  const wn=id=>esc(S.wallets.find(w=>w.id===id)?.name||'—');
+  const kl={in:'+',tin:'+',ex:'−',tout:'−'};
+  $('txList').innerHTML=S.txs.slice(0,100).map(t=>`<div><div><b>${esc(t.cat)}</b><div class="mu">${t.d} · ${wn(t.w)}${t.n?' · '+esc(t.n):''}</div></div><div><b class="${t.k==='in'||t.k==='tin'?'in':'ex'}">${kl[t.k]}${fmt(t.a)} ${t.cur}</b><button class="sm" data-dt="${t.id}">✕</button></div></div>`).join('')||'<div class="mu">এখনো কোনো হিসাব নেই</div>';
+  // debts
+  let g=0,o=0;S.debts.filter(d=>!d.paid).forEach(d=>{const v=d.a*rt(d.cur,home);d.k==='get'?g+=v:o+=v});
+  $('dGet').textContent=fmt(g,0);$('dOwe').textContent=fmt(o,0);
+  $('dList').innerHTML=S.debts.slice().sort((a,b)=>a.paid-b.paid).map(d=>`<div style="${d.paid?'opacity:.5':''}"><div><b>${esc(d.who)}</b> <span class="mu">${d.k==='get'?'পাব':'দেব'}${d.paid?' · মিটেছে':''}</span><div class="mu">${esc(d.n)}</div></div><div><b class="${d.k==='get'?'in':'ex'}">${fmt(d.a)} ${d.cur}</b>${d.paid?'':`<button class="sm" data-dp="${d.id}">✓</button>`}<button class="sm" data-dd="${d.id}">🗑</button></div></div>`).join('')||'<div class="mu">কোনো দেনা-পাওনা নেই</div>';
+  // goals
+  $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div style="display:block"><div style="display:flex;justify-content:space-between"><b>${esc(x.name)}</b><span><button class="sm" data-ga="${x.id}">＋জমা</button><button class="sm" data-dg="${x.id}">🗑</button></span></div><div class="mu">${fmt(x.saved)} / ${fmt(x.t)} ${x.cur} (${fmt(p,0)}%)</div><div class="bar"><i style="width:${p}%"></i></div></div>`}).join('')||'<div class="mu">কোনো লক্ষ্য নেই</div>';
 }
-document.addEventListener('click',e=>{
-  const s=e.target.closest('.star');if(s){const c=s.dataset.c;fav=fav.includes(c)?fav.filter(x=>x!==c):[...fav,c];store.set('rb_fav',fav);drawRates()}
-  const x=e.target.closest('.x');if(x&&confirm('মুছে ফেলবেন?')){txs=txs.filter(t=>t.id!=x.dataset.id);store.set('rb_tx',txs);drawTx()}
+
+/* ---------- actions ---------- */
+const num=id=>parseFloat($(id).value);
+$('wAdd').onclick=async()=>{const n=$('wName').value.trim();if(!n)return alert('নাম দিন');
+  await addDoc(col('wallets'),{name:n,cur:$('wCur').value,bal:num('wBal')||0});$('wName').value='';$('wBal').value=''};
+$('tType').onchange=setCats;
+$('tAdd').onclick=async()=>{
+  const a=num('tAmt'),wid=$('tW').value,w=S.wallets.find(x=>x.id===wid);
+  if(!w)return alert('ওয়ালেট বাছুন');if(!(a>0))return alert('সঠিক পরিমাণ দিন');
+  const k=$('tType').value,b=writeBatch(db);
+  b.set(doc(col('txs')),{k,w:wid,a,cur:w.cur,cat:$('tCat').value,d:$('tDate').value||new Date().toISOString().slice(0,10),n:$('tNote').value});
+  b.update(dref('wallets',wid),{bal:increment(k==='in'?a:-a)});
+  await b.commit();$('tAmt').value='';$('tNote').value='';
+};
+$('trGo').onclick=async()=>{
+  const f=S.wallets.find(x=>x.id===$('trF').value),t=S.wallets.find(x=>x.id===$('trT').value),a=num('trA');
+  if(!f||!t||f.id===t.id)return alert('দুটি আলাদা ওয়ালেট বাছুন');if(!(a>0))return alert('সঠিক পরিমাণ দিন');
+  const ta=a*rt(f.cur,t.cur),d=new Date().toISOString().slice(0,10),b=writeBatch(db);
+  b.set(doc(col('txs')),{k:'tout',w:f.id,a,cur:f.cur,cat:'ট্রান্সফার → '+t.name,d,n:''});
+  b.set(doc(col('txs')),{k:'tin',w:t.id,a:ta,cur:t.cur,cat:'ট্রান্সফার ← '+f.name,d,n:''});
+  b.update(dref('wallets',f.id),{bal:increment(-a)});b.update(dref('wallets',t.id),{bal:increment(ta)});
+  await b.commit();$('trA').value='';
+};
+$('dAdd').onclick=async()=>{const w=$('dWho').value.trim(),a=num('dAmt');if(!w||!(a>0))return alert('নাম ও পরিমাণ দিন');
+  await addDoc(col('debts'),{k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value,paid:false});$('dWho').value='';$('dAmt').value='';$('dNote').value=''};
+$('gAdd').onclick=async()=>{const n=$('gName').value.trim(),t=num('gTar');if(!n||!(t>0))return alert('নাম ও টার্গেট দিন');
+  await addDoc(col('goals'),{name:n,t,saved:0,cur:$('gCur').value});$('gName').value='';$('gTar').value=''};
+
+document.addEventListener('click',async e=>{
+  const d=e.target.dataset;if(!d)return;
+  if(d.fav){fav=fav.includes(d.fav)?fav.filter(x=>x!==d.fav):[...fav,d.fav];ls.set('rb_fav',fav);drawRates()}
+  if(d.dw&&confirm('ওয়ালেট মুছবেন? (এর লেনদেন থেকে যাবে)'))deleteDoc(dref('wallets',d.dw));
+  if(d.dt&&confirm('লেনদেন মুছবেন? ব্যালেন্স ঠিক করা হবে।')){
+    const t=S.txs.find(x=>x.id===d.dt),b=writeBatch(db);b.delete(dref('txs',d.dt));
+    if(S.wallets.some(w=>w.id===t.w))b.update(dref('wallets',t.w),{bal:increment(t.k==='in'||t.k==='tin'?-t.a:t.a)});
+    await b.commit();
+  }
+  if(d.dp)updateDoc(dref('debts',d.dp),{paid:true});
+  if(d.dd&&confirm('মুছবেন?'))deleteDoc(dref('debts',d.dd));
+  if(d.dg&&confirm('মুছবেন?'))deleteDoc(dref('goals',d.dg));
+  if(d.ga){const v=parseFloat(prompt('কত জমা করলেন?'));if(v>0)updateDoc(dref('goals',d.ga),{saved:increment(v)})}
 });
-$('nav').onclick=e=>{const t=e.target.dataset.t;if(!t)return;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===e.target));['rates','conv','tx'].forEach(s=>$(s).classList.toggle('hide',s!==t))};
+$('nav').onclick=e=>{const t=e.target.dataset.t;if(!t)return;
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===e.target));
+  ['wal','tx','debt','goal','rates','conv'].forEach(s=>$(s).classList.toggle('hide',s!==t))};
+$('home').onchange=()=>{home=$('home').value;ls.set('rb_home',home);draw()};
 $('base').onchange=$('q').oninput=drawRates;
 ['cAmt','cFrom','cTo'].forEach(i=>$(i).oninput=conv);
 $('swap').onclick=()=>{const f=$('cFrom').value;$('cFrom').value=$('cTo').value;$('cTo').value=f;conv()};
-$('tType').onchange=setCats;$('fMonth').onchange=drawTx;
-$('fHome').onchange=()=>{home=$('fHome').value;store.set('rb_home',home);drawTx()};
-$('tAdd').onclick=()=>{
-  const a=parseFloat($('tAmt').value);if(!(a>0))return alert('সঠিক পরিমাণ দিন');
-  txs.push({id:Date.now(),k:$('tType').value,cat:$('tCat').value,a,c:$('tCur').value,d:$('tDate').value||new Date().toISOString().slice(0,10),n:$('tNote').value});
-  store.set('rb_tx',txs);$('tAmt').value='';$('tNote').value='';drawTx();
-};
-$('csv').onclick=()=>{
-  const rows=[['তারিখ','ধরন','ক্যাটাগরি','পরিমাণ','মুদ্রা','নোট'],...txs.map(t=>[t.d,t.k==='in'?'আয়':'ব্যয়',t.cat,t.a,t.c,'"'+(t.n||'').replace(/"/g,'""')+'"'])];
-  const u=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));
-  const a=document.createElement('a');a.href=u;a.download='hisab.csv';a.click();
-};
-load();
+
+initSel();drawRates();conv();loadRates();
 </script>
 </body>
 </html>
