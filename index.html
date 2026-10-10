@@ -158,6 +158,43 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 #toast{position:fixed;left:50%;bottom:116px;transform:translate(-50%,20px);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;transition:.2s;z-index:50;pointer-events:none}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 
+.mini b.in{color:var(--in)}.mini b.ex{color:var(--ex)}
+.planb{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px;background:var(--bg);box-shadow:var(--inset-s);color:var(--pu);cursor:pointer}
+.planb.pro{color:#C27B00}
+.note{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:20px;background:var(--bg);box-shadow:var(--raise-s);margin-bottom:14px;font-size:14px}
+.note i{font-style:normal;font-size:20px}.note b{display:block}.note span{font-size:12.5px;color:var(--mu)}
+.seg.sc{overflow-x:auto;scrollbar-width:none;gap:4px}.seg.sc::-webkit-scrollbar{display:none}.seg.sc button{flex:0 0 auto;padding:9px 16px;white-space:nowrap}
+.lockc{text-align:center;padding:30px 18px;border-radius:26px;background:var(--bg);box-shadow:var(--raise);margin-top:6px}
+.lockc .lk{font-size:38px}.lockc b{display:block;font-size:17px;margin:8px 0 4px}.lockc .sub{margin-bottom:16px}
+.plancard{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-top:16px;border-radius:24px;background:var(--bg);box-shadow:var(--raise);cursor:pointer}
+.crown{font-size:44px;text-align:center}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 20px;font-size:13px}
+.feat div{background:var(--bg);box-shadow:var(--inset-s);border-radius:14px;padding:9px 11px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.plans button{border:0;background:var(--bg);border-radius:20px;padding:16px 8px;box-shadow:var(--raise-s);text-align:center;position:relative}
+.plans button.on{box-shadow:var(--inset-s);color:var(--pu)}
+.plans b{display:block;font-size:22px}.plans span{font-size:12px;color:var(--mu)}
+.plans em{position:absolute;top:-9px;right:8px;font-style:normal;font-size:10.5px;font-weight:700;color:#fff;background:var(--grad);border-radius:99px;padding:2px 9px}
+.payb{background:var(--bg);box-shadow:var(--inset);border-radius:18px;padding:12px 14px;margin-bottom:18px;font-size:13.5px}
+.payb .nr{display:flex;justify-content:space-between;align-items:center;padding:5px 0}
+.st-p{color:#C27B00}.st-a{color:var(--in)}.st-r{color:var(--ex)}
+.month{display:flex;justify-content:space-between;align-items:center;margin:6px 0 14px}.month b{font-size:17px}
+.ib2:disabled{opacity:.35}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.tiles div{background:var(--bg);box-shadow:var(--inset-s);border-radius:18px;padding:10px;text-align:center;font-size:12px;color:var(--mu)}
+.tiles b{display:block;font-size:15px;color:var(--tx)}.tiles b.in{color:var(--in)}.tiles b.ex{color:var(--ex)}
+.donut{display:flex;gap:16px;align-items:center}
+.donut svg{flex:0 0 130px;width:130px;height:130px}
+.leg{flex:1;min-width:0;font-size:13px}.leg div{display:flex;align-items:center;gap:7px;padding:3px 0}
+.leg i{width:10px;height:10px;border-radius:50%;flex:none}.leg span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bars{width:100%;height:auto;margin-top:8px}.bars .bi{fill:var(--in)}.bars .bx{fill:var(--ex)}.bars text{fill:var(--mu);font-size:9px;text-anchor:middle}
+.ins{display:flex;flex-direction:column;gap:10px}.ins div{background:var(--bg);box-shadow:var(--inset-s);border-radius:16px;padding:10px 13px;font-size:13.5px}
+.bud{padding:14px 16px;border-radius:22px;background:var(--bg);box-shadow:var(--raise);margin-bottom:16px}
+.bud .hd{display:flex;gap:12px;align-items:center}
+.bud .pbar i.w{background:linear-gradient(90deg,#F0A92E,#F2994A)}.bud .pbar i.x{background:linear-gradient(90deg,#E5484D,#FF7A7F)}
+#lock{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px}
+.dotsrow{display:flex;gap:16px}.dotsrow i{width:16px;height:16px;border-radius:50%;box-shadow:var(--inset-s)}.dotsrow i.f{background:var(--grad);box-shadow:none}
+.keys{display:grid;grid-template-columns:repeat(3,74px);gap:16px}.keys button{height:74px;border:0;border-radius:50%;background:var(--bg);box-shadow:var(--raise-s);font-size:24px;font-weight:600}.keys button:active{box-shadow:var(--inset-s)}
 /* auth */
 #auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 18px}
 .pcard{width:100%;max-width:400px;border-radius:34px;padding:36px 24px 28px;background:var(--bg);box-shadow:var(--raise)}
@@ -187,6 +224,7 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 </style>
 </head>
 <body>
+<div id="lock" class="hide"><div style="font-size:42px">🔒</div><b style="font-size:19px">পিন দিন</b><div class="dotsrow" id="lkDots"></div><div class="sub" id="lkMsg" style="min-height:18px;color:var(--ex)"></div><div class="keys" id="lkKeys"></div><button class="sm" id="lkOut">পিন ভুলে গেছেন? লগআউট</button></div>
 
 <div id="auth" class="hide">
 <div class="pcard">
@@ -207,12 +245,13 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 
 <!-- হোম -->
 <div class="page" id="p-home">
-<div class="hero"><div class="top"><div><b id="hello">মাই ওয়ালেট</b><small id="upd"></small></div><button class="ib" id="pfb" data-open="prof" title="প্রোফাইল" style="font-weight:700;font-size:17px">?</button></div>
+<div class="hero"><div class="top"><div><b id="hello">মাই ওয়ালেট</b><small id="upd"></small><div class="planb" id="planb" data-open="up">ফ্রি প্ল্যান</div></div><button class="ib" id="pfb" data-open="prof" title="প্রোফাইল" style="font-weight:700;font-size:17px">?</button></div>
 <div class="lab">মোট সম্পদ</div>
 <div class="net"><span id="net">০</span><select id="home" class="chip"></select></div>
 <div class="mini"><div>এই মাসের আয়<b id="sIn">০</b></div><div>এই মাসের ব্যয়<b id="sEx">০</b></div></div>
 </div>
-<h2 class="pad" style="margin-top:20px">আমার ওয়ালেট</h2>
+<div class="pad" id="alerts" style="margin-top:20px"></div>
+<h2 class="pad" style="margin-top:6px">আমার ওয়ালেট</h2>
 <div class="cards" id="cards"></div>
 <div class="pad">
 <h2>দ্রুত কাজ</h2>
@@ -238,7 +277,7 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <!-- রেট -->
 <div class="page pad" id="p-rt">
 <h2>কারেন্সি</h2>
-<div class="seg" data-g="rt"><button class="on" data-seg="rt:r">লাইভ রেট</button><button data-seg="rt:c">কনভার্টার</button></div>
+<div class="seg" data-g="rt"><button class="on" data-seg="rt:r">লাইভ রেট</button><button data-seg="rt:c">কনভার্টার</button><button data-seg="rt:a">🔔 অ্যালার্ট</button></div>
 <div id="rt-r">
 <div class="gc sbar" style="padding:22px 14px 6px;margin:10px 0 12px"><div class="fld"><select id="base"></select><label>বেস মুদ্রা</label></div><div class="fld"><input id="q" placeholder="খুঁজুন: USD, ডলার…"><label>খুঁজুন</label></div></div>
 <div class="sub" id="baseNote" style="margin:0 4px 8px"></div>
@@ -248,13 +287,15 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div class="two" style="display:flex;gap:8px"><div class="fld"><select id="cFrom"></select><label>থেকে</label></div><div class="fld"><select id="cTo"></select><label>এতে</label></div></div>
 <button class="cta alt" id="swap" style="margin-top:0">⇄ অদলবদল</button>
 <div class="cvo" id="cOut">—</div><div class="sub" id="cRate"></div></div></div>
+<div id="rt-a" class="hide"><div id="alBox"></div></div>
 </div>
 
 <!-- আরও -->
 <div class="page pad" id="p-mo">
 <div class="pcrd" data-open="prof"><div class="pfav" id="mAv">?</div><div><b id="mName">—</b><span class="sub">ইউজার আইডি: <span id="mId">—</span></span></div><span class="go">›</span></div>
-<h2>দেনা-পাওনা ও লক্ষ্য</h2>
-<div class="seg" data-g="mo"><button class="on" data-seg="mo:d">দেনা-পাওনা</button><button data-seg="mo:g">লক্ষ্য</button></div>
+<div class="plancard" id="planCard" data-open="up"></div>
+<h2>টুলস</h2>
+<div class="seg sc" data-g="mo"><button class="on" data-seg="mo:d">দেনা-পাওনা</button><button data-seg="mo:g">লক্ষ্য</button><button data-seg="mo:r">📊 রিপোর্ট</button><button data-seg="mo:b">🎯 বাজেট</button><button data-seg="mo:i">🧾 বিল</button></div>
 <div id="mo-d">
 <div class="mini" style="margin:0 0 12px"><div class="gc">আমি পাব<b class="in" id="dGet">০</b></div><div class="gc">আমি দেব<b class="ex" id="dOwe">০</b></div></div>
 <button class="cta" data-open="debt">+ নতুন দেনা-পাওনা</button>
@@ -262,6 +303,9 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div id="mo-g" class="hide">
 <button class="cta" data-open="goal">+ নতুন লক্ষ্য</button>
 <div class="rows" id="gList" style="margin-top:12px"></div></div>
+<div id="mo-r" class="hide"><div id="repBox"></div></div>
+<div id="mo-b" class="hide"><div id="budBox"></div></div>
+<div id="mo-i" class="hide"><div id="billBox"></div></div>
 <button class="cta alt" style="margin-top:22px" id="out2">লগআউট</button>
 </div>
 
@@ -312,9 +356,39 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div class="idbox"><div><div class="sub">ইউজার আইডি</div><b id="pfId">—</b></div><button class="sm" data-copy="pfId">কপি</button></div>
 <div class="fld"><input id="pfName" placeholder="আপনার নাম"><label>আপনার নাম</label></div>
 <button class="cta" id="pfSave">নাম সংরক্ষণ করুন</button>
-<div class="sub" style="margin:14px 4px 6px">যোগদান: <span id="pfJoin">—</span></div>
+<div class="sub" style="margin:14px 4px 6px">যোগদান: <span id="pfJoin">—</span> &nbsp;•&nbsp; প্ল্যান: <b id="pfPlan">—</b></div>
+<button class="cta alt" id="pinBtn">🔒 অ্যাপ লক (পিন)</button>
 <button class="cta alt" id="out3" style="margin-top:14px">লগআউট</button>
 </div>
+
+<div id="sh_up" class="f hide">
+<div class="crown">👑</div><h3 style="text-align:center;display:block;margin:6px 0 2px">মাই ওয়ালেট প্রো</h3><div class="sub" id="upSt" style="text-align:center"></div>
+<div class="feat"><div>✓ আনলিমিটেড ওয়ালেট</div><div>✓ সম্পূর্ণ হিসাবের ইতিহাস</div><div>✓ রিপোর্ট ও চার্ট</div><div>✓ স্মার্ট ইনসাইট</div><div>✓ মাসিক বাজেট ও সতর্কতা</div><div>✓ বিল রিমাইন্ডার</div><div>✓ রেট অ্যালার্ট</div><div>✓ দেনার রিমাইন্ডার (WhatsApp)</div><div>✓ CSV এক্সপোর্ট</div><div>✓ পিন লক</div></div>
+<div class="plans" id="plans"></div>
+<div class="payb" id="payInfo"></div>
+<div class="two"><div class="fld"><select id="upM"><option value="বিকাশ">বিকাশ</option><option value="নগদ">নগদ</option><option value="রকেট">রকেট</option></select><label>যে মাধ্যমে পাঠিয়েছেন</label></div><div class="fld"><input id="upNum" placeholder="01XXXXXXXXX" inputmode="tel"><label>যে নম্বর থেকে পাঠিয়েছেন</label></div></div>
+<div class="fld"><input id="upTrx" placeholder="যেমন: 9A7B6C5D4E"><label>ট্রানজেকশন আইডি (TrxID)</label></div>
+<button class="cta" id="upGo">পেমেন্ট জমা দিন</button>
+<h2 style="font-size:16px;margin:22px 0 8px">আমার পেমেন্ট</h2><div class="rows" id="payList"></div>
+</div>
+
+<div id="sh_bud" class="f hide"><h3>মাসিক বাজেট</h3>
+<div class="fld"><select id="bCat"></select><label>ক্যাটাগরি</label></div>
+<div class="two"><div class="fld"><input id="bLim" type="number" inputmode="decimal" placeholder="যেমন ৫০০০"><label>মাসিক সীমা</label></div><div class="fld"><select id="bCur"></select><label>মুদ্রা</label></div></div>
+<button class="cta" id="bAdd">সংরক্ষণ করুন</button></div>
+
+<div id="sh_bill" class="f hide"><h3 id="blTitle">নতুন বিল / রিকারিং খরচ</h3>
+<div class="fld"><input id="blName" placeholder="যেমন: বাসা ভাড়া, ইন্টারনেট"><label>নাম</label></div>
+<div class="two"><div class="fld"><input id="blAmt" type="number" inputmode="decimal"><label>পরিমাণ</label></div><div class="fld"><select id="blCur"></select><label>মুদ্রা</label></div></div>
+<div class="two"><div class="fld"><input id="blDay" type="number" min="1" max="31" inputmode="numeric" placeholder="১-৩১"><label>প্রতি মাসের তারিখ</label></div><div class="fld"><select id="blCat"></select><label>ক্যাটাগরি</label></div></div>
+<button class="cta" id="blAdd">সংরক্ষণ করুন</button></div>
+
+<div id="sh_al" class="f hide"><h3>রেট অ্যালার্ট</h3>
+<div class="two"><div class="fld"><select id="alF"></select><label>মুদ্রা</label></div><div class="fld"><select id="alT"></select><label>কিসের বিপরীতে</label></div></div>
+<div class="fld"><select id="alD"><option value="above">রেট এর বেশি হলে</option><option value="below">রেট এর কম হলে</option></select><label>কখন জানাবে</label></div>
+<div class="fld"><input id="alV" type="number" inputmode="decimal" placeholder="যেমন ১২৫"><label>টার্গেট রেট</label></div>
+<div class="sub" id="alNow" style="margin:-6px 4px 14px"></div>
+<button class="cta" id="alAdd">অ্যালার্ট যোগ করুন</button></div>
 
 <div id="sh_pay" class="f hide"><h3 id="pTitle">পরিশোধ</h3>
 <div class="sub" id="pInfo" style="margin:0 4px"></div>
@@ -330,7 +404,7 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,updateProfile,setPersistence,browserLocalPersistence,browserSessionPersistence,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import {getFirestore,collection,doc,getDoc,setDoc,serverTimestamp,addDoc,deleteDoc,updateDoc,onSnapshot,query,orderBy,writeBatch,increment} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import {getFirestore,collection,doc,getDoc,setDoc,serverTimestamp,addDoc,deleteDoc,updateDoc,onSnapshot,query,where,orderBy,writeBatch,increment} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const app=initializeApp({
   apiKey:"AIzaSyB64OUEB7sQlIfFPt1jQuSPKw9H1az-7XU",
@@ -353,7 +427,7 @@ const today=()=>new Date().toISOString().slice(0,10);
 const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
 
 let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[],tmode='ex',txf='a',editTx=null,editDebt=null,payId=null;
-let S={wallets:[],txs:[],debts:[],goals:[]};
+const emptyS=()=>({wallets:[],txs:[],debts:[],goals:[],budgets:[],bills:[],ralerts:[]});let S=emptyS();
 const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','শিক্ষা','অন্যান্য']};
 const emo={'খাবার':'🍚','বাসা ভাড়া':'🏠','যাতায়াত':'🚌','বিল':'💡','কেনাকাটা':'🛍️','চিকিৎসা':'💊','শিক্ষা':'📚','বেতন':'💼','ব্যবসা':'🏪','রেমিটেন্স':'🌍','উপহার':'🎁'};
 const ico=c=>c.startsWith('ট্রান্সফার')?'🔁':(emo[c]||'💠');
@@ -405,8 +479,8 @@ $('out2').onclick=$('out3').onclick=()=>{closeSheet();signOut(auth)};
 let P=null,pendingName='',blockedMsg='';
 const uidCode=u=>'WL-'+u.slice(0,6).toUpperCase();
 onAuthStateChanged(auth,async u=>{
-  unsubs.forEach(f=>f());unsubs=[];U=u;P=null;
-  S={wallets:[],txs:[],debts:[],goals:[]};
+  unsubs.forEach(f=>f());unsubs=[];proUnsubs.forEach(f=>f());proUnsubs=[];wasPro=null;PAY=[];ST={...DEF};U=u;P=null;
+  S=emptyS();
   if(!u){$('auth').classList.remove('hide');$('app').classList.add('hide');if(blockedMsg){amsg(blockedMsg);blockedMsg=''}return}
   try{
     const pr=doc(db,'profiles',u.uid);let snap=await getDoc(pr);
@@ -416,9 +490,15 @@ onAuthStateChanged(auth,async u=>{
       if(pendingName)updateProfile(u,{displayName:pendingName}).catch(()=>{});
       pendingName='';snap=await getDoc(pr);
     }
+    if(snap.data().status==='blocked'){blockedMsg=BLK;await signOut(auth);return}
   }catch(e){blockedMsg='প্রোফাইল লোড হয়নি ('+(e.code||e.message)+')। Firestore Rules চেক করুন।';await signOut(auth);return}
   $('auth').classList.add('hide');$('app').classList.remove('hide');
-  unsubs.push(onSnapshot(doc(db,'profiles',u.uid),s=>{P=s.data()||null;drawProfile()}));
+  unsubs.push(onSnapshot(doc(db,'profiles',u.uid),s=>{P=s.data()||null;
+    if(P&&P.status==='blocked'){blockedMsg=BLK;signOut(auth);return}
+    const pr=isPro();if(pr!==wasPro){wasPro=pr;subPro()}
+    drawProfile();draw()}));
+  unsubs.push(onSnapshot(doc(db,'settings','app'),s=>{const x=s.data()||{};ST={...DEF,...x,pays:{...DEF.pays,...(x.pays||{})}};drawUp();draw()},()=>{}));
+  unsubs.push(onSnapshot(query(collection(db,'payments'),where('uid','==',u.uid)),s=>{PAY=s.docs.map(d=>({id:d.id,...d.data()}));drawUp()},()=>{}));
   ['wallets','txs','debts','goals'].forEach(n=>{
     const q=n==='txs'?query(col(n),orderBy('d','desc')):col(n);
     unsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>toast('ডাটা লোড হয়নি: '+e.code)));
@@ -448,6 +528,8 @@ function initSel(){
   ['home','wCur','dCur','gCur','cFrom','cTo','base'].forEach(i=>$(i).innerHTML=o);
   $('home').value=home;$('wCur').value=home;$('dCur').value=home;$('gCur').value=home;
   $('cFrom').value='USD';$('cTo').value=home;$('base').value=ls.get('rb_base','USD');
+  ['bCur','blCur','alF','alT'].forEach(i=>$(i).innerHTML=o);$('bCur').value=home;$('blCur').value=home;$('alF').value='USD';$('alT').value=home;
+  $('bCat').innerHTML=$('blCat').innerHTML=cats.ex.map(c=>`<option>${c}</option>`).join('');
 }
 function drawRates(){
   if(!R)return $('rateList').innerHTML='<div class="empty">রেট লোড হয়নি। ইন্টারনেট চেক করুন।</div>';
@@ -479,12 +561,15 @@ function draw(){
   const wn=id=>S.wallets.find(w=>w.id===id)?.name||'মুছে ফেলা ওয়ালেট';
   const T=S.txs.map(t=>({...t,wn:wn(t.w)}));
   $('recent').innerHTML=T.slice(0,5).map(t=>txRow(t)).join('')||'<div class="empty">এখনো কোনো লেনদেন নেই। নিচের ＋ চেপে প্রথম লেনদেন যোগ করুন।</div>';
-  const F=T.filter(t=>txf==='a'||(txf==='tr'?t.k[0]==='t':t.k===txf));
+  const cutoff=isPro()?'':new Date(Date.now()-ST.freeDays*864e5).toISOString().slice(0,10);
+  const hidden=cutoff?T.filter(t=>t.d<cutoff).length:0;
+  const F=T.filter(t=>(!cutoff||t.d>=cutoff)&&(txf==='a'||(txf==='tr'?t.k[0]==='t':t.k===txf)));
   const groups={};F.slice(0,200).forEach(t=>(groups[t.d]=groups[t.d]||[]).push(t));
   $('txList').innerHTML=Object.keys(groups).sort().reverse().map(dy=>{
     const net=groups[dy].reduce((a,t)=>{const v=t.a*rt(t.cur,home);return t.k==='in'?a+v:t.k==='ex'?a-v:a},0);
     const lab=dy===today()?'আজ':new Date(dy+'T00:00').toLocaleDateString('bn-BD',{weekday:'long',day:'numeric',month:'long'});
     return `<div class="dayh"><b>${lab}</b><span class="${net<0?'ex':'in'}">${net?((net>0?'+':'−')+fmt(Math.abs(net),0)+' '+home):''}</span></div><div class="rows">${groups[dy].map(t=>txRow(t,1)).join('')}</div>`}).join('')||'<div class="rows"><div class="empty">কোনো হিসাব নেই</div></div>';
+  if(hidden)$('txList').insertAdjacentHTML('beforeend',`<div class="note" data-open="up" style="cursor:pointer;margin-top:18px"><i>🔒</i><div><b>${fmt(hidden,0)}টি পুরোনো লেনদেন লুকানো</b><span>ফ্রি প্ল্যানে শেষ ${fmt(ST.freeDays,0)} দিনের হিসাব দেখা যায়। সব দেখতে প্রো নিন।</span></div></div>`);
   let g=0,o=0;S.debts.forEach(d=>{const v=rem(d)*rt(d.cur,home);d.k==='get'?g+=v:o+=v});
   $('dGet').textContent=fmt(g,0)+' '+home;$('dOwe').textContent=fmt(o,0)+' '+home;
   $('dList').innerHTML=S.debts.slice().sort((a,b)=>(rem(a)===0)-(rem(b)===0)).map(d=>{
@@ -493,10 +578,130 @@ function draw(){
     return `<div class="dc ${get?'get':'owe'}" style="${done?'opacity:.78':''}"><div class="hd"><div class="av" style="background:${tint(d.who)}">${esc([...d.who][0])}</div><div class="rm"><b>${esc(d.who)}<span class="pill">${get?'পাব':'দেব'}</span></b><span>${esc(d.n)}</span></div><div style="text-align:right"><div class="amt ${get?'in':'ex'}">${fmt(r)} ${d.cur}</div><div class="sub">${done?'কিছু বাকি নেই':'বাকি'}</div></div></div>
 <div class="pbar"><i style="width:${p}%"></i></div>
 <div class="pl"><span>${get?'পেয়েছি':'পরিশোধ'} ${fmt(ps)} / ${fmt(d.a)} ${d.cur}</span><span>${fmt(p,0)}%</span></div>
-<div class="dact">${done?'<div class="done" style="flex:1;align-self:center">✓ সম্পূর্ণ মিটেছে</div>':`<button class="cta" data-pay="${d.id}">＋ ${get?'টাকা পেয়েছি':'পরিশোধ করেছি'}</button>`}<button class="ib2" data-ed="${d.id}" aria-label="সম্পাদনা">✎</button><button class="ib2" data-dd="${d.id}" aria-label="মুছুন">🗑</button></div>
+<div class="dact">${done?'<div class="done" style="flex:1;align-self:center">✓ সম্পূর্ণ মিটেছে</div>':`<button class="cta" data-pay="${d.id}">＋ ${get?'টাকা পেয়েছি':'পরিশোধ করেছি'}</button>`}${get&&!done?`<button class="ib2" data-wa="${d.id}" aria-label="রিমাইন্ডার পাঠান">💬</button>`:''}<button class="ib2" data-ed="${d.id}" aria-label="সম্পাদনা">✎</button><button class="ib2" data-dd="${d.id}" aria-label="মুছুন">🗑</button></div>
 ${pays.length?`<details><summary>${get?'প্রাপ্তির':'পরিশোধের'} ইতিহাস (${fmt(pays.length,0)}টি)</summary>${pays.map(x=>`<div class="ph"><span>${new Date(x.d+'T00:00').toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})}${x.n?' • '+esc(x.n):''}</span><span><b class="${get?'in':'ex'}">${fmt(x.a)} ${d.cur}</b> <button class="ib2" data-dpx="${d.id}:${x.id}" style="width:26px;height:24px" aria-label="মুছুন">✕</button></span></div>`).join('')}</details>`:''}</div>`}).join('')||'<div class="empty">কারও কাছে পাওনা বা দেনা থাকলে এখানে যোগ করুন।</div>';
   $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div class="r"><div class="ring" style="background:conic-gradient(#C42EF0,#2E86FF ${p*3.6}deg,var(--ln) 0)"><i>${fmt(p,0)}%</i></div><div class="rm"><b>${esc(x.name)}</b><span>${fmt(x.saved)} / ${fmt(x.t)} ${x.cur}</span></div><button class="sm" data-ga="${x.id}">+ জমা</button><button class="sm" data-dg="${x.id}">🗑</button></div>`}).join('')||'<div class="empty">বড় কিছুর জন্য সঞ্চয় করতে একটি লক্ষ্য ঠিক করুন।</div>';
+  drawPlan();drawAlerts();drawReport();drawBud();drawBills();drawAl();
 }
+
+/* ---------- plan / pro ---------- */
+const DEF={priceM:99,priceY:999,freeWallets:2,freeDays:90,pays:{bkash:'',nagad:'',rocket:''},payType:'সেন্ড মানি',how:'',notice:''};
+let ST={...DEF},PAY=[],proUnsubs=[],wasPro=null,upPlan='m',repM=0,editBill=null,payBill=null,lockedAt=0;
+const BLK='আপনার অ্যাকাউন্টটি অ্যাডমিন বন্ধ করে রেখেছেন। সহায়তার জন্য যোগাযোগ করুন।';
+const proEnd=()=>P&&P.proUntil&&P.proUntil.toDate?P.proUntil.toDate():null;
+const isPro=()=>!!(P&&P.plan==='pro'&&proEnd()&&proEnd()>new Date());
+const daysLeft=()=>Math.max(0,Math.ceil((proEnd()-new Date())/864e5));
+const needPro=()=>{if(isPro())return false;toast('এটি প্রো ফিচার');openSheet('up');return true};
+const lockCard=t=>`<div class="lockc"><div class="lk">🔒</div><b>${t}</b><div class="sub">প্রো প্ল্যানে পাওয়া যায়</div><button class="cta" data-open="up">প্রো আনলক করুন</button></div>`;
+const mkey=o=>{const n=new Date(),d=new Date(n.getFullYear(),n.getMonth()+o,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
+const mlabel=k=>new Date(k+'-01T00:00').toLocaleDateString('bn-BD',{month:'long',year:'numeric'});
+const PAL=['#7C5CE6','#3A82F7','#C42EF0','#F0A92E','#12A67B','#E5484D','#FF7AD9','#8E99B3'];
+function subPro(){
+  proUnsubs.forEach(f=>f());proUnsubs=[];S.budgets=[];S.bills=[];S.ralerts=[];
+  if(isPro())['budgets','bills','ralerts'].forEach(n=>proUnsubs.push(onSnapshot(col(n),s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},()=>{})));
+}
+function budStats(){const m=mkey(0);return S.budgets.map(b=>{const spent=S.txs.filter(t=>t.k==='ex'&&t.cat===b.cat&&t.d.startsWith(m)).reduce((a,t)=>a+t.a*rt(t.cur,b.cur),0);return {b,spent,p:b.lim>0?spent/b.lim*100:0}})}
+function billStats(){const n=new Date(),m=mkey(0),dim=new Date(n.getFullYear(),n.getMonth()+1,0).getDate();
+  return S.bills.map(b=>{const day=Math.min(b.day,dim),diff=day-n.getDate(),paid=b.paidMonth===m;return {b,diff,paid,day,st:paid?'ok':diff<0?'late':diff===0?'today':'soon'}}).sort((x,y)=>(x.paid-y.paid)||(x.diff-y.diff))}
+const alHit=a=>{const c=rt(a.f,a.t);return a.dir==='above'?c>=a.v:c<=a.v};
+const sumM=(k,key,cat)=>S.txs.filter(t=>t.k===k&&t.d.startsWith(key)&&(!cat||t.cat===cat)).reduce((s,t)=>s+t.a*rt(t.cur,home),0);
+
+function drawPlan(){
+  const pr=isPro(),exp=P&&P.plan==='pro'&&!pr,b=$('planb');
+  b.textContent=pr?`⭐ প্রো • ${fmt(daysLeft(),0)} দিন বাকি`:exp?'প্রো-র মেয়াদ শেষ • নবায়ন করুন':'ফ্রি প্ল্যান • প্রো নিন';b.classList.toggle('pro',pr);
+  $('planCard').innerHTML=`<div class="crown" style="font-size:30px">${pr?'👑':'✨'}</div><div style="flex:1"><b>${pr?'প্রো সক্রিয়':'ফ্রি প্ল্যান'}</b><div class="sub">${pr?proEnd().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})+' পর্যন্ত':'রিপোর্ট, বাজেট, বিল রিমাইন্ডার ও আরও অনেক কিছু আনলক করুন'}</div></div><span style="color:var(--mu);font-size:22px">›</span>`;
+  $('pfPlan').textContent=pr?`প্রো (${fmt(daysLeft(),0)} দিন বাকি)`:'ফ্রি';
+  $('pinBtn').textContent=ls.get('rb_pin','')?'🔒 অ্যাপ লক বন্ধ করুন':'🔒 অ্যাপ লক (পিন) চালু করুন';
+}
+function drawAlerts(){
+  const L=[],note=(i,t,s,o='')=>L.push(`<div class="note" ${o}><i>${i}</i><div><b>${t}</b><span>${s}</span></div></div>`);
+  if(ST.notice)note('📢','ঘোষণা',esc(ST.notice));
+  if(P&&P.plan==='pro'&&!isPro())note('⏳','প্রো-র মেয়াদ শেষ','নবায়ন করতে এখানে চাপুন','data-open="up" style="cursor:pointer"');
+  else if(isPro()&&daysLeft()<=5)note('⏳',`প্রো-র মেয়াদ ${fmt(daysLeft(),0)} দিন বাকি`,'নবায়ন করতে এখানে চাপুন','data-open="up" style="cursor:pointer"');
+  if(isPro()){
+    budStats().filter(x=>x.p>=80).forEach(x=>note(x.p>=100?'🚨':'⚠️',`${esc(x.b.cat)} বাজেটের ${fmt(x.p,0)}% শেষ`,`${fmt(x.spent,0)} / ${fmt(x.b.lim,0)} ${x.b.cur}`));
+    billStats().filter(x=>!x.paid&&x.diff<=3).forEach(x=>note('🧾',x.st==='late'?`${esc(x.b.name)} এর বিল বকেয়া (${fmt(-x.diff,0)} দিন)`:x.st==='today'?`আজ ${esc(x.b.name)} এর তারিখ`:`${esc(x.b.name)} — ${fmt(x.diff,0)} দিন পর`,`${fmt(x.b.a)} ${x.b.cur}`));
+    if(R)S.ralerts.filter(alHit).forEach(a=>note('📈',`১ ${a.f} এখন ${fmt(rt(a.f,a.t),4)} ${a.t}`,`আপনার টার্গেট ${fmt(a.v,4)} ছুঁয়েছে`));
+  }
+  $('alerts').innerHTML=L.join('');
+}
+function drawBud(){
+  if(!isPro())return $('budBox').innerHTML=lockCard('মাসিক বাজেট ও সতর্কতা');
+  $('budBox').innerHTML='<button class="cta" data-open="bud">+ নতুন বাজেট</button><div style="margin-top:18px">'+(budStats().map(({b,spent,p})=>`<div class="bud"><div class="hd"><div class="av e">${ico(b.cat)}</div><div class="rm"><b>${esc(b.cat)}</b><span>${fmt(spent,0)} / ${fmt(b.lim,0)} ${b.cur}</span></div><div class="amt ${p>=100?'ex':''}">${fmt(p,0)}%</div></div><div class="pbar"><i class="${p>=100?'x':p>=80?'w':''}" style="width:${Math.min(100,p)}%"></i></div><div class="dact" style="margin-top:6px"><span class="sub" style="flex:1;align-self:center">${p>=100?'⚠️ বাজেট ছাড়িয়েছে':p>=80?'সতর্ক: প্রায় শেষ':'ঠিক আছে'}</span><button class="ib2" data-be="${b.id}">✎</button><button class="ib2" data-bd="${b.id}">🗑</button></div></div>`).join('')||'<div class="empty">ক্যাটাগরি ধরে মাসিক খরচের সীমা ঠিক করুন। সীমার কাছে গেলে সতর্ক করা হবে।</div>')+'</div>';
+}
+function drawBills(){
+  if(!isPro())return $('billBox').innerHTML=lockCard('বিল রিমাইন্ডার ও রিকারিং খরচ');
+  const L=billStats(),tot=L.filter(x=>!x.paid).reduce((s,x)=>s+x.b.a*rt(x.b.cur,home),0);
+  $('billBox').innerHTML=`<div class="mini" style="margin:0 0 14px"><div class="gc">এ মাসে বাকি বিল<b class="ex">${fmt(tot,0)} ${home}</b></div></div><button class="cta" data-open="bill">+ নতুন বিল</button><div class="rows" style="margin-top:16px">`+(L.map(({b,diff,paid,st,day})=>{
+    const tag=paid?'<span class="st-a">✓ এ মাসে পরিশোধিত</span>':st==='late'?`<span class="st-r">বকেয়া ${fmt(-diff,0)} দিন</span>`:st==='today'?'<span class="st-p">আজই তারিখ</span>':`<span>${fmt(diff,0)} দিন পর (${fmt(day,0)} তারিখ)</span>`;
+    return `<div class="r"><div class="av e">${ico(b.cat)}</div><div class="rm"><b>${esc(b.name)}</b>${tag}</div><div class="rt"><div class="amt">${fmt(b.a)} ${b.cur}</div><div class="acts">${paid?'':`<button class="sm" data-bp="${b.id}" style="margin:0">পরিশোধ</button>`}<button class="ib2" data-bl="${b.id}">✎</button><button class="ib2" data-bx="${b.id}">🗑</button></div></div></div>`}).join('')||'<div class="empty">নিয়মিত বিল যোগ করুন। তারিখের আগে মনে করিয়ে দেওয়া হবে।</div>')+'</div>';
+}
+function drawAl(){
+  if(!isPro())return $('alBox').innerHTML=lockCard('রেট অ্যালার্ট');
+  $('alBox').innerHTML='<div class="sub" style="margin:4px 4px 12px">অ্যাপ খুললে বা রেট আপডেট হলে অ্যালার্ট যাচাই হয় এবং হোম পেজে দেখানো হয়।</div><button class="cta" data-open="al">+ নতুন অ্যালার্ট</button><div class="rows" style="margin-top:16px">'+(S.ralerts.map(a=>{const c=rt(a.f,a.t),hit=R&&alHit(a);return `<div class="r"><div class="av e">${hit?'✅':'🔔'}</div><div class="rm"><b>১ ${a.f} ${a.dir==='above'?'≥':'≤'} ${fmt(a.v,4)} ${a.t}</b><span>এখন ${fmt(c,4)} • ${hit?'<span class="st-a">টার্গেটে পৌঁছেছে</span>':'অপেক্ষায়'}</span></div><button class="ib2" data-ax="${a.id}">🗑</button></div>`}).join('')||'<div class="empty">কোনো অ্যালার্ট নেই। যেমন: USD ১২৫ টাকা হলে জানান।</div>')+'</div>';
+}
+function drawReport(){
+  if(!isPro())return $('repBox').innerHTML=lockCard('রিপোর্ট ও চার্ট');
+  const key=mkey(repM),pk=mkey(repM-1),inn=sumM('in',key),ex=sumM('ex',key),pex=sumM('ex',pk);
+  const by={};S.txs.filter(t=>t.k==='ex'&&t.d.startsWith(key)).forEach(t=>by[t.cat]=(by[t.cat]||0)+t.a*rt(t.cur,home));
+  const cl=Object.entries(by).sort((a,b)=>b[1]-a[1]);let acc=0;
+  const segs=cl.map(([c,v],i)=>{const q=ex?v/ex*100:0,x=`<circle r="15.9155" cx="21" cy="21" fill="none" stroke="${PAL[i%PAL.length]}" stroke-width="5" stroke-dasharray="${q} ${100-q}" stroke-dashoffset="${-acc}"/>`;acc+=q;return x}).join('');
+  const donut=`<svg viewBox="0 0 42 42" style="transform:rotate(-90deg)"><circle r="15.9155" cx="21" cy="21" fill="none" stroke="rgba(124,131,155,.2)" stroke-width="5"/>${segs}</svg>`;
+  const ms=[0,1,2,3,4,5].map(i=>mkey(repM-5+i)),vals=ms.map(m=>[sumM('in',m),sumM('ex',m)]),mx=Math.max(1,...vals.flat());
+  const bars=ms.map((m,i)=>{const x=i*50+10,hi=vals[i][0]/mx*90,he=vals[i][1]/mx*90;return `<rect class="bi" x="${x}" y="${100-hi}" width="14" height="${hi}" rx="4"/><rect class="bx" x="${x+17}" y="${100-he}" width="14" height="${he}" rx="4"/><text x="${x+15}" y="116">${new Date(m+'-01T00:00').toLocaleDateString('bn-BD',{month:'short'})}</text>`}).join('');
+  const ins=[];
+  if(!inn&&!ex)ins.push('এ মাসে কোনো আয়-ব্যয় নেই।');
+  else{
+    if(inn>0){const r=(inn-ex)/inn*100;ins.push(`💰 সঞ্চয়ের হার ${fmt(r,0)}% ${r>=20?'— চমৎকার!':r>=0?'— আরেকটু বাড়ানো যায়।':'— ব্যয় আয়ের চেয়ে বেশি!'}`)}
+    if(cl[0])ins.push(`🔝 সবচেয়ে বেশি খরচ "${esc(cl[0][0])}" — ${fmt(cl[0][1]/ex*100,0)}% (${fmt(cl[0][1],0)} ${home})`);
+    if(pex>0)ins.push(`📊 আগের মাসের চেয়ে ব্যয় ${fmt(Math.abs(ex-pex)/pex*100,0)}% ${ex>pex?'বেশি':'কম'}।`);
+    const days=repM===0?new Date().getDate():new Date(+key.slice(0,4),+key.slice(5),0).getDate();
+    if(ex>0)ins.push(`📅 দৈনিক গড় ব্যয় ${fmt(ex/days,0)} ${home}`);
+  }
+  $('repBox').innerHTML=`<div class="month"><button class="ib2" data-rm="-1" style="width:42px;height:38px">‹</button><b>${mlabel(key)}</b><button class="ib2" data-rm="1" style="width:42px;height:38px" ${repM>=0?'disabled':''}>›</button></div>
+<div class="tiles"><div>আয়<b class="in">${fmt(inn,0)}</b></div><div>ব্যয়<b class="ex">${fmt(ex,0)}</b></div><div>সঞ্চয়<b class="${inn-ex<0?'ex':'in'}">${fmt(inn-ex,0)}</b></div></div>
+<div class="gc" style="padding:16px;margin-bottom:18px"><b>ব্যয়ের ভাগ (${home})</b><div class="donut" style="margin-top:12px">${ex?donut:'<div class="empty" style="flex:1">কোনো ব্যয় নেই</div>'}<div class="leg">${cl.slice(0,6).map(([c,v],i)=>`<div><i style="background:${PAL[i%PAL.length]}"></i><span>${esc(c)}</span><b>${fmt(v/ex*100,0)}%</b></div>`).join('')}</div></div></div>
+<div class="gc" style="padding:16px;margin-bottom:18px"><b>৬ মাসের তুলনা</b> <span class="sub">(<span class="in">■ আয়</span> <span class="ex">■ ব্যয়</span>)</span><svg class="bars" viewBox="0 0 300 122">${bars}</svg></div>
+<div class="gc" style="padding:16px;margin-bottom:18px"><b>স্মার্ট ইনসাইট</b><div class="ins" style="margin-top:12px">${ins.map(x=>`<div>${x}</div>`).join('')}</div></div>
+<button class="cta alt" data-exp="1">⬇ সব লেনদেন CSV এক্সপোর্ট</button>`;
+}
+function exportCsv(){
+  const wn=id=>S.wallets.find(w=>w.id===id)?.name||'',K={in:'আয়',ex:'ব্যয়',tin:'ট্রান্সফার-ইন',tout:'ট্রান্সফার-আউট'};
+  const rows=[['তারিখ','ধরন','ক্যাটাগরি','পরিমাণ','মুদ্রা','ওয়ালেট','নোট'],...S.txs.slice().sort((a,b)=>b.d.localeCompare(a.d)).map(t=>[t.d,K[t.k],t.cat,t.a,t.cur,wn(t.w),t.n||''])];
+  const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='my-wallet.csv';a.click();
+}
+function drawUp(){
+  if(!U)return;const pr=isPro();
+  $('upSt').textContent=pr?`প্রো সক্রিয় • ${proEnd().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})} পর্যন্ত (${fmt(daysLeft(),0)} দিন)`:(P&&P.plan==='pro'?'প্রো-র মেয়াদ শেষ হয়েছে':'আপনি এখন ফ্রি প্ল্যানে আছেন');
+  const sv=ST.priceM*12-ST.priceY;
+  $('plans').innerHTML=`<button data-plan="m" class="${upPlan==='m'?'on':''}"><b>৳${fmt(ST.priceM,0)}</b><span>মাসিক • ৩০ দিন</span></button><button data-plan="y" class="${upPlan==='y'?'on':''}">${sv>0?`<em>${fmt(sv,0)} টাকা সাশ্রয়</em>`:''}<b>৳${fmt(ST.priceY,0)}</b><span>বার্ষিক • ৩৬৫ দিন</span></button>`;
+  const amt=upPlan==='y'?ST.priceY:ST.priceM,nums=[['বিকাশ',ST.pays.bkash],['নগদ',ST.pays.nagad],['রকেট',ST.pays.rocket]].filter(x=>x[1]);
+  $('payInfo').innerHTML=nums.length?`<div class="sub" style="margin-bottom:6px">নিচের যেকোনো নম্বরে <b>৳${fmt(amt,0)}</b> ${esc(ST.payType)} করুন, তারপর নিচের ফর্মে TrxID দিন:</div>`+nums.map(([n,v],i)=>`<div class="nr"><span>${n}: <b id="pn${i}">${esc(v)}</b></span><button class="sm" data-copy="pn${i}">কপি</button></div>`).join('')+(ST.how?`<div class="sub" style="margin-top:6px">${esc(ST.how)}</div>`:''):'<div class="sub">পেমেন্ট নম্বর এখনো সেট করা হয়নি। অ্যাডমিনের সাথে যোগাযোগ করুন।</div>';
+  const sl={pending:['যাচাই চলছে','st-p'],approved:['অনুমোদিত','st-a'],rejected:['প্রত্যাখ্যাত','st-r']};
+  $('payList').innerHTML=PAY.slice().sort((a,b)=>(b.createdAt?.seconds||9e12)-(a.createdAt?.seconds||9e12)).map(p=>{const x=sl[p.status]||sl.pending;return `<div class="r"><div class="rm"><b>${p.plan==='y'?'বার্ষিক':'মাসিক'} • ৳${fmt(p.amount,0)}</b><span>${esc(p.method)} • ${esc(p.trx)}${p.note?' • '+esc(p.note):''}</span></div><b class="${x[1]}">${x[0]}</b></div>`}).join('')||'<div class="empty">কোনো পেমেন্ট নেই</div>';
+}
+function alInfo(){const f=$('alF').value,t=$('alT').value;$('alNow').textContent=R&&f&&t?`এখন ১ ${f} = ${fmt(rt(f,t),4)} ${t}`:''}
+
+/* ---------- pin lock ---------- */
+const hp=async p=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('wl:'+p)))].map(x=>x.toString(16).padStart(2,'0')).join('');
+let lkBuf='';
+const drawLk=()=>{$('lkDots').innerHTML=[0,1,2,3].map(i=>`<i class="${i<lkBuf.length?'f':''}"></i>`).join('')};
+function showLock(){if(!ls.get('rb_pin',''))return;lkBuf='';drawLk();$('lkMsg').textContent='';$('lock').classList.remove('hide')}
+$('lkKeys').innerHTML=[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button data-k="${k}">${k}</button>`).join('');
+$('lkKeys').onclick=async e=>{const k=e.target.dataset.k;if(k==null)return;
+  if(k==='⌫')lkBuf=lkBuf.slice(0,-1);else if(lkBuf.length<4)lkBuf+=k;
+  drawLk();
+  if(lkBuf.length===4){if(await hp(lkBuf)===ls.get('rb_pin','')){$('lock').classList.add('hide');lkBuf=''}else{$('lkMsg').textContent='পিন ভুল হয়েছে';lkBuf='';setTimeout(drawLk,250)}}};
+$('lkOut').onclick=()=>{ls.set('rb_pin','');$('lock').classList.add('hide');signOut(auth)};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)lockedAt=Date.now();else if(lockedAt&&Date.now()-lockedAt>60000)showLock()});
+$('pinBtn').onclick=async()=>{
+  if(ls.get('rb_pin','')){const o=prompt('বন্ধ করতে বর্তমান পিন দিন');if(o==null)return;if(await hp(o)===ls.get('rb_pin','')){ls.set('rb_pin','');toast('অ্যাপ লক বন্ধ হয়েছে');drawPlan()}else toast('পিন ভুল');return}
+  if(needPro())return;
+  const a=prompt('৪ সংখ্যার নতুন পিন দিন');if(a==null)return;if(!/^\d{4}$/.test(a))return toast('ঠিক ৪টি সংখ্যা দিন');
+  const b=prompt('পিনটি আবার লিখুন');if(a!==b)return toast('পিন মেলেনি');
+  ls.set('rb_pin',await hp(a));toast('অ্যাপ লক চালু হয়েছে');drawPlan()};
+showLock();
 
 /* ---------- sheet ---------- */
 function setMode(m){
@@ -507,7 +712,12 @@ function setMode(m){
   if(m!=='tr')$('tCat').innerHTML=cats[m].map(c=>`<option>${c}</option>`).join('');
 }
 function openSheet(k,m){
-  ['tx','wallet','debt','goal','pay','prof'].forEach(s=>$('sh_'+s).classList.toggle('hide',s!==k));
+  if(['bud','bill','al'].includes(k)&&!isPro())k='up';
+  if(k==='wallet'&&!isPro()&&S.wallets.length>=ST.freeWallets){toast(`ফ্রি প্ল্যানে সর্বোচ্চ ${fmt(ST.freeWallets,0)}টি ওয়ালেট`);k='up'}
+  ['tx','wallet','debt','goal','pay','prof','up','bud','bill','al'].forEach(s=>$('sh_'+s).classList.toggle('hide',s!==k));
+  if(k==='up')drawUp();
+  if(k==='al')alInfo();
+  $('blTitle').textContent=editBill?'বিল সম্পাদনা':'নতুন বিল / রিকারিং খরচ';
   $('tTitle').classList.toggle('hide',!editTx);$('mTr').classList.toggle('hide',!!editTx);$('tAdd').textContent=editTx?'আপডেট করুন':'সংরক্ষণ করুন';
   $('dTitle').textContent=editDebt?'দেনা-পাওনা সম্পাদনা':'নতুন দেনা-পাওনা';$('dAdd').textContent=editDebt?'আপডেট করুন':'যোগ করুন';
   if(k==='tx'){
@@ -516,7 +726,7 @@ function openSheet(k,m){
   }
   $('ov').classList.add('on');$('sheet').classList.add('on');
 }
-const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove('on');editTx=editDebt=payId=null;['tAmt','tNote','dWho','dAmt','dNote','pAmt','pNote'].forEach(i=>$(i).value='')};
+const closeSheet=()=>{$('ov').classList.remove('on');$('sheet').classList.remove('on');editTx=editDebt=payId=editBill=payBill=null;['tAmt','tNote','dWho','dAmt','dNote','pAmt','pNote','bLim','blName','blAmt','blDay','alV','upNum','upTrx'].forEach(i=>$(i).value='')};
 function openEditTx(id){const t=S.txs.find(x=>x.id===id);if(!t)return;editTx=t;openSheet('tx',t.k);$('tAmt').value=t.a;$('tW').value=t.w;$('tCat').value=t.cat;$('tDate').value=t.d;$('tNote').value=t.n||''}
 function openPay(id){const d=S.debts.find(x=>x.id===id);if(!d)return;payId=id;
   $('pTitle').textContent=d.k==='get'?d.who+' এর কাছ থেকে কত পেলেন?':d.who+' কে কত দিলেন?';
@@ -528,6 +738,7 @@ $('wAdd').onclick=async()=>{
   const custom=wpick==='ব্যাংক'||wpick==='অন্যান্য';
   const n=custom?($('wName').value.trim()||(wpick==='ব্যাংক'?'ব্যাংক':'')):wpick;
   if(!n)return toast('ওয়ালেটের নাম দিন');
+  if(!isPro()&&S.wallets.length>=ST.freeWallets)return toast('ফ্রি প্ল্যানে ওয়ালেটের সীমা শেষ');
   if(has(n))return toast(`"${n}" নামে ওয়ালেট আগে থেকেই আছে`);
   await addDoc(col('wallets'),{name:n,cur:$('wCur').value,bal:num('wBal')||0});$('wName').value='';$('wBal').value='';closeSheet();toast('ওয়ালেট যোগ হয়েছে')};
 $('tAdd').onclick=async()=>{
@@ -549,8 +760,12 @@ $('tAdd').onclick=async()=>{
   }else{
     b.set(doc(col('txs')),{k:tmode,w:f.id,a,cur:f.cur,cat:$('tCat').value,d,n});
     b.update(dref('wallets',f.id),{bal:increment(tmode==='in'?a:-a)});
+    if(payBill)b.update(dref('bills',payBill),{paidMonth:mkey(0)});
   }
-  const ed=!!editTx;await b.commit();closeSheet();toast(ed?'আপডেট হয়েছে':'সংরক্ষণ হয়েছে');
+  let warn='';
+  if(!editTx&&tmode==='ex'&&isPro()){const bd=S.budgets.find(x=>x.cat===$('tCat').value);
+    if(bd){const sp=budStats().find(x=>x.b.id===bd.id).spent+a*rt(f.cur,bd.cur),q=sp/bd.lim*100;if(q>=80)warn=`${q>=100?'🚨 বাজেট ছাড়িয়েছে':'⚠️ বাজেটের '+fmt(q,0)+'% শেষ'}: ${bd.cat}`}}
+  const ed=!!editTx;await b.commit();closeSheet();toast(ed?'আপডেট হয়েছে':'সংরক্ষণ হয়েছে');if(warn)setTimeout(()=>toast(warn),2000);
 };
 $('dAdd').onclick=async()=>{const w=$('dWho').value.trim(),a=num('dAmt');if(!w||!(a>0))return toast('নাম ও পরিমাণ দিন');
   const f={k:$('dKind').value,who:w,a,cur:$('dCur').value,n:$('dNote').value};
@@ -571,19 +786,29 @@ const showPage=p=>{
   ['home','tx','rt','mo'].forEach(s=>$('p-'+s).classList.toggle('hide',s!==p));scrollTo(0,0);
 };
 document.addEventListener('click',async e=>{
-  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-pay],[data-et],[data-ed],[data-dpx],[data-full],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp],[data-copy]');
+  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-pay],[data-et],[data-ed],[data-dpx],[data-full],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp],[data-copy],[data-plan],[data-rm],[data-exp],[data-bp],[data-bl],[data-bx],[data-be],[data-bd],[data-ax],[data-wa]');
   if(!el)return;const d=el.dataset;
   if(d.close)closeSheet();
   if(d.copy){navigator.clipboard?.writeText($(d.copy).textContent).then(()=>toast('কপি হয়েছে')).catch(()=>toast('কপি করা যায়নি'))}
   if(d.wp){wpick=d.wp;drawChips()}
+  if(d.plan){upPlan=d.plan;drawUp()}
+  if(d.rm){repM=Math.min(0,repM+ +d.rm);drawReport()}
+  if(d.exp)exportCsv();
+  if(d.wa){const x=S.debts.find(y=>y.id===d.wa);if(x&&!needPro()){const msg=`আসসালামু আলাইকুম ${x.who}, আপনার কাছে আমার ${fmt(rem(x))} ${x.cur} পাওনা আছে। সুবিধামতো সময়ে দিয়ে দিলে ভালো হয়। ধন্যবাদ।`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank')}}
+  if(d.bp){const b=S.bills.find(y=>y.id===d.bp);if(b){payBill=b.id;openSheet('tx','ex');$('tAmt').value=b.a;$('tCat').value=b.cat;$('tNote').value=b.name}}
+  if(d.bl){const b=S.bills.find(y=>y.id===d.bl);if(b){editBill=b.id;openSheet('bill');$('blName').value=b.name;$('blAmt').value=b.a;$('blCur').value=b.cur;$('blDay').value=b.day;$('blCat').value=b.cat}}
+  if(d.bx&&confirm('এই বিলটি মুছবেন?'))deleteDoc(dref('bills',d.bx));
+  if(d.be){const b=S.budgets.find(y=>y.id===d.be);if(b){openSheet('bud');$('bCat').value=b.cat;$('bLim').value=b.lim;$('bCur').value=b.cur}}
+  if(d.bd&&confirm('এই বাজেটটি মুছবেন?'))deleteDoc(dref('budgets',d.bd));
+  if(d.ax&&confirm('এই অ্যালার্ট মুছবেন?'))deleteDoc(dref('ralerts',d.ax));
   if(d.open){const [k,m]=d.open.split(':');openSheet(k,m)}
   if(d.m)setMode(d.m);
   if(d.p)showPage(d.p);
   if(d.seg){const [g,v]=d.seg.split(':');
     el.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===el));
     if(g==='tf'){txf=v;draw()}
-    if(g==='rt'){$('rt-r').classList.toggle('hide',v!=='r');$('rt-c').classList.toggle('hide',v!=='c')}
-    if(g==='mo'){$('mo-d').classList.toggle('hide',v!=='d');$('mo-g').classList.toggle('hide',v!=='g')}}
+    if(g==='rt'){['r','c','a'].forEach(x=>$('rt-'+x).classList.toggle('hide',x!==v))}
+    if(g==='mo'){['d','g','r','b','i'].forEach(x=>$('mo-'+x).classList.toggle('hide',x!==v))}}
   if(d.fav){fav=fav.includes(d.fav)?fav.filter(x=>x!==d.fav):[...fav,d.fav];ls.set('rb_fav',fav);drawRates()}
   if(d.dw&&confirm('এই ওয়ালেট মুছবেন? এর লেনদেনের তালিকা থেকে যাবে।'))deleteDoc(dref('wallets',d.dw));
   if(d.dt&&confirm('এই লেনদেন মুছবেন? ওয়ালেটের ব্যালেন্স ঠিক করে দেওয়া হবে।')){
@@ -607,6 +832,26 @@ $('home').onchange=()=>{home=$('home').value;ls.set('rb_home',home);draw()};
 $('base').onchange=$('q').oninput=drawRates;
 ['cAmt','cFrom','cTo'].forEach(i=>$(i).oninput=conv);
 $('swap').onclick=()=>{const f=$('cFrom').value;$('cFrom').value=$('cTo').value;$('cTo').value=f;conv()};
+
+$('upGo').onclick=async()=>{
+  const m=$('upM').value,mob=$('upNum').value.trim(),trx=$('upTrx').value.trim().toUpperCase();
+  if(!/^01[3-9]\d{8}$/.test(mob))return toast('সঠিক মোবাইল নম্বর দিন (01XXXXXXXXX)');
+  if(!/^[A-Z0-9]{6,20}$/.test(trx))return toast('সঠিক TrxID দিন');
+  if(PAY.some(p=>p.status==='pending'))return toast('আগের পেমেন্টটি যাচাই চলছে, একটু অপেক্ষা করুন');
+  if(PAY.some(p=>p.trx===trx))return toast('এই TrxID আগে জমা দেওয়া হয়েছে');
+  try{await addDoc(collection(db,'payments'),{uid:U.uid,userId:(P&&P.userId)||uidCode(U.uid),name:(P&&P.name)||'',email:U.email||'',plan:upPlan,amount:upPlan==='y'?ST.priceY:ST.priceM,method:m,sender:mob,trx,status:'pending',createdAt:serverTimestamp()});
+    $('upNum').value='';$('upTrx').value='';toast('পেমেন্ট জমা হয়েছে। যাচাইয়ের পর প্রো চালু হবে')}catch(e){toast('জমা হয়নি: '+e.code)}};
+$('bAdd').onclick=async()=>{const cat=$('bCat').value,lim=num('bLim');if(!(lim>0))return toast('মাসিক সীমা দিন');
+  const ex=S.budgets.find(b=>b.cat===cat),cur=$('bCur').value;
+  try{if(ex)await updateDoc(dref('budgets',ex.id),{lim,cur});else await addDoc(col('budgets'),{cat,lim,cur});closeSheet();toast('বাজেট সংরক্ষিত হয়েছে')}catch(e){toast('সংরক্ষণ হয়নি: '+e.code)}};
+$('blAdd').onclick=async()=>{const name=$('blName').value.trim(),a=num('blAmt'),day=parseInt($('blDay').value);
+  if(!name||!(a>0)||!(day>=1&&day<=31))return toast('নাম, পরিমাণ ও তারিখ (১-৩১) দিন');
+  const f={name,a,cur:$('blCur').value,day,cat:$('blCat').value},id=editBill;
+  try{if(id)await updateDoc(dref('bills',id),f);else await addDoc(col('bills'),{...f,paidMonth:''});closeSheet();toast('সংরক্ষিত হয়েছে')}catch(e){toast('সংরক্ষণ হয়নি: '+e.code)}};
+$('alAdd').onclick=async()=>{const f=$('alF').value,t=$('alT').value,v=num('alV');
+  if(f===t)return toast('দুটি আলাদা মুদ্রা বাছুন');if(!(v>0))return toast('টার্গেট রেট দিন');
+  try{await addDoc(col('ralerts'),{f,t,dir:$('alD').value,v});closeSheet();toast('অ্যালার্ট যোগ হয়েছে')}catch(e){toast('সংরক্ষণ হয়নি: '+e.code)}};
+['alF','alT'].forEach(i=>$(i).onchange=alInfo);
 
 initSel();drawRates();conv();loadRates();
 </script>
