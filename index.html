@@ -2,9 +2,16 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-3Ab38mo3zLFBg+XYP6FYxdXofcMaJQCIo0PMkiDAKUM=' https://www.gstatic.com https://cdnjs.cloudflare.com https://www.google.com https://pagead2.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://www.googletagservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://open.er-api.com https://www.google.com https://*.cloudfunctions.net https://*.run.app https://*.googlesyndication.com https://*.adtrafficquality.google; frame-src https://*.firebaseapp.com https://www.google.com https://*.doubleclick.net https://*.googlesyndication.com; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E4E8F1">
 <title>মাই ওয়ালেট</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -237,6 +244,35 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 .dbtn button:active{box-shadow:var(--inset-s)}
 .dbtn .dok{background:var(--grad);color:#fff;box-shadow:6px 6px 14px var(--sh1),-4px -4px 12px var(--sh2)}
 .dbtn .dok.bad{background:linear-gradient(135deg,#F2706F,#E5484D)}
+.qk{gap:20px 6px}.qk button{position:relative}
+.qk .proe{display:none;position:absolute;top:-6px;right:2px;font-style:normal;font-size:9.5px;font-weight:700;background:var(--grad);color:#fff;border-radius:99px;padding:1px 7px}
+.qk.free .proe{display:block}
+.tpage{position:fixed;inset:0;z-index:25;background:var(--bg);overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+.tpage.on{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.thead{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:14px;padding:max(14px,env(safe-area-inset-top)) 20px 14px;background:var(--bg);max-width:560px;margin:auto}
+.thead b{font-size:20px}
+.tback{width:46px;height:46px;border:0;border-radius:50%;background:var(--bg);box-shadow:var(--raise-s);font-size:24px;line-height:1;color:var(--pu)}
+.tback:active{box-shadow:var(--inset-s)}
+.tbody{max-width:560px;margin:auto;padding:6px 20px 70px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dc2{background:var(--bg);box-shadow:var(--raise-s);border-radius:22px;padding:14px;display:flex;flex-direction:column;gap:6px;min-height:120px}
+.dc2.wide{grid-column:1/-1;min-height:0}.dc2.done{box-shadow:var(--inset-s)}
+.dc2 h4{margin:0;font-size:12.5px;color:var(--mu);font-weight:600}
+.dc2 .big2{font-size:24px;font-weight:700}.dc2 b{font-size:15px}
+.dc2 p{margin:0;font-size:12.5px;color:var(--mu);line-height:1.5}
+.dc2 .bt{margin-top:auto;display:flex;gap:8px;padding-top:6px}
+.dc2 .bt button{flex:1;border:0;border-radius:12px;padding:9px 6px;font-size:12.5px;font-weight:700;background:var(--bg);color:var(--pu);box-shadow:var(--raise-s)}
+.dc2 .bt button.ok{background:var(--grad);color:#fff}.dc2 .bt button:disabled{box-shadow:var(--inset-s);color:var(--in)}
+.wk{display:flex;gap:6px}.wk i{width:13px;height:13px;border-radius:50%;box-shadow:var(--inset-s)}.wk i.f{background:var(--grad);box-shadow:none}
+.adbox{margin:16px 0;border-radius:20px;padding:8px;text-align:center;min-height:90px;box-shadow:var(--inset-s)}.adl{font-size:10.5px;color:var(--mu);margin-bottom:4px}
+.nact{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.note.warn{box-shadow:var(--raise-s),inset 0 0 0 2px rgba(240,169,46,.55)}
+#tour{position:fixed;inset:0;z-index:150}
+#tHole{position:fixed;border-radius:22px;box-shadow:0 0 0 9999px rgba(20,24,50,.68);transition:all .3s;pointer-events:none}
+.tcard{position:fixed;left:16px;right:16px;max-width:420px;margin:auto;background:var(--bg);border-radius:26px;padding:20px;box-shadow:var(--raise)}
+.tcard h3{margin:0 0 6px;font-size:18px}.tcard p{margin:0 0 14px;color:var(--mu);font-size:14.5px;line-height:1.55}
+.tdots{display:flex;gap:6px;margin-bottom:14px}.tdots i{width:8px;height:8px;border-radius:50%;background:var(--ln)}.tdots i.on{background:var(--pu);width:20px;border-radius:6px}
+.tbt{display:flex;gap:10px}.tbt button{flex:1;height:46px;border:0;border-radius:15px;font-weight:700;background:var(--bg);color:var(--mu);box-shadow:var(--raise-s)}.tbt .tn{background:var(--grad);color:#fff}
 /* auth */
 #auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 18px}
 .pcard{width:100%;max-width:400px;border-radius:34px;padding:36px 24px 28px;background:var(--bg);box-shadow:var(--raise)}
@@ -288,34 +324,30 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 
 <!-- হোম -->
 <div class="page" id="p-home">
-<div class="hero"><div class="top"><div><b id="hello">মাই ওয়ালেট</b><small id="upd"></small><div class="planb" id="planb" data-open="up">ফ্রি প্ল্যান</div></div><button class="ib" id="pfb" data-p="mo" title="প্রোফাইল" style="font-weight:700;font-size:17px">?</button></div>
+<div class="hero" id="hero"><div class="top"><div><b id="hello">মাই ওয়ালেট</b><small id="upd"></small><div class="planb" id="planb" data-open="up">ফ্রি প্ল্যান</div></div><button class="ib" id="pfb" data-p="mo" title="প্রোফাইল" style="font-weight:700;font-size:17px">?</button></div>
 <div class="lab">মোট সম্পদ</div>
 <div class="net"><span id="net">০</span><select id="home" class="chip"></select></div>
 <div class="mini"><div>এই মাসের আয়<b id="sIn">০</b></div><div>এই মাসের ব্যয়<b id="sEx">০</b></div></div>
 </div>
 <div class="pad" id="alerts" style="margin-top:20px"></div>
-<h2 class="pad" style="margin-top:6px">আমার ওয়ালেট</h2>
+<div class="pad"><h2 style="margin-top:6px">আজকের দিন</h2><div id="daily" class="dgrid"></div><div id="adBox" class="adbox hide"></div></div>
+<h2 class="pad" style="margin-top:22px">আমার ওয়ালেট</h2>
 <div class="cards" id="cards"></div>
 <div class="pad">
-<h2>দ্রুত কাজ</h2>
-<div class="qk">
+<h2>ড্যাশবোর্ড</h2>
+<div class="qk" id="dash">
 <button data-open="tx:in"><i>📥</i>আয়</button>
 <button data-open="tx:ex"><i>📤</i>ব্যয়</button>
 <button data-open="tx:tr"><i>🔁</i>ট্রান্সফার</button>
-<button data-open="debt"><i>🤝</i>ধার</button>
+<button data-tool="d"><i>📒</i>দেনা-পাওনা</button>
+<button data-tool="g"><i>🎯</i>লক্ষ্য</button>
+<button data-tool="r"><i>📊</i>রিপোর্ট<em class="proe">PRO</em></button>
+<button data-tool="b"><i>🧮</i>বাজেট<em class="proe">PRO</em></button>
+<button data-tool="i"><i>🧾</i>বিল<em class="proe">PRO</em></button>
+<button data-tool="a"><i>🔔</i>অ্যালার্ট<em class="proe">PRO</em></button>
+<button data-p="rt"><i>💱</i>কারেন্সি</button>
+<button data-open="wallet"><i>👛</i>নতুন ওয়ালেট</button>
 </div>
-<h2>টুলস</h2>
-<div class="seg sc" data-g="mo"><button class="on" data-seg="mo:d">দেনা-পাওনা</button><button data-seg="mo:g">লক্ষ্য</button><button data-seg="mo:r">📊 রিপোর্ট</button><button data-seg="mo:b">🎯 বাজেট</button><button data-seg="mo:i">🧾 বিল</button></div>
-<div id="mo-d">
-<div class="mini" style="margin:0 0 12px"><div class="gc">আমি পাব<b class="in" id="dGet">০</b></div><div class="gc">আমি দেব<b class="ex" id="dOwe">০</b></div></div>
-<button class="cta" data-open="debt">+ নতুন দেনা-পাওনা</button>
-<div id="dList" style="margin-top:12px"></div></div>
-<div id="mo-g" class="hide">
-<button class="cta" data-open="goal">+ নতুন লক্ষ্য</button>
-<div class="rows" id="gList" style="margin-top:12px"></div></div>
-<div id="mo-r" class="hide"><div id="repBox"></div></div>
-<div id="mo-b" class="hide"><div id="budBox"></div></div>
-<div id="mo-i" class="hide"><div id="billBox"></div></div>
 <h2>সাম্প্রতিক লেনদেন</h2>
 <div class="rows" id="recent"></div>
 </div></div>
@@ -327,12 +359,13 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div style="flex:1"><div class="sub">এই মাসে সঞ্চয়</div><div class="amt" id="sBal" style="text-align:center;font-size:22px">০</div></div></div>
 <div class="seg" data-g="tf" style="margin-top:14px"><button class="on" data-seg="tf:a">সব</button><button data-seg="tf:in">আয়</button><button data-seg="tf:ex">ব্যয়</button><button data-seg="tf:tr">ট্রান্সফার</button></div>
 <div id="txList"></div>
+<div id="adBox2" class="adbox hide"></div>
 </div>
 
 <!-- রেট -->
 <div class="page pad" id="p-rt">
 <h2>কারেন্সি</h2>
-<div class="seg" data-g="rt"><button class="on" data-seg="rt:r">লাইভ রেট</button><button data-seg="rt:c">কনভার্টার</button><button data-seg="rt:a">🔔 অ্যালার্ট</button></div>
+<div class="seg" data-g="rt"><button class="on" data-seg="rt:r">লাইভ রেট</button><button data-seg="rt:c">কনভার্টার</button></div>
 <div id="rt-r">
 <div class="gc sbar" style="padding:22px 14px 6px;margin:10px 0 12px"><div class="fld"><select id="base"></select><label>বেস মুদ্রা</label></div><div class="fld"><input id="q" placeholder="খুঁজুন: USD, ডলার…"><label>খুঁজুন</label></div></div>
 <div class="sub" id="baseNote" style="margin:0 4px 8px"></div>
@@ -342,7 +375,6 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div class="two" style="display:flex;gap:8px"><div class="fld"><select id="cFrom"></select><label>থেকে</label></div><div class="fld"><select id="cTo"></select><label>এতে</label></div></div>
 <button class="cta alt" id="swap" style="margin-top:0">⇄ অদলবদল</button>
 <div class="cvo" id="cOut">—</div><div class="sub" id="cRate"></div></div></div>
-<div id="rt-a" class="hide"><div id="alBox"></div></div>
 </div>
 
 <!-- প্রোফাইল -->
@@ -367,12 +399,40 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div class="psec">আমার প্ল্যান</div>
 <div class="plancard" id="planCard" data-open="up" style="margin-top:0"></div>
 
+<div class="psec">ডাটা ও ব্যাকআপ</div>
+<div class="pbox">
+<div class="pi"><i>💾</i><div><span>আপনার ডাটা আছে</span><b id="dataLoc">—</b></div></div>
+<div class="pi"><i>⬇️</i><div><span>ব্যাকআপ ফাইল (JSON)</span><b>ডাউনলোড করুন</b></div><button class="sm" data-bk="1">ডাউনলোড</button></div>
+<div class="pi"><i>⬆️</i><div><span>ব্যাকআপ থেকে ফেরত আনুন</span><b>রিস্টোর</b></div><button class="sm" data-rs="1">ফাইল বাছুন</button></div>
+</div>
+<input type="file" id="rsFile" accept="application/json,.json" class="hide">
+
+<div class="psec">নোটিফিকেশন</div>
+<div class="pbox"><div class="pi"><i>🔔</i><div><span>ফোনে পুশ নোটিফিকেশন</span><b id="pushSt">বন্ধ</b></div><button class="sm" id="pushBtn">চালু করুন</button></div></div>
+
+<div class="psec">সহায়তা</div>
+<div class="pbox"><div class="pi"><i>🧭</i><div><span>অ্যাপ ঘুরে দেখুন</span><b>টিউটোরিয়াল</b></div><button class="sm" data-tour="1">দেখুন</button></div></div>
+
 <div class="psec">নিরাপত্তা</div>
 <div class="pbox"><div class="pi"><i>🔒</i><div><span>অ্যাপ লক (পিন)</span><b id="pinSt">বন্ধ</b></div><button class="sm" id="pinBtn">চালু করুন</button></div></div>
 
 <button class="cta alt" id="out2" style="margin-top:28px;color:var(--ex)">⎋ লগআউট</button>
 </div></div>
 
+
+<div id="tpage" class="tpage"><div class="thead"><button class="tback" id="tBack" aria-label="ফিরে যান">‹</button><b id="tlTitle">—</b></div><div class="tbody">
+<div id="mo-d">
+<div class="mini" style="margin:0 0 12px"><div class="gc">আমি পাব<b class="in" id="dGet">০</b></div><div class="gc">আমি দেব<b class="ex" id="dOwe">০</b></div></div>
+<button class="cta" data-open="debt">+ নতুন দেনা-পাওনা</button>
+<div id="dList" style="margin-top:12px"></div></div>
+<div id="mo-g" class="hide">
+<button class="cta" data-open="goal">+ নতুন লক্ষ্য</button>
+<div class="rows" id="gList" style="margin-top:12px"></div></div>
+<div id="mo-r" class="hide"><div id="repBox"></div></div>
+<div id="mo-b" class="hide"><div id="budBox"></div></div>
+<div id="mo-i" class="hide"><div id="billBox"></div></div>
+<div id="mo-a" class="hide"><div id="alBox"></div></div>
+</div></div>
 
 <nav><div class="in-nav">
 <button data-p="home" class="on"><i>🏠</i>হোম</button>
@@ -426,7 +486,9 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <div id="sh_up" class="f hide">
 <div class="crown">👑</div><h3 style="text-align:center;display:block;margin:6px 0 2px">মাই ওয়ালেট প্রো</h3><div class="sub" id="upSt" style="text-align:center"></div>
 <div id="cmp" class="cmp"></div>
+<div class="payb" style="margin-bottom:16px;line-height:1.6"><b>💾 আপনার ডাটা কোথায় থাকে?</b><br>• <b>ফ্রি:</b> ডাটা শুধু এই ডিভাইসের ব্রাউজারে থাকে। ডিভাইস বদলালে বা ব্রাউজার পরিষ্কার করলে হারাতে পারে, তাই ব্যাকআপ নিন।<br>• <b>প্রো:</b> প্রো নিলে আপনার ডাটা ক্লাউডে সরে যায় এবং সব ডিভাইসে মেলে।<br>• <b>⚠️ মেয়াদ শেষ হলে:</b> প্রো-র মেয়াদ শেষের ৫ দিন আগে হোমে মনে করিয়ে দেওয়া হয়। মেয়াদ শেষের <b>৭ দিন পর ক্লাউডের সব ডাটা চিরতরে মুছে যায়।</b> এর মধ্যে নবায়ন করুন, অথবা ডাটা ডিভাইসে নিয়ে নিন।</div>
 <div class="plans" id="plans"></div>
+<button class="cta" id="sslGo" style="margin-bottom:14px">💳 অনলাইনে পেমেন্ট (কার্ড / মোবাইল ব্যাংকিং)</button>
 <div class="payb" id="payInfo"></div>
 <div class="two"><div class="fld"><select id="upM"><option value="বিকাশ">বিকাশ</option><option value="নগদ">নগদ</option><option value="রকেট">রকেট</option></select><label>যে মাধ্যমে পাঠিয়েছেন</label></div><div class="fld"><input id="upNum" placeholder="01XXXXXXXXX" inputmode="tel"><label>যে নম্বর থেকে পাঠিয়েছেন</label></div></div>
 <div class="fld"><input id="upTrx" placeholder="যেমন: 9A7B6C5D4E"><label>ট্রানজেকশন আইডি (TrxID)</label></div>
@@ -461,13 +523,14 @@ nav .fab:active{box-shadow:inset 3px 3px 9px rgba(0,0,0,.3),0 0 0 7px var(--bg)}
 <button class="cta" id="pAdd">যোগ করুন</button></div>
 </div>
 
+<div id="tour" class="hide"><div id="tHole"></div><div class="tcard" id="tCard"><h3 id="tT"></h3><p id="tP"></p><div class="tdots" id="tD"></div><div class="tbt"><button id="tSkip">বাদ দিন</button><button class="tn" id="tNext">পরের ধাপ</button></div></div></div>
 <div id="toast"></div>
 </div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,updateProfile,setPersistence,browserLocalPersistence,browserSessionPersistence,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import {getFirestore,collection,doc,getDoc,setDoc,serverTimestamp,addDoc,deleteDoc,updateDoc,onSnapshot,query,where,orderBy,writeBatch,increment} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import {getFirestore,collection as fbCol,doc as fbDoc,getDoc,getDocs,setDoc,serverTimestamp,addDoc as fbAdd,deleteDoc as fbDel,updateDoc as fbUpd,onSnapshot,query,where,orderBy,limit,writeBatch as fbBatch,increment as fbInc} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const app=initializeApp({
   apiKey:"AIzaSyB64OUEB7sQlIfFPt1jQuSPKw9H1az-7XU",
@@ -477,7 +540,11 @@ const app=initializeApp({
   messagingSenderId:"901912926518",
   appId:"1:901912926518:web:6388a890716238aae13b97"
 });
+if(top!==self){document.documentElement.style.display='none';try{top.location.href=self.location.href}catch(e){}}
+const APPCHECK_KEY=''; // Firebase Console → App Check → reCAPTCHA v3 site key এখানে বসান
+if(APPCHECK_KEY){try{const m=await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js');m.initializeAppCheck(app,{provider:new m.ReCaptchaV3Provider(APPCHECK_KEY),isTokenAutoRefreshEnabled:true})}catch(e){}}
 const auth=getAuth(app),db=getFirestore(app);
+const PH_RE=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
 const $=id=>document.getElementById(id);
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -486,11 +553,12 @@ const dn=new Intl.DisplayNames(['bn'],{type:'currency'}),dne=new Intl.DisplayNam
 const nm=c=>{try{return dn.of(c)}catch(e){return c}},nme=c=>{try{return dne.of(c)}catch(e){return ''}};
 const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;return h};
 const tint=s=>`hsl(${hue(s)} 52% 42%)`;
-const today=()=>new Date().toISOString().slice(0,10);
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>ymd(new Date());
 const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
 
 let U=null,R=ls.get('rb_rates',null),home=ls.get('rb_home','BDT'),fav=ls.get('rb_fav',['USD','EUR','GBP','SAR','AED','INR']),unsubs=[],tmode='ex',txf='a',editTx=null,editDebt=null,payId=null;
-const emptyS=()=>({wallets:[],txs:[],debts:[],goals:[],budgets:[],bills:[],ralerts:[]});let S=emptyS();
+const emptyS=()=>({wallets:[],txs:[],debts:[],goals:[],budgets:[],bills:[],ralerts:[],meta:{}});let S=emptyS();
 const cats={in:['বেতন','ব্যবসা','রেমিটেন্স','উপহার','অন্যান্য'],ex:['খাবার','বাসা ভাড়া','যাতায়াত','বিল','কেনাকাটা','চিকিৎসা','শিক্ষা','অন্যান্য']};
 const emo={'খাবার':'🍚','বাসা ভাড়া':'🏠','যাতায়াত':'🚌','বিল':'💡','কেনাকাটা':'🛍️','চিকিৎসা':'💊','শিক্ষা':'📚','বেতন':'💼','ব্যবসা':'🏪','রেমিটেন্স':'🌍','উপহার':'🎁'};
 const ico=c=>c.startsWith('ট্রান্সফার')?'🔁':(emo[c]||'💠');
@@ -511,7 +579,36 @@ function drawChips(){
 }
 const curs=()=>R?Object.keys(R.rates).sort():['BDT','USD'];
 const rt=(f,t)=>f===t?1:(R&&R.rates[f]&&R.rates[t]?R.rates[t]/R.rates[f]:1);
-const col=n=>collection(db,'users',U.uid,n),dref=(n,id)=>doc(db,'users',U.uid,n,id);
+/* ---------- data layer: local (free) / cloud (pro) ---------- */
+const COLS=['wallets','txs','debts','goals','budgets','bills','ralerts'];
+let forceLocal=false,dataUnsubs=[],tourChecked=false;
+const useCloud=()=>isPro()&&!forceLocal;
+const lkey=()=>'rb_data_'+(U?U.uid:'x');
+const newId=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-5);
+const readLocal=()=>{try{return JSON.parse(localStorage.getItem(lkey()))||null}catch(e){return null}};
+function persistLocal(){try{localStorage.setItem(lkey(),JSON.stringify({v:1,...Object.fromEntries(COLS.map(c=>[c,S[c]])),meta:S.meta||{}}))}catch(e){toast('ডাটা সংরক্ষণ হয়নি: ব্রাউজারে জায়গা নেই')}}
+const sortTx=()=>S.txs.sort((a,b)=>b.d.localeCompare(a.d));
+function loadLocal(){const d=readLocal()||{};S=emptyS();COLS.forEach(c=>S[c]=Array.isArray(d[c])?d[c]:[]);S.meta=d.meta||{};sortTx()}
+const hasData=d=>!!d&&COLS.some(c=>(d[c]||[]).length);
+const col=n=>useCloud()?fbCol(db,'users',U.uid,n):{L:1,c:n};
+const dref=(n,id)=>useCloud()?fbDoc(db,'users',U.uid,n,id):{L:1,c:n,id};
+const collection=(...a)=>fbCol(...a);
+const doc=(...a)=>{const r=a[0];if(r&&r.L)return {L:1,c:r.c,id:newId()};return fbDoc(...a)};
+const increment=n=>({__inc:n});
+const isInc=v=>v&&typeof v==='object'&&'__inc' in v;
+const cv=o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,isInc(v)?fbInc(v.__inc):v]));
+function lApply(op){const [t,r,d]=op,arr=S[r.c];
+  if(t==='s'){const i=arr.findIndex(x=>x.id===r.id),it={id:r.id,...d};if(i>=0)arr[i]=it;else arr.push(it)}
+  else if(t==='u'){const it=arr.find(x=>x.id===r.id);if(it)Object.entries(d).forEach(([k,v])=>{it[k]=isInc(v)?(+it[k]||0)+v.__inc:v})}
+  else if(t==='d'){const i=arr.findIndex(x=>x.id===r.id);if(i>=0)arr.splice(i,1)}}
+const lDone=()=>{sortTx();persistLocal();draw()};
+const addDoc=async(r,d)=>{if(r.L){const id=newId();lApply(['s',{c:r.c,id},d]);lDone();return {id}}return fbAdd(r,cv(d))};
+const updateDoc=async(r,p)=>{if(r.L){lApply(['u',r,p]);lDone();return}return fbUpd(r,cv(p))};
+const deleteDoc=async r=>{if(r.L){lApply(['d',r]);lDone();return}return fbDel(r)};
+const writeBatch=()=>{const ops=[];const b={set(r,d){ops.push(['s',r,d]);return b},update(r,p){ops.push(['u',r,p]);return b},delete(r){ops.push(['d',r]);return b},
+  async commit(){if(ops.some(o=>o[1].L)){ops.forEach(lApply);lDone();return}
+    const rb=fbBatch(db);ops.forEach(([t,r,d])=>t==='s'?rb.set(r,cv(d)):t==='u'?rb.update(r,cv(d)):rb.delete(r));return rb.commit()}};return b};
+/* ---------- end data layer ---------- */
 const sel=(el,html,def)=>{const v=el.value;el.innerHTML=html;el.value=v&&[...el.options].some(o=>o.value===v)?v:(def??el.options[0]?.value??'')};
 const curOpts=()=>curs().map(c=>`<option value="${c}">${c} – ${nm(c)}</option>`).join('');
 const walOpts=()=>S.wallets.map(w=>`<option value="${w.id}">${esc(w.name)} – ${fmt(w.bal)} ${w.cur}</option>`).join('');
@@ -538,11 +635,11 @@ $('eye').onclick=()=>{const p=$('pw'),show=p.type==='password';p.type=show?'text
 $('fgt').onclick=async e=>{e.preventDefault();const m=$('em').value.trim();
   if(!m)return amsg('আগে ইমেইল লিখুন, তারপর "পাসওয়ার্ড ভুলে গেছেন?" চাপুন');
   try{await sendPasswordResetEmail(auth,m);amsg('পাসওয়ার্ড রিসেটের লিংক ইমেইলে পাঠানো হয়েছে',1)}catch(x){amsg(errMsg(x))}};
-$('out2').onclick=async()=>{if(await askC('এই ডিভাইস থেকে লগআউট করবেন?',{title:'লগআউট',ok:'হ্যাঁ, লগআউট',icon:'⎋',danger:false}))signOut(auth)};
+$('out2').onclick=async()=>{if(await askC('এই ডিভাইস থেকে লগআউট করবেন?',{title:'লগআউট',ok:'হ্যাঁ, লগআউট',icon:'⎋',danger:false})){if(pushOn())await Promise.race([dropDevice(),new Promise(r=>setTimeout(r,4000))]);signOut(auth)}};
 let P=null,pendingName='',blockedMsg='';
 const uidCode=u=>'WL-'+u.slice(0,6).toUpperCase();
 onAuthStateChanged(auth,async u=>{
-  unsubs.forEach(f=>f());unsubs=[];proUnsubs.forEach(f=>f());proUnsubs=[];wasPro=null;PAY=[];ST={...DEF};U=u;P=null;
+  unsubs.forEach(f=>f());unsubs=[];dataUnsubs.forEach(f=>f());dataUnsubs=[];tourChecked=false;forceLocal=false;proUnsubs.forEach(f=>f());proUnsubs=[];wasPro=null;pushRefreshed=false;PAY=[];ST={...DEF};closeTool(true);U=u;P=null;
   S=emptyS();
   if(!u){$('auth').classList.remove('hide');$('app').classList.add('hide');if(blockedMsg){amsg(blockedMsg);blockedMsg=''}return}
   try{
@@ -558,19 +655,16 @@ onAuthStateChanged(auth,async u=>{
   $('auth').classList.add('hide');$('app').classList.remove('hide');
   unsubs.push(onSnapshot(doc(db,'profiles',u.uid),s=>{P=s.data()||null;
     if(P&&P.status==='blocked'){blockedMsg=BLK;signOut(auth);return}
-    const pr=isPro();if(pr!==wasPro){wasPro=pr;subPro()}
+    const pr=isPro();if(pr!==wasPro){wasPro=pr;onProChange(pr)}
+    if(!tourChecked){tourChecked=true;if(!localStorage.getItem('rb_onb_'+u.uid))setTimeout(startTour,1200)}
     drawProfile();draw()}));
-  unsubs.push(onSnapshot(doc(db,'settings','app'),s=>{const x=s.data()||{};ST={...DEF,...x,pays:{...DEF.pays,...(x.pays||{})}};drawUp();draw()},()=>{}));
+  unsubs.push(onSnapshot(doc(db,'settings','app'),s=>{const x=s.data()||{};ST={...DEF,...x,pays:{...DEF.pays,...(x.pays||{})}};if(!pushRefreshed&&ST.vapidKey&&pushOn()){pushRefreshed=true;enablePush(true)}drawUp();draw()},()=>{}));
   unsubs.push(onSnapshot(query(collection(db,'payments'),where('uid','==',u.uid)),s=>{PAY=s.docs.map(d=>({id:d.id,...d.data()}));drawUp()},()=>{}));
-  ['wallets','txs','debts','goals'].forEach(n=>{
-    const q=n==='txs'?query(col(n),orderBy('d','desc')):col(n);
-    unsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>toast('ডাটা লোড হয়নি: '+e.code)));
-  });
   draw();drawProfile();
 });
 function drawProfile(){
   if(!U)return;
-  const n=(P&&P.name)||U.displayName||(U.email||'').split('@')[0]||'ইউজার',ini=[...n][0]||'?',id=(P&&P.userId)||uidCode(U.uid),ph=P&&P.photo;
+  const n=(P&&P.name)||U.displayName||(U.email||'').split('@')[0]||'ইউজার',ini=[...n][0]||'?',id=(P&&P.userId)||uidCode(U.uid),ph=P&&P.photo&&PH_RE.test(P.photo)?P.photo:'';
   const setAv=el=>{el.style.backgroundImage=ph?`url("${ph}")`:'';el.textContent=ph?'':ini};
   setAv($('pfb'));$('pfb').classList.toggle('ph',!!ph);setAv($('bigAv'));if(phNew===undefined)setAv($('pfAv'));
   $('hello').textContent='হ্যালো, '+n.split(' ')[0]+' 👋';
@@ -623,14 +717,14 @@ function draw(){
   $('cards').innerHTML=S.wallets.map((w,i)=>`<div class="wc" style="background:linear-gradient(135deg,${brand[w.name]?brand[w.name]+','+brand[w.name]+'bb':grads[i%grads.length]})"><button class="wx" data-dw="${w.id}">✕</button><div class="wn">${esc(w.name)}</div><div><div class="wb">${fmt(w.bal)}</div><div class="wcu">${w.cur} • ${nm(w.cur)}</div></div></div>`).join('')+'<button class="wadd" data-open="wallet">+ নতুন ওয়ালেট</button>';
   drawChips();
   const wo=walOpts();sel($('tW'),wo);sel($('tTo'),wo,S.wallets[1]?.id);
-  const m=new Date().toISOString().slice(0,7);let i=0,e=0;
+  const m=mkey(0);let i=0,e=0;
   S.txs.filter(t=>t.d.startsWith(m)).forEach(t=>{const v=t.a*rt(t.cur,home);if(t.k==='in')i+=v;if(t.k==='ex')e+=v});
   $('sIn').textContent=fmt(i,0)+' '+home;$('sEx').textContent=fmt(e,0)+' '+home;$('sBal').textContent=fmt(i-e,0)+' '+home;
   $('sBal').className='amt '+(i-e<0?'ex':'in');
   const wn=id=>S.wallets.find(w=>w.id===id)?.name||'মুছে ফেলা ওয়ালেট';
   const T=S.txs.map(t=>({...t,wn:wn(t.w)}));
   $('recent').innerHTML=T.slice(0,5).map(t=>txRow(t)).join('')||'<div class="empty">এখনো কোনো লেনদেন নেই। নিচের ＋ চেপে প্রথম লেনদেন যোগ করুন।</div>';
-  const cutoff=isPro()?'':new Date(Date.now()-ST.freeDays*864e5).toISOString().slice(0,10);
+  const cutoff=isPro()?'':ymd(new Date(Date.now()-ST.freeDays*864e5));
   const hidden=cutoff?T.filter(t=>t.d<cutoff).length:0;
   const F=T.filter(t=>(!cutoff||t.d>=cutoff)&&(txf==='a'||(txf==='tr'?t.k[0]==='t':t.k===txf)));
   const groups={};F.slice(0,200).forEach(t=>(groups[t.d]=groups[t.d]||[]).push(t));
@@ -650,11 +744,11 @@ function draw(){
 <div class="dact">${done?'<div class="done" style="flex:1;align-self:center">✓ সম্পূর্ণ মিটেছে</div>':`<button class="cta" data-pay="${d.id}">＋ ${get?'টাকা পেয়েছি':'পরিশোধ করেছি'}</button>`}${get&&!done?`<button class="ib2" data-wa="${d.id}" aria-label="রিমাইন্ডার পাঠান">💬</button>`:''}<button class="ib2" data-ed="${d.id}" aria-label="সম্পাদনা">✎</button><button class="ib2" data-dd="${d.id}" aria-label="মুছুন">🗑</button></div>
 ${pays.length?`<details><summary>${get?'প্রাপ্তির':'পরিশোধের'} ইতিহাস (${fmt(pays.length,0)}টি)</summary>${pays.map(x=>`<div class="ph"><span>${new Date(x.d+'T00:00').toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})}${x.n?' • '+esc(x.n):''}</span><span><b class="${get?'in':'ex'}">${fmt(x.a)} ${d.cur}</b> <button class="ib2" data-dpx="${d.id}:${x.id}" style="width:26px;height:24px" aria-label="মুছুন">✕</button></span></div>`).join('')}</details>`:''}</div>`}).join('')||'<div class="empty">কারও কাছে পাওনা বা দেনা থাকলে এখানে যোগ করুন।</div>';
   $('gList').innerHTML=S.goals.map(x=>{const p=Math.min(100,x.saved/x.t*100||0);return `<div class="r"><div class="ring" style="background:conic-gradient(#C42EF0,#2E86FF ${p*3.6}deg,var(--ln) 0)"><i>${fmt(p,0)}%</i></div><div class="rm"><b>${esc(x.name)}</b><span>${fmt(x.saved)} / ${fmt(x.t)} ${x.cur}</span></div><button class="sm" data-ga="${x.id}">+ জমা</button><button class="sm" data-dg="${x.id}">🗑</button></div>`}).join('')||'<div class="empty">বড় কিছুর জন্য সঞ্চয় করতে একটি লক্ষ্য ঠিক করুন।</div>';
-  drawProfile();drawPlan();drawAlerts();drawReport();drawBud();drawBills();drawAl();
+  drawProfile();drawPlan();drawAlerts();drawReport();drawBud();drawBills();drawAl();drawDaily();drawAds();
 }
 
 /* ---------- plan / pro ---------- */
-const DEF={priceM:99,priceY:999,freeWallets:2,freeDays:90,pays:{bkash:'',nagad:'',rocket:''},payType:'সেন্ড মানি',how:'',notice:''};
+const DEF={priceM:99,priceY:999,freeWallets:2,freeDays:90,pays:{bkash:'',nagad:'',rocket:''},payType:'সেন্ড মানি',how:'',notice:'',sslOn:false,adsOn:true,adClient:'',adSlot:'',vapidKey:''};
 let ST={...DEF},PAY=[],proUnsubs=[],wasPro=null,upPlan='m',repM=0,editBill=null,payBill=null,lockedAt=0,phNew=undefined;
 const BLK='আপনার অ্যাকাউন্টটি অ্যাডমিন বন্ধ করে রেখেছেন। সহায়তার জন্য যোগাযোগ করুন।';
 const proEnd=()=>P&&P.proUntil&&P.proUntil.toDate?P.proUntil.toDate():null;
@@ -665,10 +759,7 @@ const lockCard=t=>`<div class="lockc"><div class="lk">🔒</div><b>${t}</b><div 
 const mkey=o=>{const n=new Date(),d=new Date(n.getFullYear(),n.getMonth()+o,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 const mlabel=k=>new Date(k+'-01T00:00').toLocaleDateString('bn-BD',{month:'long',year:'numeric'});
 const PAL=['#7C5CE6','#3A82F7','#C42EF0','#F0A92E','#12A67B','#E5484D','#FF7AD9','#8E99B3'];
-function subPro(){
-  proUnsubs.forEach(f=>f());proUnsubs=[];S.budgets=[];S.bills=[];S.ralerts=[];
-  if(isPro())['budgets','bills','ralerts'].forEach(n=>proUnsubs.push(onSnapshot(col(n),s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},()=>{})));
-}
+function subPro(){}
 function budStats(){const m=mkey(0);return S.budgets.map(b=>{const spent=S.txs.filter(t=>t.k==='ex'&&t.cat===b.cat&&t.d.startsWith(m)).reduce((a,t)=>a+t.a*rt(t.cur,b.cur),0);return {b,spent,p:b.lim>0?spent/b.lim*100:0}})}
 function billStats(){const n=new Date(),m=mkey(0),dim=new Date(n.getFullYear(),n.getMonth()+1,0).getDate();
   return S.bills.map(b=>{const day=Math.min(b.day,dim),diff=day-n.getDate(),paid=b.paidMonth===m;return {b,diff,paid,day,st:paid?'ok':diff<0?'late':diff===0?'today':'soon'}}).sort((x,y)=>(x.paid-y.paid)||(x.diff-y.diff))}
@@ -676,23 +767,44 @@ const alHit=a=>{const c=rt(a.f,a.t);return a.dir==='above'?c>=a.v:c<=a.v};
 const sumM=(k,key,cat)=>S.txs.filter(t=>t.k===k&&t.d.startsWith(key)&&(!cat||t.cat===cat)).reduce((s,t)=>s+t.a*rt(t.cur,home),0);
 
 function drawPlan(){
-  const pr=isPro(),exp=P&&P.plan==='pro'&&!pr,b=$('planb');
+  const pr=isPro(),exp=P&&P.plan==='pro'&&!pr,b=$('planb');$('dash').classList.toggle('free',!pr);
   b.textContent=pr?`⭐ প্রো • ${fmt(daysLeft(),0)} দিন বাকি`:exp?'প্রো-র মেয়াদ শেষ • নবায়ন করুন':'ফ্রি প্ল্যান • প্রো নিন';b.classList.toggle('pro',pr);
   $('planCard').innerHTML=`<div class="crown" style="font-size:30px">${pr?'👑':'✨'}</div><div style="flex:1"><b>${pr?'প্রো সক্রিয়':'ফ্রি প্ল্যান'}</b><div class="sub">${pr?proEnd().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})+' পর্যন্ত':'রিপোর্ট, বাজেট, বিল রিমাইন্ডার ও আরও অনেক কিছু আনলক করুন'}</div></div><span style="color:var(--mu);font-size:22px">›</span>`;
   const pp=$('prPlan');pp.textContent=pr?`⭐ প্রো • ${fmt(daysLeft(),0)} দিন বাকি`:exp?'প্রো-র মেয়াদ শেষ':'ফ্রি প্ল্যান';pp.className='bd'+(pr?' pro':'');
+  $('dataLoc').textContent=useCloud()?'☁️ ক্লাউডে (সব ডিভাইসে মেলে)':'📱 এই ডিভাইসে (ফ্রি)';
+  const pm=typeof Notification!=='undefined'?Notification.permission:'x',pon=pm==='granted'&&ls.get('rb_push_'+U.uid,0);
+  $('pushSt').textContent=pon?'চালু আছে':pm==='denied'?'ব্রাউজারে বন্ধ করা':pm==='x'?'এই ব্রাউজারে নেই':'বন্ধ';$('pushBtn').textContent=pon?'বন্ধ করুন':'চালু করুন';
   const pin=!!ls.get('rb_pin','');$('pinSt').textContent=pin?'চালু আছে':'বন্ধ';$('pinBtn').textContent=pin?'বন্ধ করুন':'চালু করুন';
 }
 function drawAlerts(){
-  const L=[],note=(i,t,s,o='')=>L.push(`<div class="note" ${o}><i>${i}</i><div><b>${t}</b><span>${s}</span></div></div>`);
-  if(ST.notice)note('📢','ঘোষণা',esc(ST.notice));
-  if(P&&P.plan==='pro'&&!isPro())note('⏳','প্রো-র মেয়াদ শেষ','নবায়ন করতে এখানে চাপুন','data-open="up" style="cursor:pointer"');
-  else if(isPro()&&daysLeft()<=5)note('⏳',`প্রো-র মেয়াদ ${fmt(daysLeft(),0)} দিন বাকি`,'নবায়ন করতে এখানে চাপুন','data-open="up" style="cursor:pointer"');
-  if(isPro()){
-    budStats().filter(x=>x.p>=80).forEach(x=>note(x.p>=100?'🚨':'⚠️',`${esc(x.b.cat)} বাজেটের ${fmt(x.p,0)}% শেষ`,`${fmt(x.spent,0)} / ${fmt(x.b.lim,0)} ${x.b.cur}`));
-    billStats().filter(x=>!x.paid&&x.diff<=3).forEach(x=>note('🧾',x.st==='late'?`${esc(x.b.name)} এর বিল বকেয়া (${fmt(-x.diff,0)} দিন)`:x.st==='today'?`আজ ${esc(x.b.name)} এর তারিখ`:`${esc(x.b.name)} — ${fmt(x.diff,0)} দিন পর`,`${fmt(x.b.a)} ${x.b.cur}`));
-    if(R)S.ralerts.filter(alHit).forEach(a=>note('📈',`১ ${a.f} এখন ${fmt(rt(a.f,a.t),4)} ${a.t}`,`আপনার টার্গেট ${fmt(a.v,4)} ছুঁয়েছে`));
+  const L=[],pn=[],td=today(),note=(i,t,s,o='')=>L.push(`<div class="note" ${o}><i>${i}</i><div><b>${t}</b><span>${s}</span></div></div>`);
+  const add=(tag,i,t,s,key=td)=>{note(i,esc(t),esc(s));pn.push([tag,i+' '+t,s,key])};
+  if(ST.notice)add('notice','📢','ঘোষণা',ST.notice,hs(ST.notice));
+  if(P&&P.plan==='pro'&&proEnd()){
+    const left=Math.ceil((proEnd()-Date.now())/864e5);
+    if(left>0&&left<=5){
+      L.push(`<div class="note warn" data-open="up" style="cursor:pointer"><i>⏳</i><div><b>প্রো-র মেয়াদ ${fmt(left,0)} দিন বাকি</b><span>মেয়াদ শেষের ৭ দিন পর ক্লাউডের সব ডাটা মুছে যাবে। এখনই নবায়ন করুন।</span></div></div>`);
+      pn.push(['pro5',`⏳ প্রো-র মেয়াদ ${fmt(left,0)} দিন বাকি`,'মেয়াদ শেষের ৭ দিন পর ক্লাউডের সব ডাটা মুছে যাবে। এখনই নবায়ন করুন।',td]);
+    }else if(left<=0&&left>-7){
+      L.push(`<div class="note warn"><i>⚠️</i><div><b>প্রো-র মেয়াদ শেষ হয়েছে</b><span>আর ${fmt(7+left,0)} দিন পরে ক্লাউডের সব ডাটা চিরতরে মুছে যাবে। নবায়ন করুন, অথবা ডাটা এই ডিভাইসে নিয়ে নিন।</span><div class="nact"><button class="sm" data-open="up" style="margin:0">নবায়ন করুন</button><button class="sm" data-pull="1" style="margin:0">📥 ডাটা ডিভাইসে নিন</button></div></div></div>`);
+      pn.push(['grace','⚠️ প্রো-র মেয়াদ শেষ হয়েছে',`আর ${fmt(7+left,0)} দিন পরে ক্লাউডের সব ডাটা চিরতরে মুছে যাবে। নবায়ন করুন অথবা ডাটা ডিভাইসে নিয়ে নিন।`,td]);
+    }
   }
+  if(forceLocal)L.push(`<div class="note warn"><i>☁️</i><div><b>ডাটা ক্লাউডে সরানো যায়নি</b><span>আপনার ডাটা এই ডিভাইসে নিরাপদ আছে। ইন্টারনেট ঠিক থাকলে আবার চেষ্টা করুন।</span><div class="nact"><button class="sm" data-retry="1" style="margin:0">আবার চেষ্টা করুন</button></div></div></div>`);
+  if(!useCloud()&&S.txs.length>=5&&Date.now()-ls.get('rb_lastbk_'+U.uid,0)>14*864e5){
+    L.push(`<div class="note"><i>💾</i><div><b>ব্যাকআপ নিয়েছেন?</b><span>ফ্রি ডাটা শুধু এই ডিভাইসে থাকে। ডিভাইস বদলালে বা ব্রাউজার পরিষ্কার করলে হারিয়ে যেতে পারে।</span><div class="nact"><button class="sm" data-bk="1" style="margin:0">ব্যাকআপ নিন</button></div></div></div>`);
+    pn.push(['bk','💾 ব্যাকআপ নিয়েছেন?','ফ্রি ডাটা শুধু এই ডিভাইসে থাকে। এখনই একটি ব্যাকআপ ফাইল নামিয়ে রাখুন।',td]);
+  }
+  if(isPro()){
+    budStats().filter(x=>x.p>=80).forEach(x=>add('bud-'+x.b.id,x.p>=100?'🚨':'⚠️',`${x.b.cat} বাজেটের ${fmt(x.p,0)}% শেষ`,`${fmt(x.spent,0)} / ${fmt(x.b.lim,0)} ${x.b.cur}`));
+    billStats().filter(x=>!x.paid&&x.diff<=3).forEach(x=>add('bill-'+x.b.id,'🧾',x.st==='late'?`${x.b.name} এর বিল বকেয়া (${fmt(-x.diff,0)} দিন)`:x.st==='today'?`আজ ${x.b.name} এর তারিখ`:`${x.b.name} — ${fmt(x.diff,0)} দিন পর`,`${fmt(x.b.a)} ${x.b.cur}`));
+    if(R)S.ralerts.filter(alHit).forEach(a=>add('rate-'+a.id,'📈',`১ ${a.f} এখন ${fmt(rt(a.f,a.t),4)} ${a.t}`,`আপনার টার্গেট ${fmt(a.v,4)} ছুঁয়েছে`));
+  }
+  if(new Date().getHours()>=20&&!dayDone(td))pn.push(['streak','🔥 আজকের হিসাব লিখেছেন?',`এখনই লিখে স্ট্রিক ধরে রাখুন (এখন ${fmt(streakNow(),0)} দিন)`,td]);
   $('alerts').innerHTML=L.join('');
+  if(pushOn()){const k='rb_nt_'+U.uid,m=ls.get(k,{}),live=new Set(pn.map(x=>x[0]));let ch=0;
+    Object.keys(m).forEach(t=>{if(!live.has(t)){delete m[t];ch=1}});if(ch)ls.set(k,m);
+    pn.forEach(x=>localNote(...x))}
 }
 function drawBud(){
   if(!isPro())return $('budBox').innerHTML=lockCard('মাসিক বাজেট ও সতর্কতা');
@@ -735,7 +847,7 @@ function drawReport(){
 <button class="cta alt" data-pdf="1">📄 PDF রিপোর্ট ডাউনলোড</button>`;
 }
 function drawUp(){
-  if(!U)return;const pr=isPro();
+  if(!U)return;const pr=isPro();$('sslGo').classList.toggle('hide',!ST.sslOn);
   const rw=(t,f,p)=>`<div class="rw"><span>${t}</span><span class="${f===true?'y':f===false?'n':''}">${f===true?'✓':f===false?'✗':f}</span><span class="${p===true?'y':''}">${p===true?'✓':p}</span></div>`;
   $('cmp').innerHTML='<div class="h"><span>ফিচার</span><span>ফ্রি</span><span>⭐ প্রো</span></div>'+[
     ['ওয়ালেট',`${fmt(ST.freeWallets,0)}টি`,'আনলিমিটেড'],['হিসাবের ইতিহাস',`${fmt(ST.freeDays,0)} দিন`,'সম্পূর্ণ'],
@@ -820,16 +932,252 @@ async function exportPdf(){
   }catch(e){toast('PDF তৈরি হয়নি')}finally{box.remove()}
 }
 
+/* ---------- cloud/local transitions ---------- */
+function startData(){
+  dataUnsubs.forEach(f=>f());dataUnsubs=[];
+  if(useCloud()){
+    S=emptyS();
+    COLS.forEach(n=>{const q=n==='txs'?query(fbCol(db,'users',U.uid,n),orderBy('d','desc')):fbCol(db,'users',U.uid,n);
+      dataUnsubs.push(onSnapshot(q,s=>{S[n]=s.docs.map(d=>({id:d.id,...d.data()}));draw()},e=>toast('ডাটা লোড হয়নি: '+e.code)))});
+    dataUnsubs.push(onSnapshot(fbDoc(db,'users',U.uid,'meta','main'),s=>{S.meta=s.data()||{};draw()},()=>{}));
+  }else loadLocal();
+  draw();
+}
+async function wipeCloud(){
+  for(const c of [...COLS,'meta']){const sn=await getDocs(fbCol(db,'users',U.uid,c));let b=fbBatch(db),n=0;
+    for(const d of sn.docs){b.delete(d.ref);if(++n>=400){await b.commit();b=fbBatch(db);n=0}}if(n)await b.commit()}
+}
+async function uploadLocal(loc){
+  let b=fbBatch(db),n=0;const flush=async()=>{if(n){await b.commit();b=fbBatch(db);n=0}};
+  for(const c of COLS)for(const it of (loc[c]||[])){const {id,...data}=it;b.set(fbDoc(db,'users',U.uid,c,id),data);if(++n>=400)await flush()}
+  if(loc.meta&&Object.keys(loc.meta).length){b.set(fbDoc(db,'users',U.uid,'meta','main'),loc.meta);n++}
+  await flush();
+}
+async function migrateLocal(loc){
+  const a=await getDocs(query(fbCol(db,'users',U.uid,'wallets'),limit(1))),b=await getDocs(query(fbCol(db,'users',U.uid,'txs'),limit(1)));
+  if(!a.empty||!b.empty){
+    const useDevice=await dlgOpen({title:'কোন ডাটা রাখবেন?',msg:'আপনার ক্লাউডে আগের প্রো ডাটা আছে, আবার এই ডিভাইসেও আলাদা ডাটা আছে। দুটো মেশানো যায় না।\n\n• "ক্লাউডের ডাটা": আগের ডাটা ফিরে আসবে, ডিভাইসের ডাটা ব্যাকআপে রাখা হবে।\n• "এই ডিভাইসের ডাটা": ক্লাউডের পুরোনো ডাটা মুছে ডিভাইসের ডাটা ক্লাউডে যাবে।',ok:'এই ডিভাইসের ডাটা',no:'ক্লাউডের ডাটা',icon:'☁️'});
+    if(!useDevice){localStorage.setItem('rb_bk_'+U.uid,JSON.stringify(loc));localStorage.removeItem(lkey());return}
+    await wipeCloud();
+  }
+  await uploadLocal(loc);
+  localStorage.setItem('rb_bk_'+U.uid,JSON.stringify(loc));localStorage.removeItem(lkey());
+  toast('☁️ আপনার ডাটা ক্লাউডে সরানো হয়েছে');
+}
+async function onProChange(pr){
+  forceLocal=false;
+  if(pr){const loc=readLocal();if(hasData(loc)){try{await migrateLocal(loc)}catch(e){forceLocal=true;toast('ডাটা ক্লাউডে সরানো যায়নি: '+(e.code||e.message))}}}
+  startData();
+  if(P&&P.plan==='pro'&&proEnd()&&(Date.now()-proEnd())/864e5>=7){
+    const k='rb_purged_'+U.uid,stamp=String(proEnd().getTime());
+    if(localStorage.getItem(k)!==stamp){try{await wipeCloud();localStorage.setItem(k,stamp)}catch(e){}}
+  }
+}
+async function pullCloud(){
+  if(!await dlgOpen({title:'ডাটা এই ডিভাইসে নেবেন?',msg:'ক্লাউডের সব ডাটা এই ডিভাইসে কপি হবে (ডিভাইসের বর্তমান ডাটা প্রতিস্থাপিত হবে), তারপর ক্লাউড থেকে মুছে ফেলা হবে। এরপর আপনি ফ্রি প্ল্যানে এই ডিভাইসেই কাজ করবেন।',ok:'হ্যাঁ, ডাটা নিন',icon:'📥'}))return;
+  try{
+    const out={v:1,meta:{}};
+    for(const c of COLS){const sn=await getDocs(fbCol(db,'users',U.uid,c));out[c]=sn.docs.map(x=>({id:x.id,...x.data()}))}
+    const ms=await getDocs(fbCol(db,'users',U.uid,'meta'));ms.forEach(x=>{if(x.id==='main')out.meta=x.data()});
+    localStorage.setItem(lkey(),JSON.stringify(out));await wipeCloud();startData();toast('ডাটা এই ডিভাইসে আনা হয়েছে');
+  }catch(e){toast('ডাটা আনা যায়নি: '+(e.code||e.message))}
+}
+async function saveMeta(){
+  const m=S.meta=S.meta||{},cut=ymd(new Date(Date.now()-120*864e5));
+  ['checks','chal'].forEach(k=>{if(m[k])Object.keys(m[k]).forEach(d=>{if(d<cut)delete m[k][d]})});
+  m.best=Math.max(m.best||0,streakNow());
+  if(useCloud()){try{await setDoc(fbDoc(db,'users',U.uid,'meta','main'),m)}catch(e){toast('সংরক্ষণ হয়নি: '+e.code)}}else persistLocal();
+  draw();
+}
+
+/* ---------- backup / restore ---------- */
+const SCHEMA={wallets:['name','cur','bal'],txs:['k','w','a','cur','cat','d','n','tr'],debts:['k','who','a','cur','n','paid','pays'],goals:['name','t','saved','cur'],budgets:['cat','lim','cur'],bills:['name','a','cur','day','cat','paidMonth'],ralerts:['f','t','dir','v']};
+const cleanColl=(c,arr)=>(Array.isArray(arr)?arr:[]).slice(0,20000).map(it=>{const o={id:String(it.id||newId()).slice(0,40)};SCHEMA[c].forEach(k=>{if(it&&k in it)o[k]=it[k]});return o});
+function exportBackup(){
+  const d={v:1,app:'my-wallet',at:new Date().toISOString(),...Object.fromEntries(COLS.map(c=>[c,S[c]])),meta:S.meta||{}};
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(d)],{type:'application/json'}));a.download=`my-wallet-backup-${today()}.json`;a.click();
+  ls.set('rb_lastbk_'+U.uid,Date.now());toast('ব্যাকআপ ডাউনলোড হয়েছে');drawAlerts();
+}
+async function importBackup(f){
+  if(useCloud())return toast('প্রো ডাটা ক্লাউডে নিরাপদ আছে। রিস্টোর শুধু ফ্রি (ডিভাইস) মোডে কাজ করে');
+  try{
+    const d=JSON.parse(await f.text());if(d.app!=='my-wallet')throw 0;
+    if(!await askC('এই ব্যাকআপ ফাইলের ডাটা দিয়ে বর্তমান ডাটা প্রতিস্থাপন করবেন?',{title:'ডাটা রিস্টোর',ok:'হ্যাঁ, রিস্টোর করুন',icon:'⬆️',danger:true}))return;
+    const mt=d.meta&&typeof d.meta==='object'?d.meta:{},out={v:1,meta:{checks:mt.checks||{},chal:mt.chal||{},best:+mt.best||0}};
+    COLS.forEach(c=>out[c]=cleanColl(c,d[c]));
+    localStorage.setItem(lkey(),JSON.stringify(out));startData();toast('ডাটা ফিরিয়ে আনা হয়েছে');
+  }catch(e){toast('ব্যাকআপ ফাইলটি সঠিক নয়')}
+}
+
+/* ---------- daily: streak / money check / challenge / insight ---------- */
+const CH=[
+ {t:'আজ সব খরচ হিসাবে লিখুন',d:'ছোট-বড় প্রতিটি খরচ লিখে রাখুন',auto:()=>S.txs.some(t=>t.d===today()&&t.k==='ex')},
+ {t:'আজ কোনো অপ্রয়োজনীয় খরচ করবেন না',d:'শখের কেনাকাটা আজকের জন্য বাদ'},
+ {t:'আজ বাইরের খাবার এড়িয়ে চলুন',d:'ঘরের খাবার খান, টাকা বাঁচান'},
+ {t:'আজ অন্তত ২০ টাকা সঞ্চয় করুন',d:'লক্ষ্যে জমা দিন বা আলাদা করে রাখুন'},
+ {t:'আজ একটা দেনা-পাওনা মিলিয়ে দেখুন',d:'কার কাছে কত বাকি, দেখে নিন'},
+ {t:'আজ একটা বিল বা সাবস্ক্রিপশন যাচাই করুন',d:'দরকার না হলে বন্ধ করে দিন'},
+ {t:'আজ হেঁটে বা সাইকেলে যাতায়াত করুন',d:'রিকশা-বাসের ভাড়া বাঁচান'},
+ {t:'আগামী ৭ দিনের খরচের পরিকল্পনা করুন',d:'বাজার ও বিলের তালিকা বানান'},
+ {t:'কিছু কেনার আগে ২৪ ঘণ্টা ভাবুন',d:'আবেগে কেনাকাটা এড়ান'},
+ {t:'আজ ৫০ টাকার কম খরচে দিন কাটান',d:'যত কম, তত ভালো'},
+ {t:'পুরোনো লেনদেনের তালিকা একবার মিলিয়ে দেখুন',d:'ভুল থাকলে ঠিক করে নিন'},
+ {t:'আজ নিজের মোট সম্পদ দেখুন',d:'হোমের ওপরের সারাংশে চোখ রাখুন'}
+];
+const TIPS=['আয় হাতে এলেই আগে সঞ্চয় আলাদা করুন, তারপর খরচ করুন।','প্রতিদিন ৫ মিনিট হিসাব লিখলে মাস শেষে টাকা কোথায় যায় পরিষ্কার বোঝা যায়।','জরুরি তহবিল হিসেবে অন্তত ৩ মাসের খরচ আলাদা রাখুন।','অপ্রয়োজনীয় সাবস্ক্রিপশন বছরে অনেক টাকা খেয়ে ফেলে, আজ একবার যাচাই করুন।','ছোট খরচগুলোই জমে বড় অঙ্ক হয়, চা-নাস্তার খরচও লিখে রাখুন।','ঋণ থাকলে আগে বেশি সুদের ঋণ শোধ করুন।','মাসের শুরুতে বাজেট ঠিক করুন, মাঝে মাঝে মিলিয়ে দেখুন।'];
+const dayIdx=()=>Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5);
+const dayDone=d=>!!((S.meta||{}).checks||{})[d]||S.txs.some(t=>t.d===d);
+const isoAgo=o=>ymd(new Date(Date.now()-o*864e5));
+function streakNow(){let n=0,o=dayDone(today())?0:1;while(dayDone(isoAgo(o))&&n<500){n++;o++}return n}
+function pickInsight(idx){
+  const key=mkey(0),inn=sumM('in',key),ex=sumM('ex',key),pex=sumM('ex',mkey(-1)),L=[];
+  const by={};S.txs.filter(t=>t.k==='ex'&&t.d.startsWith(key)).forEach(t=>by[t.cat]=(by[t.cat]||0)+t.a*rt(t.cur,home));
+  const top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
+  if(inn>0)L.push(`এ মাসে আয়ের ${fmt(Math.max(0,(inn-ex)/inn*100),0)}% এখনো বাঁচিয়ে রেখেছেন।${ex>inn?' ব্যয় আয়ের চেয়ে বেশি হয়ে গেছে, সাবধান!':''}`);
+  if(top&&ex>0)L.push(`এ মাসের সবচেয়ে বড় খরচ "${esc(top[0])}", মোট ব্যয়ের ${fmt(top[1]/ex*100,0)}%।`);
+  if(pex>0&&ex>0)L.push(`আগের মাসের তুলনায় এ পর্যন্ত ব্যয় ${fmt(Math.abs(ex-pex)/pex*100,0)}% ${ex>pex?'বেশি':'কম'}।`);
+  const net=S.wallets.reduce((s,w)=>s+w.bal*rt(w.cur,home),0);
+  if(S.wallets.length>1&&net>0){const w=S.wallets.slice().sort((a,b)=>b.bal*rt(b.cur,home)-a.bal*rt(a.cur,home))[0];L.push(`আপনার মোট সম্পদের ${fmt(w.bal*rt(w.cur,home)/net*100,0)}% "${esc(w.name)}" ওয়ালেটে আছে।`)}
+  const get=S.debts.filter(d=>d.k==='get').reduce((s,d)=>s+rem(d)*rt(d.cur,home),0),owe=S.debts.filter(d=>d.k==='owe').reduce((s,d)=>s+rem(d)*rt(d.cur,home),0);
+  if(get>0)L.push(`অন্যের কাছে আপনার ${fmt(get,0)} ${home} পাওনা আছে, সময়মতো তাগাদা দিন।`);
+  if(owe>0)L.push(`আপনার ${fmt(owe,0)} ${home} দেনা আছে, মেটানোর পরিকল্পনা করে ফেলুন।`);
+  TIPS.forEach(t=>L.push('💡 '+t));
+  return L[idx%L.length];
+}
+function drawDaily(){
+  const el=$('daily');if(!el||!U)return;
+  const m=S.meta||{},ch=m.chal||{},td=today(),n=streakNow(),tDone=dayDone(td),best=Math.max(m.best||0,n);
+  const wk=[6,5,4,3,2,1,0].map(i=>`<i class="${dayDone(isoAgo(i))?'f':''}"></i>`).join('');
+  const dex=S.txs.filter(t=>t.d===td&&t.k==='ex').reduce((s,t)=>s+t.a*rt(t.cur,home),0);
+  const w7=S.txs.filter(t=>t.k==='ex'&&t.d>=isoAgo(7)&&t.d<td).reduce((s,t)=>s+t.a*rt(t.cur,home),0)/7;
+  const idx=dayIdx(),c=CH[idx%CH.length],cDone=!!ch[td]||!!(c.auto&&c.auto());
+  const md=Object.keys(ch).filter(k=>k.startsWith(mkey(0))).length;
+  el.innerHTML=`<div class="dc2 ${tDone?'done':''}"><h4>🔥 ডেইলি স্ট্রিক</h4><div class="big2">${fmt(n,0)} দিন</div><div class="wk">${wk}</div><p>${tDone?'আজকের স্ট্রিক পাকা ✓':'আজ হিসাব লিখলে '+fmt(n+1,0)+' দিন হবে'} • সেরা ${fmt(best,0)}</p></div>
+<div class="dc2 ${tDone?'done':''}"><h4>📅 ডেইলি মানি চেক</h4><div class="big2">${fmt(dex,0)} <small style="font-size:12px">${home}</small></div><p>আজকের খরচ • ৭ দিনের গড় ${fmt(w7,0)}</p><div class="bt">${tDone?'<button disabled>✓ সম্পন্ন</button>':'<button data-mc="add">➕ লিখুন</button><button data-mc="none">খরচ নেই</button>'}</div></div>
+<div class="dc2 wide ${cDone?'done':''}"><h4>🎯 ডেইলি চ্যালেঞ্জ • এ মাসে ${fmt(md,0)}টি সম্পন্ন</h4><b>${c.t}</b><p>${c.d}</p><div class="bt">${cDone?'<button disabled>🎉 সম্পন্ন হয়েছে</button>':'<button class="ok" data-ch="done">✓ সম্পন্ন করেছি</button>'}</div></div>
+<div class="dc2 wide"><h4>🧠 ডেইলি ইনসাইট <span style="font-size:10.5px;opacity:.8">• স্মার্ট</span></h4><p style="font-size:14px;color:var(--tx)">${pickInsight(idx)}</p></div>`;
+}
+
+/* ---------- ads (free users) ----------
+   AdSense আইডি বসানোর দুটি উপায় (যেকোনো একটি করলেই হবে):
+   (১) অ্যাডমিন প্যানেল → সেটিংস → বিজ্ঞাপন অংশে আইডি দিন।
+   (২) নিচের ADS অবজেক্টে সরাসরি লিখে দিন (অ্যাডমিনে ফাঁকা থাকলে এটি কাজ করবে)।
+   আইডি ঠিকঠাক বসলেই ফ্রি ইউজারদের হোম ও হিসাব পেজে বিজ্ঞাপন দেখাবে। প্রো ইউজাররা কখনো বিজ্ঞাপন দেখবে না। */
+const ADS={client:'',slot:''}; // client: 'ca-pub-1234567890123456' , slot: '1234567890'
+function drawAds(){
+  const cl=String(ST.adClient||ADS.client||'').trim(),sl=String(ST.adSlot||ADS.slot||'').trim();
+  const on=!!P&&!isPro()&&ST.adsOn!==false&&/^ca-pub-\d{10,20}$/.test(cl)&&/^\d{6,20}$/.test(sl);
+  ['adBox','adBox2'].forEach(id=>{const b=$(id);if(!b)return;
+    if(!on){b.innerHTML='';b.classList.add('hide');b.dataset.k='';return}
+    b.classList.remove('hide');const k=cl+sl;
+    if(b.dataset.k!==k){b.dataset.k=k;
+      b.innerHTML=`<div class="adl">বিজ্ঞাপন</div><ins class="adsbygoogle" style="display:block" data-ad-client="${cl}" data-ad-slot="${sl}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+      loadJs('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+cl).then(()=>{try{(window.adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}}).catch(()=>{})}});
+}
+
+/* ---------- push notifications ---------- */
+const FN_REGION='asia-south1';
+const hs=x=>{let h=0;for(const c of String(x))h=(h*31+c.charCodeAt(0))|0;return (h>>>0).toString(36)};
+let pushMsgOn=false,pushRefreshed=false;
+const pushOn=()=>!!U&&typeof Notification!=='undefined'&&Notification.permission==='granted'&&!!ls.get('rb_push_'+U.uid,0);
+const MSG_JS='https://www.gstatic.com/firebasejs/12.19.0/firebase-messaging.js';
+async function enablePush(silent){
+  const quiet=silent===true;
+  if(!('Notification' in window)||!('serviceWorker' in navigator))return quiet||toast('এই ব্রাউজারে পুশ নোটিফিকেশন নেই');
+  if(!ST.vapidKey)return quiet||toast('অ্যাডমিন এখনো পুশ চালু করেননি');
+  if(Notification.permission==='denied')return quiet||toast('ব্রাউজারের সেটিংসে গিয়ে নোটিফিকেশনের অনুমতি দিন');
+  if(quiet&&Notification.permission!=='granted')return;
+  const perm=Notification.permission==='granted'?'granted':await Notification.requestPermission();
+  if(perm!=='granted')return quiet||toast('নোটিফিকেশনের অনুমতি দেওয়া হয়নি');
+  try{
+    const reg=await navigator.serviceWorker.register('firebase-messaging-sw.js');await navigator.serviceWorker.ready;
+    const m=await import(MSG_JS),ms=m.getMessaging(app);
+    const tok=await m.getToken(ms,{vapidKey:ST.vapidKey,serviceWorkerRegistration:reg});
+    if(!tok)throw new Error('টোকেন পাওয়া যায়নি');
+    const id=tok.slice(-24);
+    await setDoc(fbDoc(db,'users',U.uid,'devices',id),{token:tok,ua:navigator.userAgent.slice(0,150),at:Date.now()});
+    ls.set('rb_ptok_'+U.uid,id);
+    if(!pushMsgOn){pushMsgOn=true;m.onMessage(ms,pl=>{const n=pl.notification||pl.data||{};toast((n.title||'নোটিফিকেশন')+(n.body?': '+n.body:''))})}
+    ls.set('rb_push_'+U.uid,1);if(!quiet)toast('🔔 নোটিফিকেশন চালু হয়েছে');drawPlan();drawAlerts();
+  }catch(e){quiet||toast('নোটিফিকেশন চালু হয়নি ('+(e.code||e.message)+')')}
+}
+async function dropDevice(){
+  const id=ls.get('rb_ptok_'+U.uid,'');
+  try{if(id)await fbDel(fbDoc(db,'users',U.uid,'devices',id))}catch(e){}
+  try{const m=await import(MSG_JS);await m.deleteToken(m.getMessaging(app))}catch(e){}
+}
+async function disablePush(){await dropDevice();ls.set('rb_push_'+U.uid,0);ls.set('rb_ptok_'+U.uid,'');toast('নোটিফিকেশন বন্ধ করা হয়েছে');drawPlan()}
+/* অ্যাপে দেখানো প্রতিটি অ্যালার্ট ফোনের নোটিফিকেশনেও আসে (একই অ্যালার্ট দিনে একবার)। অ্যাপ বন্ধ থাকলে সার্ভার (functions/index.js) পুশ পাঠায়; দুই জায়গার tag এক, তাই ডুপ্লিকেট দেখায় না। */
+async function localNote(tag,title,body,key){
+  try{
+    if(!pushOn())return;
+    const k='rb_nt_'+U.uid,m=ls.get(k,{});
+    if(m[tag]===key)return;
+    m[tag]=key;ls.set(k,m);
+    const reg=await navigator.serviceWorker.ready;
+    await reg.showNotification(title,{body,tag,icon:'icon-192.png',badge:'icon-192.png',data:{url:'./'}});
+  }catch(e){}
+}
+
+/* ---------- onboarding tour ---------- */
+const TOUR=[
+ {t:'স্বাগতম! 👋',p:'মাই ওয়ালেটে আপনার সব টাকার হিসাব এক জায়গায়। চলুন ৪০ সেকেন্ডে অ্যাপটা ঘুরে দেখি।'},
+ {s:'#hero',t:'আপনার সারাংশ',p:'এখানে মোট সম্পদ আর এই মাসের আয়-ব্যয় এক নজরে। ওপরের গোল বাটনে চাপলে প্রোফাইল।'},
+ {s:'#daily',t:'আজকের দিন',p:'🔥 স্ট্রিক, 📅 মানি চেক, 🎯 চ্যালেঞ্জ আর 🧠 ইনসাইট। রোজ হিসাব লিখলেই স্ট্রিক বাড়ে।'},
+ {s:'#cards',t:'ওয়ালেট',p:'ক্যাশ, বিকাশ, ব্যাংক, আলাদা আলাদা ওয়ালেটে টাকা রাখুন। ফ্রিতে ২টি ওয়ালেট, প্রোতে যত খুশি।'},
+ {s:'#dash',t:'ড্যাশবোর্ড',p:'আয়-ব্যয় লেখা থেকে রিপোর্ট, বাজেট, বিল, যেটা দরকার সেটাই চাপুন। PRO ট্যাগ মানে প্রো ফিচার।'},
+ {s:'nav .fab',t:'নতুন লেনদেন',p:'যেকোনো সময় এই ＋ চেপে আয়, ব্যয় বা ট্রান্সফার লিখুন।'},
+ {s:'nav [data-p="mo"]',t:'প্রোফাইল',p:'এখানে ছবি, ব্যাকআপ, পিন লক আর প্রো প্ল্যান। 🔔 নোটিফিকেশন চালু করলে সব রিমাইন্ডার ফোনেই পাবেন।'},
+ {t:'আপনার ডাটা কোথায়? 💾',p:'ফ্রিতে ডাটা এই ডিভাইসের ব্রাউজারে থাকে, তাই নিয়মিত ব্যাকআপ নিন। প্রো নিলে ডাটা ক্লাউডে যায় ও সব ডিভাইসে মেলে। প্রো-র মেয়াদ শেষের ৭ দিন পর ক্লাউডের ডাটা মুছে যায়।'}
+];
+let tourI=0;
+function startTour(){showPage('home');closeTool(true);$('tour').classList.remove('hide');tourI=0;tourStep()}
+function endTour(){
+  $('tour').classList.add('hide');if(!U)return;localStorage.setItem('rb_onb_'+U.uid,'1');
+  if(typeof Notification!=='undefined'&&Notification.permission==='default'&&ST.vapidKey&&!ls.get('rb_push_'+U.uid,0))
+    setTimeout(async()=>{if(await dlgOpen({title:'নোটিফিকেশন চালু করবেন?',msg:'বিল, বাজেট, রেট অ্যালার্ট, প্রো-র মেয়াদ ও ডেইলি রিমাইন্ডার ফোনের নোটিফিকেশনে পেয়ে যাবেন।',ok:'হ্যাঁ, চালু করুন',no:'পরে',icon:'🔔'}))enablePush()},400);
+}
+function tourStep(){
+  const st=TOUR[tourI],last=tourI===TOUR.length-1,h=$('tHole'),c=$('tCard');
+  $('tT').textContent=st.t;$('tP').textContent=st.p;
+  $('tD').innerHTML=TOUR.map((_,i)=>`<i class="${i===tourI?'on':''}"></i>`).join('');
+  $('tNext').textContent=last?'শুরু করি 🚀':'পরের ধাপ';$('tSkip').classList.toggle('hide',last);
+  const el=st.s?document.querySelector(st.s):null;
+  if(!el){Object.assign(h.style,{left:'50%',top:'50%',width:'0px',height:'0px'});c.style.top='50%';c.style.bottom='auto';c.style.transform='translateY(-50%)';return}
+  c.style.transform='none';
+  if(!st.s.startsWith('nav'))el.scrollIntoView({block:'center'});
+  setTimeout(()=>{const r=el.getBoundingClientRect(),pd=8;
+    Object.assign(h.style,{left:(r.left-pd)+'px',top:(r.top-pd)+'px',width:(r.width+pd*2)+'px',height:(r.height+pd*2)+'px'});
+    if(r.top+r.height/2>innerHeight*.5){c.style.top='max(16px,env(safe-area-inset-top))';c.style.bottom='auto'}else{c.style.top='auto';c.style.bottom='calc(16px + env(safe-area-inset-bottom))'}
+  },80);
+}
+
+/* ---------- tool pages ---------- */
+const TOOLS={d:'দেনা-পাওনা',g:'সঞ্চয় লক্ষ্য',r:'রিপোর্ট ও চার্ট',b:'মাসিক বাজেট',i:'বিল ও রিকারিং খরচ',a:'রেট অ্যালার্ট'};
+let toolOpen=false;
+function openTool(k){
+  ['d','g','r','b','i','a'].forEach(x=>$('mo-'+x).classList.toggle('hide',x!==k));
+  $('tlTitle').textContent=TOOLS[k];$('tpage').scrollTop=0;$('tpage').classList.add('on');
+  if(!toolOpen){history.pushState({t:1},'');toolOpen=true}
+}
+function closeTool(fromPop){$('tpage').classList.remove('on');if(toolOpen){toolOpen=false;if(!fromPop)history.back()}}
+$('tBack').onclick=()=>closeTool();
+window.addEventListener('popstate',()=>{if(toolOpen)closeTool(true)});
+
 /* ---------- pin lock ---------- */
 const hp=async p=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('wl:'+p)))].map(x=>x.toString(16).padStart(2,'0')).join('');
 let lkBuf='';
 const drawLk=()=>{$('lkDots').innerHTML=[0,1,2,3].map(i=>`<i class="${i<lkBuf.length?'f':''}"></i>`).join('')};
 function showLock(){if(!ls.get('rb_pin',''))return;lkBuf='';drawLk();$('lkMsg').textContent='';$('lock').classList.remove('hide')}
 $('lkKeys').innerHTML=[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button data-k="${k}">${k}</button>`).join('');
+const lkf=()=>ls.get('rb_pin_f',{n:0,until:0});
 $('lkKeys').onclick=async e=>{const k=e.target.dataset.k;if(k==null)return;
+  const f=lkf();if(Date.now()<f.until){lkBuf='';drawLk();return void($('lkMsg').textContent=`অনেকবার ভুল হয়েছে। ${Math.ceil((f.until-Date.now())/1000)} সেকেন্ড পরে চেষ্টা করুন`)}
   if(k==='⌫')lkBuf=lkBuf.slice(0,-1);else if(lkBuf.length<4)lkBuf+=k;
   drawLk();
-  if(lkBuf.length===4){if(await hp(lkBuf)===ls.get('rb_pin','')){$('lock').classList.add('hide');lkBuf=''}else{$('lkMsg').textContent='পিন ভুল হয়েছে';lkBuf='';setTimeout(drawLk,250)}}};
+  if(lkBuf.length===4){
+    if(await hp(lkBuf)===ls.get('rb_pin','')){ls.set('rb_pin_f',{n:0,until:0});$('lock').classList.add('hide');lkBuf=''}
+    else{f.n++;if(f.n>=5)f.until=Date.now()+30000*Math.min(f.n-4,10);ls.set('rb_pin_f',f);$('lkMsg').textContent=f.until>Date.now()?'পরপর ভুল! কিছুক্ষণ অপেক্ষা করুন':'পিন ভুল হয়েছে';lkBuf='';setTimeout(drawLk,250)}}};
 $('lkOut').onclick=()=>{ls.set('rb_pin','');$('lock').classList.add('hide');signOut(auth)};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)lockedAt=Date.now();else if(lockedAt&&Date.now()-lockedAt>60000)showLock()});
 $('pinBtn').onclick=async()=>{
@@ -926,7 +1274,7 @@ const showPage=p=>{
   ['home','tx','rt','mo'].forEach(s=>$('p-'+s).classList.toggle('hide',s!==p));scrollTo(0,0);
 };
 document.addEventListener('click',async e=>{
-  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-pay],[data-et],[data-ed],[data-dpx],[data-full],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp],[data-copy],[data-plan],[data-rm],[data-pdf],[data-bp],[data-bl],[data-bx],[data-be],[data-bd],[data-ax],[data-wa]');
+  const el=e.target.closest('[data-fav],[data-dw],[data-dt],[data-pay],[data-et],[data-ed],[data-dpx],[data-full],[data-dd],[data-dg],[data-ga],[data-open],[data-p],[data-seg],[data-m],[data-close],[data-wp],[data-copy],[data-plan],[data-rm],[data-pdf],[data-bp],[data-bl],[data-bx],[data-be],[data-bd],[data-ax],[data-wa],[data-tool],[data-mc],[data-ch],[data-pull],[data-retry],[data-bk],[data-rs],[data-tour]');
   if(!el)return;const d=el.dataset;
   if(d.close)closeSheet();
   if(d.copy){navigator.clipboard?.writeText($(d.copy).textContent).then(()=>toast('কপি হয়েছে')).catch(()=>toast('কপি করা যায়নি'))}
@@ -934,7 +1282,16 @@ document.addEventListener('click',async e=>{
   if(d.plan){upPlan=d.plan;drawUp()}
   if(d.rm){repM=Math.min(0,repM+ +d.rm);drawReport()}
   if(d.pdf)exportPdf();
-  if(d.wa){const x=S.debts.find(y=>y.id===d.wa);if(x&&!needPro()){const msg=`আসসালামু আলাইকুম ${x.who}, আপনার কাছে আমার ${fmt(rem(x))} ${x.cur} পাওনা আছে। সুবিধামতো সময়ে দিয়ে দিলে ভালো হয়। ধন্যবাদ।`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank')}}
+  if(d.tool)openTool(d.tool);
+  if(d.mc==='add')openSheet('tx','ex');
+  if(d.mc==='none'){S.meta=S.meta||{};(S.meta.checks=S.meta.checks||{})[today()]=1;await saveMeta();toast('✓ আজকের মানি চেক সম্পন্ন')}
+  if(d.ch){S.meta=S.meta||{};(S.meta.chal=S.meta.chal||{})[today()]=1;await saveMeta();toast('🎉 চ্যালেঞ্জ সম্পন্ন!')}
+  if(d.pull)pullCloud();
+  if(d.retry)onProChange(isPro());
+  if(d.bk)exportBackup();
+  if(d.rs)$('rsFile').click();
+  if(d.tour)startTour();
+  if(d.wa){const x=S.debts.find(y=>y.id===d.wa);if(x&&!needPro()){const msg=`আসসালামু আলাইকুম ${x.who}, আপনার কাছে আমার ${fmt(rem(x))} ${x.cur} পাওনা আছে। সুবিধামতো সময়ে দিয়ে দিলে ভালো হয়। ধন্যবাদ।`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer')}}
   if(d.bp){const b=S.bills.find(y=>y.id===d.bp);if(b){payBill=b.id;openSheet('tx','ex');$('tAmt').value=b.a;$('tCat').value=b.cat;$('tNote').value=b.name}}
   if(d.bl){const b=S.bills.find(y=>y.id===d.bl);if(b){editBill=b.id;openSheet('bill');const known=BILLS.some(x=>x[0]===b.name);$('blKind').value=known?b.name:'__o';$('blName').value=known?'':b.name;$('blAmt').value=b.a;$('blCur').value=b.cur;$('blDay').value=b.day;$('blCat').value=b.cat;billKindUI(false)}}
   if(d.bx&&await askC('এই বিলটি মুছবেন?'))deleteDoc(dref('bills',d.bx));
@@ -947,7 +1304,7 @@ document.addEventListener('click',async e=>{
   if(d.seg){const [g,v]=d.seg.split(':');
     el.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===el));
     if(g==='tf'){txf=v;draw()}
-    if(g==='rt'){['r','c','a'].forEach(x=>$('rt-'+x).classList.toggle('hide',x!==v))}
+    if(g==='rt'){['r','c'].forEach(x=>$('rt-'+x).classList.toggle('hide',x!==v))}
     if(g==='mo'){['d','g','r','b','i'].forEach(x=>$('mo-'+x).classList.toggle('hide',x!==v))}}
   if(d.fav){fav=fav.includes(d.fav)?fav.filter(x=>x!==d.fav):[...fav,d.fav];ls.set('rb_fav',fav);drawRates()}
   if(d.dw&&await askC('এই ওয়ালেট মুছবেন? এর লেনদেনের তালিকা থেকে যাবে।'))deleteDoc(dref('wallets',d.dw));
@@ -993,6 +1350,19 @@ $('alAdd').onclick=async()=>{const f=$('alF').value,t=$('alT').value,v=num('alV'
   try{await addDoc(col('ralerts'),{f,t,dir:$('alD').value,v});closeSheet();toast('অ্যালার্ট যোগ হয়েছে')}catch(e){toast('সংরক্ষণ হয়নি: '+e.code)}};
 ['alF','alT'].forEach(i=>$(i).onchange=alInfo);
 
+$('rsFile').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)importBackup(f)};
+$('pushBtn').onclick=()=>pushOn()?disablePush():enablePush();
+$('tNext').onclick=()=>{if(tourI>=TOUR.length-1)return endTour();tourI++;tourStep()};
+$('tSkip').onclick=endTour;
+$('sslGo').onclick=async()=>{
+  try{toast('পেমেন্ট পেজ খোলা হচ্ছে…');
+    const m=await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js');
+    const r=await m.httpsCallable(m.getFunctions(app,FN_REGION),'createSslSession')({plan:upPlan});
+    if(r.data&&/^https:\/\/(sandbox|securepay)\.sslcommerz\.com\//.test(r.data.url))location.href=r.data.url;else throw 0;
+  }catch(e){toast('অনলাইন পেমেন্ট এখন চালু নেই। ম্যানুয়াল পেমেন্ট ব্যবহার করুন')}
+};
+(()=>{const q=new URLSearchParams(location.search).get('pay');if(!q)return;history.replaceState(null,'',location.pathname);
+  setTimeout(()=>toast(q==='ok'?'✅ পেমেন্ট সফল! প্রো চালু হচ্ছে…':q==='cancel'?'পেমেন্ট বাতিল করা হয়েছে':'❌ পেমেন্ট সফল হয়নি'),1500)})();
 $('phPick').onclick=()=>$('phFile').click();
 $('phFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(!f.type.startsWith('image/'))return toast('শুধু ছবি বাছুন');
   try{phNew=await shrinkImg(f);$('pfAv').style.backgroundImage=`url("${phNew}")`;$('pfAv').textContent=''}catch(x){toast('ছবিটি পড়া যায়নি')}};
